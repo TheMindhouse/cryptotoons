@@ -30,33 +30,29 @@ class Footer extends React.PureComponent<Props> {
             </Col>
             <Col xs={24} sm={24} md={16} style={{ textAlign: "center" }}>
               Created with &hearts; by The Mindhouse & WebCartoons Studio
-              <Row>
-                <Col xs={24} sm={12}>
-                  <a
-                    href="https://mindhouse.io"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <img
-                      src={logoMindhouse}
-                      title="The Mindhouse"
-                      className="Footer__logo"
-                    />
-                  </a>
-                </Col>
-                <Col xs={24} sm={12}>
-                  <a
-                    href="http://www.webcartoons.nl/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <img
-                      src={logoWebcartoons}
-                      title="WebCartoons Studio"
-                      className="Footer__logo"
-                    />
-                  </a>
-                </Col>
+              <Row type="flex" align="middle" justify="center">
+                <a
+                  href="https://mindhouse.io"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src={logoMindhouse}
+                    title="The Mindhouse"
+                    className="Footer__logo"
+                  />
+                </a>
+                <a
+                  href="http://www.webcartoons.nl/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src={logoWebcartoons}
+                    title="WebCartoons Studio"
+                    className="Footer__logo"
+                  />
+                </a>
               </Row>
             </Col>
             <Col xs={24} sm={24} md={4} className="Footer-Social">
