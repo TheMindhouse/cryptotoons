@@ -1,5 +1,27 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: 'Catamaran', sans-serif;
+  height: auto;
+}
+
+.AppContent {
+  width: 100%;
+  min-height: calc(100vh - 150px);
+  overflow: hidden;
+}
+
+.containerWrapper {
+  background: #fafafa;
+  padding: 50px 0;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
