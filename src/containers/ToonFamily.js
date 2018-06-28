@@ -12,28 +12,30 @@ type Props = {
 }
 
 type State = {
-  familyName?: string,
+  familyId?: number,
 }
 
 class ToonFamily extends React.PureComponent<Props, State> {
   static defaultProps = {}
 
-  state = {}
+  state = {
+    familyId: null,
+  }
 
   constructor(props) {
     super(props)
-    const familyName: ?string = this.getFamilyName(props)
+    const familyId: ?number = this.getFamilyId(props)
     this.state = {
-      familyName,
+      familyId,
     }
   }
 
   componentDidUpdate() {
-    const familyName: ?string = this.getFamilyName(this.props)
+    const familyName: ?string = this.getFamilyId(this.props)
     this.setState({ familyName })
   }
 
-  getFamilyName = (props: Props): ?string => {
+  getFamilyId = (props: Props): ?string => {
     const familyName = props.match.params.name
     const availableToons = Object.values(FAMILY_NAMES).map((name: string) =>
       name.toLowerCase()
@@ -43,17 +45,23 @@ class ToonFamily extends React.PureComponent<Props, State> {
       document.location = URLHelper.pageNotFound
       return null
     }
-    return FAMILY_NAMES[familyId]
+    return familyId
   }
 
   render() {
-    if (!this.state.familyName) {
+    const { familyId } = this.state
+
+    if (familyId === null) {
       return null
     }
 
     return (
-      <div className="container">
-        <h1>{this.state.familyName}</h1>
+      <div className="containerWrapper containerWrapper--gray">
+        <div className="container">
+          <h1>
+            <b>{FAMILY_NAMES[familyId]}</b>
+          </h1>
+        </div>
       </div>
     )
   }
