@@ -3,44 +3,17 @@ import * as React from "react"
 import { URLHelper } from "../../helpers/URLhelper"
 import { Menu } from "antd"
 import { NavLink } from "react-router-dom"
+import { FAMILY_IDS, FAMILY_NAMES } from "../../constants/toonFamilies"
 
 const ToonFamiliesSubmenu = (
   <Menu>
-    <Menu.Item>
-      <NavLink to={URLHelper.home} exact>
-        CryptoCows
-      </NavLink>
-    </Menu.Item>
-    <Menu.Item>
-      <NavLink to={URLHelper.home} exact>
-        BitBulls
-      </NavLink>
-    </Menu.Item>
-    <Menu.Item>
-      <NavLink to={URLHelper.home} exact>
-        DappDonkeys
-      </NavLink>
-    </Menu.Item>
-    <Menu.Item>
-      <NavLink to={URLHelper.home} exact>
-        EtherElephants
-      </NavLink>
-    </Menu.Item>
-    <Menu.Item>
-      <NavLink to={URLHelper.home} exact>
-        GuldenGorillas
-      </NavLink>
-    </Menu.Item>
-    <Menu.Item>
-      <NavLink to={URLHelper.home} exact>
-        HodlHippos
-      </NavLink>
-    </Menu.Item>
-    <Menu.Item>
-      <NavLink to={URLHelper.home} exact>
-        LiteLlamas
-      </NavLink>
-    </Menu.Item>
+    {Object.values(FAMILY_IDS).map((familyId: number) => (
+      <Menu.Item>
+        <NavLink to={URLHelper.toonFamily(FAMILY_NAMES[familyId])} exact>
+          {FAMILY_NAMES[familyId]}
+        </NavLink>
+      </Menu.Item>
+    ))}
   </Menu>
 )
 export { ToonFamiliesSubmenu }

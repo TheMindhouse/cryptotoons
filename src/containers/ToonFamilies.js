@@ -10,6 +10,8 @@ import familyElephants from "../assets/images/toon-families/elephants.jpg"
 import familyGorillas from "../assets/images/toon-families/gorillas.jpg"
 import familyHippos from "../assets/images/toon-families/hippos.jpg"
 import familyLlamas from "../assets/images/toon-families/llamas.jpg"
+import { Link } from "react-router-dom"
+import { FAMILY_IDS } from "../constants/toonFamilies"
 
 type Props = {}
 
@@ -22,25 +24,31 @@ class ToonFamilies extends React.PureComponent<Props> {
         <div className="container">
           <Row gutter={20}>
             <Col span={12}>
-              <FamilyCard image={familyCows} name="CryptoCows" />
+              <FamilyCard image={familyCows} familyId={FAMILY_IDS.Cows} />
             </Col>
             <Col span={12}>
-              <FamilyCard image={familyBulls} name="BitBulls" />
+              <FamilyCard image={familyBulls} familyId={FAMILY_IDS.Bulls} />
             </Col>
             <Col span={12}>
-              <FamilyCard image={familyDonkeys} name="DappDonkeys" />
+              <FamilyCard image={familyDonkeys} familyId={FAMILY_IDS.Donkeys} />
             </Col>
             <Col span={12}>
-              <FamilyCard image={familyElephants} name="EtherElephants" />
+              <FamilyCard
+                image={familyElephants}
+                familyId={FAMILY_IDS.Elephants}
+              />
             </Col>
             <Col span={12}>
-              <FamilyCard image={familyGorillas} name="GuldenGorillas" />
+              <FamilyCard
+                image={familyGorillas}
+                familyId={FAMILY_IDS.Gorillas}
+              />
             </Col>
             <Col span={12}>
-              <FamilyCard image={familyHippos} name="HodlHippos" />
+              <FamilyCard image={familyHippos} familyId={FAMILY_IDS.Hippos} />
             </Col>
             <Col span={12}>
-              <FamilyCard image={familyLlamas} name="LiteLlamas" />
+              <FamilyCard image={familyLlamas} familyId={FAMILY_IDS.Llamas} />
             </Col>
           </Row>
         </div>

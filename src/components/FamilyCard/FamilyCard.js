@@ -1,10 +1,13 @@
 // @flow
 import * as React from "react"
 import "./styles/FamilyCard.css"
+import { URLHelper } from "../../helpers/URLhelper"
+import { FAMILY_NAMES } from "../../constants/toonFamilies"
+import { Link } from "react-router-dom"
 
 type Props = {
   image: string,
-  name: string,
+  familyId: number,
 }
 
 class FamilyCard extends React.PureComponent<Props> {
@@ -13,7 +16,9 @@ class FamilyCard extends React.PureComponent<Props> {
   render() {
     return (
       <div className="FamilyCard">
-        <img src={this.props.image} className="FamilyCard__image" />
+        <Link to={URLHelper.toonFamily(FAMILY_NAMES[this.props.familyId])}>
+          <img src={this.props.image} className="FamilyCard__image" />
+        </Link>
       </div>
     )
   }
