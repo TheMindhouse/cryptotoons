@@ -1,8 +1,9 @@
 .Header {
     padding: 20px;
     margin: 0 auto;
-    background: #0b8aa8;
+    //background: #0b8aa8;
     color: #fff;
+    border-bottom: 1px solid #ddd;
 }
 
 .Header__link {
@@ -22,22 +23,23 @@
 .Header__menu li {
     display: inline-block;
     padding: 0 30px;
-    font-weight: 700;
+    font-weight: 600;
     font-size: 20px;
 }
 
 .Header__menu-link {
-    color: #fff;
+    color: #333;
     /*border-bottom: 2px solid transparent;*/
     text-decoration: none !important;
 }
 
 .Header__menu-link:not(.Header__menu-link--disabled):hover {
-    color: #fff;
+    /*border-bottom: 2px solid #0b8aa8;*/
 }
 
 .Header__menu-link--active {
-    border-color: #fff;
+    border-color: #0b8aa8;
+    color: #0b8aa8;
 }
 
 .Header__menu-link--disabled {

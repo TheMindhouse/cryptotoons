@@ -4,9 +4,9 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import ScrollToTop from "react-router-scroll-top"
 //import ReactGA from "react-ga"
 import { ToonFamilies } from "./containers/ToonFamilies"
-import { Header } from "./components/layout/Header"
+import { Header } from "./components/Header/Header"
 import { ErrorPage404 } from "./containers/ErrorPage404"
-import { Footer } from "./components/layout/Footer"
+import { Footer } from "./components/Footer/Footer"
 
 // Initialize Google Analytics
 // ReactGA.initialize('UA-117937544-1')

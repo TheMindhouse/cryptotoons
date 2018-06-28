@@ -1,14 +1,14 @@
 // @flow
 import React from "react"
-import { Row } from "antd"
+import { Dropdown, Icon, Row } from "antd"
 
 import logo from "../../assets/images/logo.png"
 import "./styles/Header.css"
 import { Link, NavLink } from "react-router-dom"
 import { URLHelper } from "../../helpers/URLhelper"
+import { ToonFamiliesSubmenu } from "./ToonFamiliesSubmenu"
 
 type Props = {
-  // from withWeb3
   account?: string,
 }
 
@@ -26,14 +26,16 @@ const Header = (props: Props) => {
           </Row>
           <ul className="Header__menu">
             <li>
-              <NavLink
-                to={URLHelper.home}
-                exact
-                className="Header__menu-link"
-                activeClassName="Header__menu-link--active"
-              >
-                Browse Toons
-              </NavLink>
+              <Dropdown overlay={ToonFamiliesSubmenu}>
+                <NavLink
+                  to={URLHelper.home}
+                  exact
+                  className="Header__menu-link"
+                  activeClassName="Header__menu-link--active"
+                >
+                  Toon Families <Icon type="down" />
+                </NavLink>
+              </Dropdown>
             </li>
             <li>
               <NavLink

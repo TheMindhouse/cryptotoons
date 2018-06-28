@@ -1,6 +1,6 @@
 // @flow
 import * as React from "react"
-import { Col, Divider, Icon, Row } from "antd"
+import { Col, Icon, Row } from "antd"
 import { URLHelper } from "../../helpers/URLhelper"
 import { Link } from "react-router-dom"
 import "./styles/Footer.css"
