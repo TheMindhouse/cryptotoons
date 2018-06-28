@@ -1,5 +1,6 @@
 .FamilyCard {
     width: 100%;
+    min-height: 100px;
     margin-bottom: 20px;
     box-shadow: 0 6px 10px 0 rgba(0,0,0,0.1);
     transition: all ease-in-out 0.2s;

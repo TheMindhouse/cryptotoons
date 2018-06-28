@@ -10,13 +10,17 @@ import familyElephants from "../assets/images/toon-families/elephants.jpg"
 import familyGorillas from "../assets/images/toon-families/gorillas.jpg"
 import familyHippos from "../assets/images/toon-families/hippos.jpg"
 import familyLlamas from "../assets/images/toon-families/llamas.jpg"
-import { Link } from "react-router-dom"
 import { FAMILY_IDS } from "../constants/toonFamilies"
+import { setDocumentTitle } from "../helpers/utils"
 
 type Props = {}
 
 class ToonFamilies extends React.PureComponent<Props> {
   static defaultProps = {}
+
+  componentDidMount() {
+    setDocumentTitle("Toon Families")
+  }
 
   render() {
     return (
