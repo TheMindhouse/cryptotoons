@@ -1,25 +1,30 @@
 // @flow
 import * as React from "react"
 import "./styles/ToonCard.css"
+import type { ToonDetailsType } from "../../types/ToonDetailsType"
 
-type Props = {
-  image: string,
-  name: string,
+type ToonCardProps = {
+  toonDetails: ToonDetailsType,
 }
 
-class ToonCard extends React.PureComponent<Props> {
+class ToonCard extends React.PureComponent<ToonCardProps> {
   static defaultProps = {}
 
   render() {
+    const { toonDetails } = this.props
     return (
       <div className="ToonCard">
-        <div
-          className="ToonCard__image"
-          style={{
-            backgroundImage: `url(${this.props.image})`,
-          }}
-        />
-        <p className="ToonCard__name">{this.props.name}</p>
+        {toonDetails.image ? (
+          <div
+            className="ToonCard__image"
+            style={{
+              backgroundImage: `url(${toonDetails.image})`,
+            }}
+          />
+        ) : (
+          <div className="ToonCard__image" />
+        )}
+        <p className="ToonCard__name">{toonDetails.name}</p>
       </div>
     )
   }

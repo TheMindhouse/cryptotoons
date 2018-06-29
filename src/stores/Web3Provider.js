@@ -12,7 +12,7 @@ const Web3Context = React.createContext()
 const Web3 = window.Web3
 
 type Props = {
-  children: React.Children,
+  children?: React.Node,
 }
 
 type State = {
@@ -62,7 +62,7 @@ class Web3Provider extends React.Component<Props, State> {
   }
 
   prepareContractFacades = (
-    account: ?string = null
+    account: string = ""
   ): { [number]: ContractFacade } => {
     const ContractInstance = window.web3.eth.contract(ABI)
     const Contracts: Object = {}

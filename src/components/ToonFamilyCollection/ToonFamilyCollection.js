@@ -5,19 +5,24 @@ import { Col, Row } from "antd"
 import withWeb3 from "../../hoc/withWeb3"
 import type { Web3ProviderState } from "../../stores/Web3Provider"
 import { ContractFacade } from "../../facades/ContractFacade"
-import { URLHelper } from "../../helpers/URLhelper"
 import { Logger } from "../../helpers/Logger"
+import { ToonCard } from "../ToonCard/ToonCard"
+import { ToonDetailsCore } from "../../hoc/renderProps/ToonDetailsCore"
+import { ToonDetailsType } from "../../types/ToonDetailsType"
 
-type Props = {
+type ToonFamilyCollectionProps = {
   familyId: number,
   web3Store?: Web3ProviderState,
 }
 
-type State = {
+type ToonFamilyCollectionState = {
   toonsCount: number,
 }
 
-class ToonFamilyCollection extends React.PureComponent<Props, State> {
+class ToonFamilyCollection extends React.PureComponent<
+  ToonFamilyCollectionProps,
+  ToonFamilyCollectionState
+> {
   static defaultProps = {}
 
   state = {
@@ -36,6 +41,10 @@ class ToonFamilyCollection extends React.PureComponent<Props, State> {
     )
   }
 
+  /**
+   * Get total number of toons from given family
+   * @returns {Promise<number>}
+   */
   getToonsCount = (): Promise<number> => {
     const { familyId, web3Store } = this.props
 
@@ -54,9 +63,20 @@ class ToonFamilyCollection extends React.PureComponent<Props, State> {
   }
 
   render() {
+    const { familyId } = this.props
     return (
       <Row gutter={30}>
-        <Col span={8}>{this.state.toonsCount}</Col>
+        {Array.from(Array(this.state.toonsCount).keys()).map((toonId) => (
+          <Col span={8} key={toonId}>
+            <ToonDetailsCore
+              familyId={familyId}
+              toonId={toonId}
+              render={(toonDetails: ToonDetailsType) => (
+                <ToonCard toonDetails={toonDetails} />
+              )}
+            />
+          </Col>
+        ))}
       </Row>
     )
   }
