@@ -44,12 +44,12 @@ class ToonFamily extends React.PureComponent<Props, State> {
 
   getFamilyId = (props: Props): number => {
     const familyName = props.match.params.name
-    const availableToons = Object.values(FAMILY_NAMES).map((name: string) =>
-      name.toLowerCase()
+    const availableToons = Object.values(FAMILY_NAMES).map((name: mixed) =>
+      String(name).toLowerCase()
     )
     const familyId = availableToons.indexOf(familyName.toLowerCase())
     if (familyId < 0) {
-      document.location = URLHelper.pageNotFound
+      document.location.href = URLHelper.pageNotFound
       return -1
     }
     return familyId
