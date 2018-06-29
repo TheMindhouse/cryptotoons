@@ -9,6 +9,7 @@ import { ErrorPage404 } from "./containers/ErrorPage404"
 import { Footer } from "./components/Footer/Footer"
 import { ToonFamily } from "./containers/ToonFamily"
 import { Web3Provider } from "./stores/Web3Provider"
+import { Toon } from "./containers/Toon"
 
 // Initialize Google Analytics
 // ReactGA.initialize('UA-117937544-1')
@@ -33,6 +34,11 @@ class App extends Component<{}> {
               <Switch>
                 <Route exact path="/" component={ToonFamilies} />
                 <Route exact path="/toons/:name" component={ToonFamily} />
+                <Route
+                  exact
+                  path="/toons/:familyName/:toonId"
+                  component={Toon}
+                />
                 <Route path="/404" component={ErrorPage404} />
                 <Route component={ErrorPage404} />
               </Switch>

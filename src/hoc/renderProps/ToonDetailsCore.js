@@ -5,12 +5,11 @@ import withWeb3 from "../withWeb3"
 import type { Web3ProviderState } from "../../stores/Web3Provider"
 import { ContractFacade } from "../../facades/ContractFacade"
 import { ToonInfo } from "../../models/ToonInfo"
-import { CONFIG } from "../../config"
 
 type Props = {
   familyId: number,
   toonId: number,
-  render: (?ToonDetailsType) => React.Node,
+  render: (ToonDetailsType) => ?React.Node,
   web3Store?: Web3ProviderState,
 }
 
@@ -24,6 +23,20 @@ class ToonDetailsCore extends React.PureComponent<Props, State> {
   state = {}
 
   componentDidMount() {
+    this.getToon()
+  }
+
+  componentDidUpdate(prevProps: Props) {
+    if (
+      prevProps.familyId !== this.props.familyId ||
+      prevProps.toonId !== this.props.toonId ||
+      prevProps.web3Store !== this.props.web3Store
+    ) {
+      this.getToon()
+    }
+  }
+
+  getToon = () => {
     this.getToonInfo().then((toonInfo: ToonInfo) => {
       const toonDetails: ToonDetailsType = {
         name: `#${this.props.toonId}`,
@@ -31,8 +44,9 @@ class ToonDetailsCore extends React.PureComponent<Props, State> {
         familyId: this.props.familyId,
         birthTime: toonInfo.birthTime,
         owner: toonInfo.owner,
+        genes: toonInfo.genes,
       }
-      this.setState({ toonDetails }, () => this.getImageUrl(toonInfo.genes))
+      this.setState({ toonDetails })
     })
   }
 
@@ -47,17 +61,6 @@ class ToonDetailsCore extends React.PureComponent<Props, State> {
     }
 
     return toonContract.getToonInfo(toonId)
-  }
-
-  getImageUrl = (genes: string) => {
-    const image: string = `${CONFIG.TOON_IMAGE_BASE_URL}/${
-      this.props.familyId
-    }/${genes}`
-    const toonDetails = {
-      ...this.state.toonDetails,
-      image,
-    }
-    this.setState({ toonDetails })
   }
 
   render() {

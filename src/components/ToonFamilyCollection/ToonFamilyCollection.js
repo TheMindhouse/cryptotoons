@@ -9,6 +9,8 @@ import { Logger } from "../../helpers/Logger"
 import { ToonCard } from "../ToonCard/ToonCard"
 import { ToonDetailsCore } from "../../hoc/renderProps/ToonDetailsCore"
 import { ToonDetailsType } from "../../types/ToonDetailsType"
+import { URLHelper } from "../../helpers/URLhelper"
+import { Link } from "react-router-dom"
 
 type ToonFamilyCollectionProps = {
   familyId: number,
@@ -72,7 +74,9 @@ class ToonFamilyCollection extends React.PureComponent<
               familyId={familyId}
               toonId={toonId}
               render={(toonDetails: ToonDetailsType) => (
-                <ToonCard toonDetails={toonDetails} />
+                <Link to={URLHelper.toon(familyId, toonId)}>
+                  <ToonCard toonDetails={toonDetails} />
+                </Link>
               )}
             />
           </Col>

@@ -1,6 +1,6 @@
 // @flow
 import * as React from "react"
-import ABI from "../helpers/ABI.json"
+import ABI from "../assets/abi/ToonABI.json"
 import { ContractFacade } from "../facades/ContractFacade"
 import { FAMILY_IDS } from "../constants/toonFamilies"
 import { TOON_CONTRACT_ADDRESSES } from "../constants/contracts"
