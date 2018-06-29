@@ -2,12 +2,8 @@
 import * as React from "react"
 import { FAMILY_NAMES } from "../constants/toonFamilies"
 import { URLHelper } from "../helpers/URLhelper"
-import { Col, Row } from "antd"
-import { ToonCard } from "../components/ToonCard/ToonCard"
-
-import toonImage from "../assets/images/toons/01-cows.png"
 import { setDocumentTitle } from "../helpers/utils"
-import { Link } from "react-router-dom"
+import { ToonFamilyCollection } from "../components/ToonFamilyCollection/ToonFamilyCollection"
 
 type Props = {
   match: {
@@ -76,13 +72,7 @@ class ToonFamily extends React.PureComponent<Props, State> {
           <h1>
             <b>{this.getFamilyName()}</b>
           </h1>
-          <Row gutter={30}>
-            <Col span={8}>
-              <Link to={URLHelper.toon(familyId, 0)}>
-                <ToonCard image={toonImage} name="#0" />
-              </Link>
-            </Col>
-          </Row>
+          <ToonFamilyCollection familyId={familyId} />
         </div>
       </div>
     )

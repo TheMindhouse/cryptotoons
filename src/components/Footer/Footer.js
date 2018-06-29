@@ -38,8 +38,8 @@ class Footer extends React.PureComponent<Props> {
                 >
                   <img
                     src={logoMindhouse}
-                    title="The Mindhouse"
                     className="Footer__logo"
+                    alt="The Mindhouse"
                   />
                 </a>
                 <a
@@ -49,8 +49,8 @@ class Footer extends React.PureComponent<Props> {
                 >
                   <img
                     src={logoWebcartoons}
-                    title="WebCartoons Studio"
                     className="Footer__logo"
+                    alt="WebCartoons Studio"
                   />
                 </a>
               </Row>
