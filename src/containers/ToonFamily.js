@@ -7,6 +7,7 @@ import { ToonCard } from "../components/ToonCard/ToonCard"
 
 import toonImage from "../assets/images/toons/01-cows.png"
 import { setDocumentTitle } from "../helpers/utils"
+import { Link } from "react-router-dom"
 
 type Props = {
   match: {
@@ -17,19 +18,19 @@ type Props = {
 }
 
 type State = {
-  familyId?: number,
+  familyId: number,
 }
 
 class ToonFamily extends React.PureComponent<Props, State> {
   static defaultProps = {}
 
   state = {
-    familyId: null,
+    familyId: -1,
   }
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props)
-    const familyId: ?number = this.getFamilyId(props)
+    const familyId: number = this.getFamilyId(props)
     this.state = {
       familyId,
     }
@@ -37,11 +38,11 @@ class ToonFamily extends React.PureComponent<Props, State> {
   }
 
   componentDidUpdate() {
-    const familyId: ?string = this.getFamilyId(this.props)
+    const familyId: number = this.getFamilyId(this.props)
     this.setState({ familyId }, () => setDocumentTitle(this.getFamilyName()))
   }
 
-  getFamilyId = (props: Props): ?string => {
+  getFamilyId = (props: Props): number => {
     const familyName = props.match.params.name
     const availableToons = Object.values(FAMILY_NAMES).map((name: string) =>
       name.toLowerCase()
@@ -49,7 +50,7 @@ class ToonFamily extends React.PureComponent<Props, State> {
     const familyId = availableToons.indexOf(familyName.toLowerCase())
     if (familyId < 0) {
       document.location = URLHelper.pageNotFound
-      return null
+      return -1
     }
     return familyId
   }
@@ -77,7 +78,9 @@ class ToonFamily extends React.PureComponent<Props, State> {
           </h1>
           <Row gutter={30}>
             <Col span={8}>
-              <ToonCard image={toonImage} name={FAMILY_NAMES[familyId]} />
+              <Link to={URLHelper.toon(familyId, 0)}>
+                <ToonCard image={toonImage} name="#0" />
+              </Link>
             </Col>
           </Row>
         </div>

@@ -16,7 +16,7 @@ class FamilyCard extends React.PureComponent<Props> {
   render() {
     return (
       <div className="FamilyCard">
-        <Link to={URLHelper.toonFamily(FAMILY_NAMES[this.props.familyId])}>
+        <Link to={URLHelper.toonFamily(this.props.familyId)}>
           <img src={this.props.image} className="FamilyCard__image" />
         </Link>
       </div>

@@ -9,7 +9,7 @@ const ToonFamiliesSubmenu = (
   <Menu>
     {Object.values(FAMILY_IDS).map((familyId: number) => (
       <Menu.Item>
-        <NavLink to={URLHelper.toonFamily(FAMILY_NAMES[familyId])} exact>
+        <NavLink to={URLHelper.toonFamily(familyId)} exact>
           {FAMILY_NAMES[familyId]}
         </NavLink>
       </Menu.Item>
