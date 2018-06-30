@@ -3,7 +3,7 @@ import * as React from "react"
 import "./styles/ToonFamilyCollection.css"
 import { Col, Row } from "antd"
 import withWeb3 from "../../hoc/withWeb3"
-import type { Web3ProviderState } from "../../stores/Web3Provider"
+import type { Web3Store } from "../../stores/Web3Provider"
 import { ContractFacade } from "../../facades/ContractFacade"
 import { Logger } from "../../helpers/Logger"
 import { ToonCard } from "../ToonCard/ToonCard"
@@ -14,7 +14,7 @@ import { Link } from "react-router-dom"
 
 type ToonFamilyCollectionProps = {
   familyId: number,
-  web3Store?: Web3ProviderState,
+  web3Store?: Web3Store,
 }
 
 type ToonFamilyCollectionState = {

@@ -1,0 +1,18 @@
+.TransactionsSummary {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.TransactionsSummary__Icon {
+    padding: 10px 15px;
+    border-radius: 4px;
+    background: #fafafa;
+}
+
+.TransactionsSummary__Badge .ant-badge-status-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 8px;
+}

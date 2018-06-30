@@ -2,7 +2,7 @@
 import * as React from "react"
 import type { ToonDetailsType } from "../../types/ToonDetailsType"
 import withWeb3 from "../withWeb3"
-import type { Web3ProviderState } from "../../stores/Web3Provider"
+import type { Web3Store } from "../../stores/Web3Provider"
 import { ContractFacade } from "../../facades/ContractFacade"
 import { ToonInfo } from "../../models/ToonInfo"
 import { Logger } from "../../helpers/Logger"
@@ -11,7 +11,7 @@ type Props = {
   familyId: number,
   toonId: number,
   render: (ToonDetailsType) => ?React.Node,
-  web3Store?: Web3ProviderState,
+  web3Store?: Web3Store,
 }
 
 type State = {

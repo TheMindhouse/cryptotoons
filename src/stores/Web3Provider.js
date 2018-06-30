@@ -19,6 +19,8 @@ type State = {
   web3?: ?Object,
   Contracts?: { [number]: ContractFacade },
   account?: ?string,
+  eventsSupported: boolean,
+  metamaskAvailable: boolean,
 }
 
 class Web3Provider extends React.Component<Props, State> {
@@ -42,8 +44,13 @@ class Web3Provider extends React.Component<Props, State> {
   setupWeb3 = () => {
     Logger.log("Setting up Web3 Provider")
 
+    let eventsSupported = false
+    let metamaskAvailable = false
+
     if (typeof window.web3 !== "undefined") {
       window.web3 = new Web3(window.web3.currentProvider)
+      eventsSupported = true
+      metamaskAvailable = true
     } else {
       Logger.log("Metamask not found - using localhost!")
       window.web3 = new Web3(
@@ -51,13 +58,17 @@ class Web3Provider extends React.Component<Props, State> {
       )
     }
 
-    const Contracts = this.prepareContractFacades()
+    eventsSupported
+      ? Logger.log("Events supported")
+      : Logger.log("Events not supported")
 
-    Logger.log(Contracts)
+    const Contracts = this.prepareContractFacades()
 
     this.setState({
       web3: window.web3,
       Contracts,
+      eventsSupported,
+      metamaskAvailable,
     })
   }
 
@@ -98,6 +109,6 @@ class Web3Provider extends React.Component<Props, State> {
   }
 }
 
-export type Web3ProviderState = State
+export type Web3Store = ?State
 
 export { Web3Context, Web3Provider }
