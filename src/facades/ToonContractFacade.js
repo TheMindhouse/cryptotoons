@@ -12,17 +12,12 @@ export class ToonContractFacade extends BaseContract {
     this.familyId = familyId
   }
 
-  createAuction({
-    toonId,
-    startPrice,
-    endPrice,
-    duration,
-  }: {
+  createAuction(
     toonId: number,
     startPrice: number,
     endPrice: number,
-    duration: number,
-  }) {
+    duration: number
+  ) {
     return new Promise((resolve, reject) => {
       this.Contract.createSaleAuction(
         toonId,

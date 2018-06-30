@@ -75,15 +75,6 @@ class Toon extends React.PureComponent<ToonProps, ToonState> {
             <ToonPageHeader toonDetails={toonDetails} />
           )}
         />
-        <div className="containerWrapper">
-          <div className="container">
-            <h1>
-              <b>
-                {this.getFamilyName()} #{toonId}
-              </b>
-            </h1>
-          </div>
-        </div>
       </div>
     )
   }

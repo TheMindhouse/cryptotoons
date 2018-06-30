@@ -11,6 +11,8 @@ module.exports = function override(config, env) {
       "@primary-color": "#0b8aa8",
       "@font-family": "Catamaran, sans-serif",
       "@font-size-base": "16px",
+      "@btn-primary-color": "#333",
+      "@btn-primary-bg": "#fbcd15",
     },
   })(config, env)
   return config
