@@ -5,6 +5,7 @@ import withWeb3 from "../withWeb3"
 import type { Web3ProviderState } from "../../stores/Web3Provider"
 import { ContractFacade } from "../../facades/ContractFacade"
 import { ToonInfo } from "../../models/ToonInfo"
+import { Logger } from "../../helpers/Logger"
 
 type Props = {
   familyId: number,
@@ -37,17 +38,19 @@ class ToonDetailsCore extends React.PureComponent<Props, State> {
   }
 
   getToon = () => {
-    this.getToonInfo().then((toonInfo: ToonInfo) => {
-      const toonDetails: ToonDetailsType = {
-        name: `#${this.props.toonId}`,
-        toonId: this.props.toonId,
-        familyId: this.props.familyId,
-        birthTime: toonInfo.birthTime,
-        owner: toonInfo.owner,
-        genes: toonInfo.genes,
-      }
-      this.setState({ toonDetails })
-    })
+    this.getToonInfo()
+      .then((toonInfo: ToonInfo) => {
+        const toonDetails: ToonDetailsType = {
+          name: `#${this.props.toonId}`,
+          toonId: this.props.toonId,
+          familyId: this.props.familyId,
+          birthTime: toonInfo.birthTime,
+          owner: toonInfo.owner,
+          genes: toonInfo.genes,
+        }
+        this.setState({ toonDetails })
+      })
+      .catch(() => null)
   }
 
   getToonInfo = (): Promise<ToonInfo> => {

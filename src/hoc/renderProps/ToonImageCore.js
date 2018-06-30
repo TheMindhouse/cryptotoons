@@ -1,13 +1,12 @@
 // @flow
 import * as React from "react"
 import { CONFIG } from "../../config"
-import { Logger } from "../../helpers/Logger"
 
 type Props = {
   familyId: number,
   toonId: number,
   genes: string,
-  render: (string) => React.Node,
+  render: (?string) => React.Node,
 }
 
 type State = {
@@ -43,7 +42,6 @@ class ToonImageCore extends React.PureComponent<Props, State> {
   }
 
   render() {
-    Logger.log("Render")
     return this.props.render(this.state.imageUrl)
   }
 }

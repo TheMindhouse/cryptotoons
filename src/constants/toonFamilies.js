@@ -17,3 +17,13 @@ export const FAMILY_NAMES = {
   [FAMILY_IDS.Hippos]: "HodlHippos",
   [FAMILY_IDS.Llamas]: "LiteLlamas",
 }
+
+export const FAMILY_NAMES_SINGULAR = {
+  [FAMILY_IDS.Cows]: "CryptoCow",
+  [FAMILY_IDS.Bulls]: "BitBull",
+  [FAMILY_IDS.Donkeys]: "DappDonkey",
+  [FAMILY_IDS.Elephants]: "EtherElephant",
+  [FAMILY_IDS.Gorillas]: "GuldenGorilla",
+  [FAMILY_IDS.Hippos]: "HodlHippo",
+  [FAMILY_IDS.Llamas]: "LiteLlama",
+}

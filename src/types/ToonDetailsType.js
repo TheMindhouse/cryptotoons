@@ -5,4 +5,5 @@ export type ToonDetailsType = {
   familyId: number,
   birthTime: string,
   owner: string,
+  genes: string,
 }

@@ -1,11 +1,11 @@
 // @flow
 import * as React from "react"
 import { URLHelper } from "../helpers/URLhelper"
-import { FAMILY_NAMES } from "../constants/toonFamilies"
+import { FAMILY_NAMES, FAMILY_NAMES_SINGULAR } from "../constants/toonFamilies"
 import { setDocumentTitle } from "../helpers/utils"
 import { ToonDetailsType } from "../types/ToonDetailsType"
 import { ToonDetailsCore } from "../hoc/renderProps/ToonDetailsCore"
-import { ToonCard } from "../components/ToonCard/ToonCard"
+import { ToonPageHeader } from "../components/ToonPageHeader/ToonPageHeader"
 
 type ToonProps = {
   match: {
@@ -37,7 +37,7 @@ class Toon extends React.PureComponent<ToonProps, ToonState> {
 
   componentDidUpdate() {
     const familyId: number = this.getFamilyId(this.props)
-    const toonId = this.props.match.params.toonId
+    const toonId = parseInt(this.props.match.params.toonId, 10)
     this.setState({ familyId, toonId }, () =>
       setDocumentTitle(this.getFamilyName())
     )
@@ -59,7 +59,7 @@ class Toon extends React.PureComponent<ToonProps, ToonState> {
   getFamilyName = (): string => {
     const { familyId } = this.state
     if (familyId > -1) {
-      return FAMILY_NAMES[familyId]
+      return FAMILY_NAMES_SINGULAR[familyId]
     }
     return ""
   }
@@ -67,22 +67,22 @@ class Toon extends React.PureComponent<ToonProps, ToonState> {
   render() {
     const { familyId, toonId } = this.state
     return (
-      <div className="containerWrapper containerWrapper--gray">
-        <div className="container">
-          <ToonDetailsCore
-            familyId={familyId}
-            toonId={toonId}
-            render={(toonDetails: ToonDetailsType) => (
-              <ToonCard toonDetails={toonDetails} />
-            )}
-          />
-        </div>
-        <div className="container">
-          <h1>
-            <b>
-              {this.getFamilyName()} #{toonId}
-            </b>
-          </h1>
+      <div>
+        <ToonDetailsCore
+          familyId={familyId}
+          toonId={toonId}
+          render={(toonDetails: ToonDetailsType) => (
+            <ToonPageHeader toonDetails={toonDetails} />
+          )}
+        />
+        <div className="containerWrapper">
+          <div className="container">
+            <h1>
+              <b>
+                {this.getFamilyName()} #{toonId}
+              </b>
+            </h1>
+          </div>
         </div>
       </div>
     )

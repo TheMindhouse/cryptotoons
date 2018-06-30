@@ -1,0 +1,6 @@
+.ToonPageHeader__Image {
+    width: 100%;
+    height: 400px;
+    background: no-repeat center;
+    background-size: contain;
+}
