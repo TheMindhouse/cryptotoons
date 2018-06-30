@@ -1,5 +1,5 @@
 // @flow
-import React from "react"
+import * as React from "react"
 import { LocalStorageManager } from "../localStorage"
 import {
   Transaction,
@@ -16,6 +16,7 @@ const TransactionsContext = React.createContext()
 
 type TransactionsProviderProps = {
   web3Store: Web3Store,
+  children: ?React.Node,
 }
 
 type TransactionsProviderState = {
@@ -56,6 +57,7 @@ class TransactionsProvider extends React.Component<
   }
 
   checkTransactions = () => {
+    const { web3Store } = this.props
     LocalStorageManager.transactions
       .getTransactions()
       .filter((tx) => tx.status === TRANSACTION_STATUS.pending)
@@ -63,18 +65,18 @@ class TransactionsProvider extends React.Component<
         // todo - prevent double notifications when checkTransactions runs
         // the second time before getTransactionReceipt is received
         // console.log(`Checking transaction - ${tx.hash}`)
-        this.props.web3Store.web3.eth.getTransactionReceipt(
-          tx.hash,
-          (error, result) => {
-            if (!error && result) {
-              const status = TRANSACTION_RECEIPT_STATUS[Number(result.status)]
-              const newTx = { ...tx, status }
-              LocalStorageManager.transactions.updateTransactions(newTx)
+        if (!web3Store || !web3Store.web3 || !web3Store.web3.eth) {
+          return
+        }
+        web3Store.web3.eth.getTransactionReceipt(tx.hash, (error, result) => {
+          if (!error && result) {
+            const status = TRANSACTION_RECEIPT_STATUS[Number(result.status)]
+            const newTx = { ...tx, status }
+            LocalStorageManager.transactions.updateTransactions(newTx)
 
-              this.showNotification(newTx)
-            }
+            this.showNotification(newTx)
           }
-        )
+        })
       })
   }
 

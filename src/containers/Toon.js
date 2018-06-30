@@ -32,7 +32,7 @@ class Toon extends React.PureComponent<ToonProps, ToonState> {
       familyId,
       toonId,
     }
-    setDocumentTitle(this.getFamilyName())
+    setDocumentTitle(`${this.getFamilyName()} #${toonId}`)
   }
 
   componentDidUpdate() {

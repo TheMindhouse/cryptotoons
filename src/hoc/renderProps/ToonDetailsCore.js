@@ -3,7 +3,7 @@ import * as React from "react"
 import type { ToonDetailsType } from "../../types/ToonDetailsType"
 import withWeb3 from "../withWeb3"
 import type { Web3Store } from "../../stores/Web3Provider"
-import { ContractFacade } from "../../facades/ContractFacade"
+import { ContractFacade } from "../../facades/ToonContractFacade"
 import { ToonInfo } from "../../models/ToonInfo"
 import { Logger } from "../../helpers/Logger"
 

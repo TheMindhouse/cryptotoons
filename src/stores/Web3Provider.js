@@ -1,11 +1,12 @@
 // @flow
 import * as React from "react"
 import ABI from "../assets/abi/ToonABI.json"
-import { ContractFacade } from "../facades/ContractFacade"
+import { ToonContractFacade } from "../facades/ToonContractFacade"
 import { FAMILY_IDS } from "../constants/toonFamilies"
 import { TOON_CONTRACT_ADDRESSES } from "../constants/contracts"
 import { CONFIG } from "../config"
 import { Logger } from "../helpers/Logger"
+import { AuctionContractFacade } from "../facades/AuctionContractFacade"
 
 const Web3Context = React.createContext()
 
@@ -17,7 +18,8 @@ type Props = {
 
 type State = {
   web3?: ?Object,
-  Contracts?: { [number]: ContractFacade },
+  Contracts?: { [number]: ToonContractFacade },
+  AuctionContract?: AuctionContractFacade,
   account?: ?string,
   eventsSupported: boolean,
   metamaskAvailable: boolean,
@@ -74,18 +76,21 @@ class Web3Provider extends React.Component<Props, State> {
 
   prepareContractFacades = (
     account: string = ""
-  ): { [number]: ContractFacade } => {
+  ): { [number]: ToonContractFacade } => {
     const ContractInstance = window.web3.eth.contract(ABI)
     const Contracts: Object = {}
-    Object.values(FAMILY_IDS).forEach((familyId) => {
-      const address = TOON_CONTRACT_ADDRESSES[familyId]
-      if (address) {
-        Contracts[familyId] = new ContractFacade(
-          ContractInstance.at(address),
-          account
-        )
-      }
-    })
+    Object.keys(FAMILY_IDS)
+      .map((key: string): number => FAMILY_IDS[key])
+      .forEach((familyId: number) => {
+        const address = TOON_CONTRACT_ADDRESSES[familyId]
+        if (address) {
+          Contracts[familyId] = new ToonContractFacade(
+            ContractInstance.at(address),
+            account,
+            familyId
+          )
+        }
+      })
     return Contracts
   }
 

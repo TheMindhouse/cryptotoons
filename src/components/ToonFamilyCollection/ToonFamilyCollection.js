@@ -4,7 +4,7 @@ import "./styles/ToonFamilyCollection.css"
 import { Col, Row } from "antd"
 import withWeb3 from "../../hoc/withWeb3"
 import type { Web3Store } from "../../stores/Web3Provider"
-import { ContractFacade } from "../../facades/ContractFacade"
+import { ToonContractFacade } from "../../facades/ToonContractFacade"
 import { Logger } from "../../helpers/Logger"
 import { ToonCard } from "../ToonCard/ToonCard"
 import { ToonDetailsCore } from "../../hoc/renderProps/ToonDetailsCore"
@@ -54,7 +54,7 @@ class ToonFamilyCollection extends React.PureComponent<
       return Promise.resolve(0)
     }
 
-    const toonContract: ?ContractFacade = web3Store.Contracts[familyId]
+    const toonContract: ?ToonContractFacade = web3Store.Contracts[familyId]
     if (!toonContract) {
       return Promise.resolve(0)
     }
