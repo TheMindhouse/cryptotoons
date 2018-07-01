@@ -10,12 +10,12 @@ import withWeb3 from "../hoc/withWeb3"
 import { notification } from "antd"
 import { EtherscanLink } from "../components/Small/EtherscanLink"
 import { CONFIG } from "../config"
-import type { Web3Store } from "./Web3Provider"
+import type { Web3StoreType } from "../types/Web3StoreType"
 
 const TransactionsContext = React.createContext()
 
 type TransactionsProviderProps = {
-  web3Store: Web3Store,
+  web3Store: Web3StoreType,
   children: ?React.Node,
 }
 

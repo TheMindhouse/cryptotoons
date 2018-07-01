@@ -1,13 +1,13 @@
 // @flow
 import * as React from "react"
 import withWeb3 from "../../hoc/withWeb3"
-import type { Web3Store } from "../../stores/Web3Provider"
 import { TOON_CONTRACT_ADDRESSES } from "../../constants/contracts"
+import type { Web3StoreType } from "../../types/Web3StoreType"
 
 type CurrentToonPriceProps = {
   familyId: number,
   toonId: number,
-  web3Store?: Web3Store,
+  web3Store: Web3StoreType,
 }
 
 type CurrentToonPriceState = {

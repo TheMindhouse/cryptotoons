@@ -11,6 +11,7 @@ import {
 import { CONFIG } from "../config"
 import { Logger } from "../helpers/Logger"
 import { AuctionContractFacade } from "../facades/AuctionContractFacade"
+import type { Web3StoreType } from "../types/Web3StoreType"
 
 const Web3Context = React.createContext()
 
@@ -21,15 +22,12 @@ type Props = {
 }
 
 type State = {
-  web3?: ?Object,
-  Contracts?: { [number]: ToonContractFacade },
-  AuctionContract?: AuctionContractFacade,
-  account?: ?string,
-  eventsSupported: boolean,
-  metamaskAvailable: boolean,
+  web3Store?: Web3StoreType,
 }
 
 class Web3Provider extends React.Component<Props, State> {
+  state = {}
+
   checkAccountInterval: * = setInterval(() => {}, CONFIG.CHECK_ACCOUNT_DELAY)
 
   componentDidMount() {
@@ -71,13 +69,14 @@ class Web3Provider extends React.Component<Props, State> {
     const Contracts = this.prepareContractFacades()
     const AuctionContract = this.prepareAuctionContractFacade()
 
-    this.setState({
+    const web3Store: Web3StoreType = {
       web3: window.web3,
       Contracts,
       AuctionContract,
       eventsSupported,
       metamaskAvailable,
-    })
+    }
+    this.setState({ web3Store })
   }
 
   prepareContractFacades = (
@@ -117,20 +116,23 @@ class Web3Provider extends React.Component<Props, State> {
         Logger.log("New account: ", account)
         const Contracts = this.prepareContractFacades(account)
         const AuctionContract = this.prepareAuctionContractFacade(account)
-        this.setState({ account, Contracts, AuctionContract })
+        const web3Store: Web3StoreType = {
+          ...this.state.web3Store,
+          Contracts,
+          AuctionContract,
+        }
+        this.setState({ web3Store })
       }
     })
   }
 
   render() {
     return (
-      <Web3Context.Provider value={this.state}>
+      <Web3Context.Provider value={this.state.web3Store}>
         {this.props.children}
       </Web3Context.Provider>
     )
   }
 }
-
-export type Web3Store = State
 
 export { Web3Context, Web3Provider }

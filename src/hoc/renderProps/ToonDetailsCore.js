@@ -1,16 +1,16 @@
 // @flow
 import * as React from "react"
 import withWeb3 from "../withWeb3"
-import type { Web3Store } from "../../stores/Web3Provider"
 import { ToonContractFacade } from "../../facades/ToonContractFacade"
 import { ToonInfo } from "../../models/web3/ToonInfo"
 import { ToonDetails } from "../../models/ToonDetails"
+import type { Web3StoreType } from "../../types/Web3StoreType"
 
 type Props = {
   familyId: number,
   toonId: number,
   render: (ToonDetails) => ?React.Node,
-  web3Store?: Web3Store,
+  web3Store: Web3StoreType,
 }
 
 type State = {

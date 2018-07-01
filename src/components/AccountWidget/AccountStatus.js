@@ -12,12 +12,12 @@ import { StatusMetaMaskNotAvailable } from "./Status/StatusMetaMaskNotAvailable"
 import { StatusConnected } from "./Status/StatusConnected"
 import type { WithModal } from "../../types/WithModal"
 import type { TransactionsStore } from "../../stores/TransactionsProvider"
-import type { Web3Store } from "../../stores/Web3Provider"
+import type { Web3StoreType } from "../../types/Web3StoreType"
 
 type AccountStatusProps = {
   modal: WithModal,
   txStore: TransactionsStore,
-  web3Store: Web3Store,
+  web3Store: Web3StoreType,
 }
 
 class AccountStatus extends React.PureComponent<AccountStatusProps> {

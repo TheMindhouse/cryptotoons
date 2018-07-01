@@ -1,7 +1,6 @@
 // @flow
 import * as React from "react"
 import withWeb3 from "../../hoc/withWeb3"
-import type { Web3Store } from "../../stores/Web3Provider"
 import { Button, message } from "antd"
 import withModal from "../../hoc/withModal"
 import type { WithModal } from "../../types/WithModal"
@@ -9,10 +8,11 @@ import { CreateAuctionModal } from "../Modals/CreateAuctionModal"
 import { TransactionWithToon } from "../../models/TransactionWithToon"
 import { LocalStorageManager } from "../../localStorage"
 import { ToonDetails } from "../../models/ToonDetails"
+import type { Web3StoreType } from "../../types/Web3StoreType"
 
 type CreateToonAuctionProps = {
   toonDetails: ToonDetails,
-  web3Store?: Web3Store,
+  web3Store: Web3StoreType,
   modal: WithModal,
 }
 

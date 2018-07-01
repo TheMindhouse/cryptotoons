@@ -11,10 +11,11 @@ import { ToonDetailsCore } from "../../hoc/renderProps/ToonDetailsCore"
 import { URLHelper } from "../../helpers/URLhelper"
 import { Link } from "react-router-dom"
 import { ToonDetails } from "../../models/ToonDetails"
+import type { Web3StoreType } from "../../types/Web3StoreType"
 
 type ToonFamilyCollectionProps = {
   familyId: number,
-  web3Store?: Web3Store,
+  web3Store: Web3StoreType,
 }
 
 type ToonFamilyCollectionState = {
