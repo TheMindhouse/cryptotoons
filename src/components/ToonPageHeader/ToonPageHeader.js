@@ -1,14 +1,15 @@
 // @flow
 import * as React from "react"
-import { ToonDetailsType } from "../../types/ToonDetailsType"
 import { ToonImageCore } from "../../hoc/renderProps/ToonImageCore"
 import "./styles/ToonPageHeader.css"
 import { FAMILY_NAMES_SINGULAR } from "../../constants/toonFamilies"
 import { CreateToonAuction } from "../ToonActions/CreateToonAuction"
 import { Col, Row } from "antd"
+import { CurrentToonPrice } from "../ToonActions/CurrentToonPrice"
+import { ToonDetails } from "../../models/ToonDetails"
 
 type ToonPageHeaderProps = {
-  toonDetails: ToonDetailsType,
+  toonDetails: ToonDetails,
 }
 
 class ToonPageHeader extends React.PureComponent<ToonPageHeaderProps> {
@@ -60,6 +61,7 @@ class ToonPageHeader extends React.PureComponent<ToonPageHeaderProps> {
               </Col>
               <Col span={8} className="text-right">
                 <CreateToonAuction toonDetails={toonDetails} />
+                <CurrentToonPrice familyId={familyId} toonId={toonId} />
               </Col>
             </Row>
           </div>

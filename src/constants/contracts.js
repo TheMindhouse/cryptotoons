@@ -1,6 +1,7 @@
 import { FAMILY_IDS } from "./toonFamilies"
 
-export const AUCTION_CONTRACT = "0x51bd82e935e37d715a477270e5d714ff20961f21"
+export const AUCTION_CONTRACT_ADDRESS =
+  "0x51bd82e935e37d715a477270e5d714ff20961f21"
 
 export const TOON_CONTRACT_ADDRESSES = {}
 

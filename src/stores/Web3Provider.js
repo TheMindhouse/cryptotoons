@@ -1,9 +1,13 @@
 // @flow
 import * as React from "react"
-import ABI from "../assets/abi/ToonABI.json"
+import ToonContractABI from "../assets/abi/ToonABI.json"
+import AuctionContractABI from "../assets/abi/AuctionABI.json"
 import { ToonContractFacade } from "../facades/ToonContractFacade"
 import { FAMILY_IDS } from "../constants/toonFamilies"
-import { TOON_CONTRACT_ADDRESSES } from "../constants/contracts"
+import {
+  AUCTION_CONTRACT_ADDRESS,
+  TOON_CONTRACT_ADDRESSES,
+} from "../constants/contracts"
 import { CONFIG } from "../config"
 import { Logger } from "../helpers/Logger"
 import { AuctionContractFacade } from "../facades/AuctionContractFacade"
@@ -65,10 +69,12 @@ class Web3Provider extends React.Component<Props, State> {
       : Logger.log("Events not supported")
 
     const Contracts = this.prepareContractFacades()
+    const AuctionContract = this.prepareAuctionContractFacade()
 
     this.setState({
       web3: window.web3,
       Contracts,
+      AuctionContract,
       eventsSupported,
       metamaskAvailable,
     })
@@ -77,7 +83,7 @@ class Web3Provider extends React.Component<Props, State> {
   prepareContractFacades = (
     account: string = ""
   ): { [number]: ToonContractFacade } => {
-    const ContractInstance = window.web3.eth.contract(ABI)
+    const ContractInstance = window.web3.eth.contract(ToonContractABI)
     const Contracts: Object = {}
     Object.keys(FAMILY_IDS)
       .map((key: string): number => FAMILY_IDS[key])
@@ -94,13 +100,24 @@ class Web3Provider extends React.Component<Props, State> {
     return Contracts
   }
 
+  prepareAuctionContractFacade = (
+    account: string = ""
+  ): AuctionContractFacade => {
+    const ContractInstance = window.web3.eth.contract(AuctionContractABI)
+    return new AuctionContractFacade(
+      ContractInstance.at(AUCTION_CONTRACT_ADDRESS),
+      account
+    )
+  }
+
   checkAccount = () => {
     window.web3.eth.getAccounts((error, accounts = []) => {
       const account = accounts[0]
       if (account !== this.state.account) {
         Logger.log("New account: ", account)
         const Contracts = this.prepareContractFacades(account)
-        this.setState({ account, Contracts })
+        const AuctionContract = this.prepareAuctionContractFacade(account)
+        this.setState({ account, Contracts, AuctionContract })
       }
     })
   }
@@ -114,6 +131,6 @@ class Web3Provider extends React.Component<Props, State> {
   }
 }
 
-export type Web3Store = ?State
+export type Web3Store = State
 
 export { Web3Context, Web3Provider }

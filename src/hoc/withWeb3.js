@@ -7,13 +7,10 @@ const withWeb3 = (WrappedComponent) => {
     render() {
       return (
         <Web3Context.Consumer>
-          {(web3Store) => (
-            // web3Store ? (
-            <WrappedComponent {...this.props} web3Store={web3Store} />
-          )
-          // ) : (
-          //   <WrappedComponent {...this.props} />
-          // )
+          {(web3Store) =>
+            web3Store ? (
+              <WrappedComponent {...this.props} web3Store={web3Store} />
+            ) : null
           }
         </Web3Context.Consumer>
       )

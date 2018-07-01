@@ -3,9 +3,9 @@ import * as React from "react"
 import { URLHelper } from "../helpers/URLhelper"
 import { FAMILY_NAMES, FAMILY_NAMES_SINGULAR } from "../constants/toonFamilies"
 import { setDocumentTitle } from "../helpers/utils"
-import { ToonDetailsType } from "../types/ToonDetailsType"
 import { ToonDetailsCore } from "../hoc/renderProps/ToonDetailsCore"
 import { ToonPageHeader } from "../components/ToonPageHeader/ToonPageHeader"
+import { ToonDetails } from "../models/ToonDetails"
 
 type ToonProps = {
   match: {
@@ -71,7 +71,7 @@ class Toon extends React.PureComponent<ToonProps, ToonState> {
         <ToonDetailsCore
           familyId={familyId}
           toonId={toonId}
-          render={(toonDetails: ToonDetailsType) => (
+          render={(toonDetails: ToonDetails) => (
             <ToonPageHeader toonDetails={toonDetails} />
           )}
         />

@@ -1,21 +1,20 @@
 // @flow
 import * as React from "react"
-import type { ToonDetailsType } from "../../types/ToonDetailsType"
 import withWeb3 from "../withWeb3"
 import type { Web3Store } from "../../stores/Web3Provider"
-import { ContractFacade } from "../../facades/ToonContractFacade"
-import { ToonInfo } from "../../models/ToonInfo"
-import { Logger } from "../../helpers/Logger"
+import { ToonContractFacade } from "../../facades/ToonContractFacade"
+import { ToonInfo } from "../../models/web3/ToonInfo"
+import { ToonDetails } from "../../models/ToonDetails"
 
 type Props = {
   familyId: number,
   toonId: number,
-  render: (ToonDetailsType) => ?React.Node,
+  render: (ToonDetails) => ?React.Node,
   web3Store?: Web3Store,
 }
 
 type State = {
-  toonDetails?: ToonDetailsType,
+  toonDetails?: ToonDetails,
 }
 
 class ToonDetailsCore extends React.PureComponent<Props, State> {
@@ -40,14 +39,14 @@ class ToonDetailsCore extends React.PureComponent<Props, State> {
   getToon = () => {
     this.getToonInfo()
       .then((toonInfo: ToonInfo) => {
-        const toonDetails: ToonDetailsType = {
+        const toonDetails = new ToonDetails({
           name: `#${this.props.toonId}`,
           toonId: this.props.toonId,
           familyId: this.props.familyId,
           birthTime: toonInfo.birthTime,
           owner: toonInfo.owner,
           genes: toonInfo.genes,
-        }
+        })
         this.setState({ toonDetails })
       })
       .catch(() => null)
@@ -58,7 +57,7 @@ class ToonDetailsCore extends React.PureComponent<Props, State> {
     if (!web3Store || !web3Store.Contracts) {
       return Promise.reject()
     }
-    const toonContract: ?ContractFacade = web3Store.Contracts[familyId]
+    const toonContract: ?ToonContractFacade = web3Store.Contracts[familyId]
     if (!toonContract) {
       return Promise.reject()
     }

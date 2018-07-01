@@ -1,5 +1,5 @@
 // @flow
-import { ToonInfo } from "../models/ToonInfo"
+import { ToonInfo } from "../models/web3/ToonInfo"
 import { BaseContract } from "./BaseContract"
 import { TRANSACTION_TYPE } from "../models/Transaction"
 import { TransactionWithToon } from "../models/TransactionWithToon"

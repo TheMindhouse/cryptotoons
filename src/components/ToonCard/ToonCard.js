@@ -1,12 +1,11 @@
 // @flow
 import * as React from "react"
 import "./styles/ToonCard.css"
-import type { ToonDetailsType } from "../../types/ToonDetailsType"
 import { ToonImageCore } from "../../hoc/renderProps/ToonImageCore"
-import { Spin } from "antd"
+import { ToonDetails } from "../../models/ToonDetails"
 
 type ToonCardProps = {
-  toonDetails: ToonDetailsType,
+  toonDetails: ToonDetails,
 }
 
 class ToonCard extends React.PureComponent<ToonCardProps> {
