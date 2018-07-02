@@ -2,11 +2,18 @@
 import * as React from "react"
 import { ToonImageCore } from "../../hoc/renderProps/ToonImageCore"
 import "./styles/ToonPageHeader.css"
-import { FAMILY_NAMES_SINGULAR } from "../../constants/toonFamilies"
 import { CreateToonAuction } from "../ToonActions/CreateToonAuction"
 import { Col, Row } from "antd"
 import { CurrentToonPrice } from "../ToonActions/CurrentToonPrice"
 import { ToonDetails } from "../../models/ToonDetails"
+import { URLHelper } from "../../helpers/URLhelper"
+import { Link } from "react-router-dom"
+import Moment from "react-moment"
+import {
+  getFamilyName,
+  getFamilyNameSingular,
+} from "../../helpers/familyNamesHelper"
+import { AUCTION_CONTRACT_ADDRESS } from "../../constants/contracts"
 
 type ToonPageHeaderProps = {
   toonDetails: ToonDetails,
@@ -15,17 +22,9 @@ type ToonPageHeaderProps = {
 class ToonPageHeader extends React.PureComponent<ToonPageHeaderProps> {
   static defaultProps = {}
 
-  getFamilyName = (): string => {
-    const { familyId } = this.props.toonDetails
-    if (familyId > -1) {
-      return FAMILY_NAMES_SINGULAR[familyId]
-    }
-    return ""
-  }
-
   render() {
     const { toonDetails } = this.props
-    const { familyId, toonId, genes, owner } = toonDetails
+    const { familyId, toonId, genes, owner, birthTime } = toonDetails
     return (
       <div>
         <div className="ToonPageHeader containerWrapper containerWrapper--gray">
@@ -53,17 +52,31 @@ class ToonPageHeader extends React.PureComponent<ToonPageHeaderProps> {
           <div className="container">
             <Row type="flex" align="middle">
               <Col span={16}>
-                <h1 style={{ margin: 0 }}>
+                <h1>
                   <b>
-                    {this.getFamilyName()} #{toonId}
+                    {getFamilyNameSingular(familyId)} #{toonId}
                   </b>
                 </h1>
+                <p>
+                  Born <Moment format="YYYY/MM/DD">{birthTime}</Moment> &bull;{" "}
+                  Family:{" "}
+                  <Link to={URLHelper.toonFamily(familyId)}>
+                    {getFamilyName(familyId)}
+                  </Link>
+                </p>
               </Col>
               <Col span={8} className="text-right">
-                <CreateToonAuction toonDetails={toonDetails} />
-                <CurrentToonPrice familyId={familyId} toonId={toonId} />
+                <p>
+                  <b>Owner:</b>
+                  <br />
+                  {owner === AUCTION_CONTRACT_ADDRESS ? "On Auction" : owner}
+                </p>
               </Col>
             </Row>
+            <div>
+              <CreateToonAuction toonDetails={toonDetails} />
+              <CurrentToonPrice familyId={familyId} toonId={toonId} />
+            </div>
           </div>
         </div>
       </div>

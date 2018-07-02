@@ -11,7 +11,7 @@ type CurrentToonPriceProps = {
 }
 
 type CurrentToonPriceState = {
-  price?: number,
+  price: ?number,
 }
 
 class CurrentToonPrice extends React.PureComponent<
@@ -20,7 +20,9 @@ class CurrentToonPrice extends React.PureComponent<
 > {
   static defaultProps = {}
 
-  state = {}
+  state = {
+    price: null,
+  }
 
   componentDidMount() {
     this.getToonPrice()
@@ -47,14 +49,20 @@ class CurrentToonPrice extends React.PureComponent<
     const toonContractAddress = TOON_CONTRACT_ADDRESSES[familyId]
     auctionContract
       .getCurrentPrice(toonContractAddress, toonId)
-      .then((price: number) => this.setState({ price }))
+      .then((price: ?number) => this.setState({ price }))
   }
 
   render() {
+    const { price } = this.state
+
+    if (price === null || price === undefined) {
+      return null
+    }
+
     return (
       <div>
         <h1>
-          <b>{this.state.price} ETH</b>
+          <b>{price > 0 ? `${price} ETH` : "Free"}</b>
         </h1>
       </div>
     )

@@ -3,19 +3,18 @@ import { BaseContract } from "./BaseContract"
 import { BigNumber } from "bignumber.js"
 
 export class AuctionContractFacade extends BaseContract {
-  constructor(Contract: Object, account: string) {
-    super(Contract, account)
-  }
-
-  getCurrentPrice(toonContractAddress: string, toonId: number) {
+  getCurrentPrice(
+    toonContractAddress: string,
+    toonId: number
+  ): Promise<?number> {
     return new Promise((resolve, reject) => {
       this.Contract.getCurrentPrice(
         toonContractAddress,
         toonId,
         (error, result: BigNumber) => {
           if (error) {
-            console.log(error)
-            reject(error)
+            // Rejected transaction means there is no auction for the toon
+            resolve(null)
           } else {
             resolve(result.toNumber())
           }

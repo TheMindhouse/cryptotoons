@@ -3,7 +3,6 @@ import * as React from "react"
 import "./styles/ToonFamilyCollection.css"
 import { Col, Row } from "antd"
 import withWeb3 from "../../hoc/withWeb3"
-import type { Web3Store } from "../../stores/Web3Provider"
 import { ToonContractFacade } from "../../facades/ToonContractFacade"
 import { Logger } from "../../helpers/Logger"
 import { ToonCard } from "../ToonCard/ToonCard"
@@ -70,7 +69,7 @@ class ToonFamilyCollection extends React.PureComponent<
     return (
       <Row gutter={30}>
         {Array.from(Array(this.state.toonsCount).keys()).map((toonId) => (
-          <Col span={8} key={toonId}>
+          <Col span={6} key={toonId} className="ToonFamilyCollection__Toon">
             <ToonDetailsCore
               familyId={familyId}
               toonId={toonId}

@@ -73,6 +73,7 @@ class Web3Provider extends React.Component<Props, State> {
       web3: window.web3,
       Contracts,
       AuctionContract,
+      account: null,
       eventsSupported,
       metamaskAvailable,
     }
@@ -112,7 +113,7 @@ class Web3Provider extends React.Component<Props, State> {
   checkAccount = () => {
     window.web3.eth.getAccounts((error, accounts = []) => {
       const account = accounts[0]
-      if (account !== this.state.account) {
+      if (this.state.web3Store && account !== this.state.web3Store.account) {
         Logger.log("New account: ", account)
         const Contracts = this.prepareContractFacades(account)
         const AuctionContract = this.prepareAuctionContractFacade(account)
@@ -120,6 +121,7 @@ class Web3Provider extends React.Component<Props, State> {
           ...this.state.web3Store,
           Contracts,
           AuctionContract,
+          account,
         }
         this.setState({ web3Store })
       }

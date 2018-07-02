@@ -54,7 +54,7 @@ class CreateAuctionModal extends React.PureComponent<
             <InputNumber
               value={startPrice}
               formatter={(value) => `Ξ ${value}`}
-              parser={(value) => value.replace(/\Ξ\s?|(,*)/g, "")}
+              parser={(value) => value.replace(/Ξ\s?|(,*)/g, "")}
               onChange={(value: number) => this.setState({ startPrice: value })}
               style={{ width: "100%" }}
             />
@@ -68,7 +68,7 @@ class CreateAuctionModal extends React.PureComponent<
             <InputNumber
               value={endPrice}
               formatter={(value) => `Ξ ${value}`}
-              parser={(value) => value.replace(/\Ξ\s?|(,*)/g, "")}
+              parser={(value) => value.replace(/Ξ\s?|(,*)/g, "")}
               onChange={(value: number) => this.setState({ endPrice: value })}
               style={{ width: "100%" }}
             />
