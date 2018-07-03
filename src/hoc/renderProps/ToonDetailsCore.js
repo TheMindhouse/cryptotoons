@@ -39,7 +39,6 @@ class ToonDetailsCore extends React.PureComponent<Props, State> {
   getToon = () => {
     this.getToonInfo().then((toonInfo: ToonInfo) => {
       const toonDetails = new ToonDetails({
-        name: `#${this.props.toonId}`,
         toonId: this.props.toonId,
         familyId: this.props.familyId,
         birthTime: toonInfo.birthTime,

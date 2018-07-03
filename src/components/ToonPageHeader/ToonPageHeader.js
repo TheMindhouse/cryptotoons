@@ -7,7 +7,7 @@ import { ToonDetails } from "../../models/ToonDetails"
 import { URLHelper } from "../../helpers/URLhelper"
 import { Link } from "react-router-dom"
 import Moment from "react-moment"
-import { getFamilyName, getFamilyNameSingular } from "../../helpers/familyNamesHelper"
+import { getFamilyName } from "../../helpers/familyNamesHelper"
 import { AUCTION_CONTRACT_ADDRESS } from "../../constants/contracts"
 import { ToonAuction } from "../../models/web3/ToonAuction"
 
@@ -21,7 +21,7 @@ class ToonPageHeader extends React.PureComponent<ToonPageHeaderProps> {
 
   render() {
     const { toonDetails } = this.props
-    const { familyId, toonId, genes, owner, birthTime } = toonDetails
+    const { name, familyId, toonId, genes, owner, birthTime } = toonDetails
     return (
       <div>
         <div className="ToonPageHeader containerWrapper containerWrapper--gray">
@@ -50,9 +50,7 @@ class ToonPageHeader extends React.PureComponent<ToonPageHeaderProps> {
             <Row type="flex" align="middle">
               <Col span={16}>
                 <h1>
-                  <b>
-                    {getFamilyNameSingular(familyId)} #{toonId}
-                  </b>
+                  <b>{name}</b>
                 </h1>
                 <p>
                   Born <Moment format="YYYY/MM/DD">{birthTime}</Moment> &bull;{" "}

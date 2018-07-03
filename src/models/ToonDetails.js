@@ -1,6 +1,8 @@
 // @flow
+import { FAMILY_NAMES_SINGULAR } from "../constants/toonFamilies"
+
 type ToonDetailsProps = {
-  name: string,
+  name?: string,
   image?: string,
   toonId: number,
   familyId: number,
@@ -27,7 +29,7 @@ export class ToonDetails {
     owner,
     genes,
   }: ToonDetailsProps) {
-    this.name = name
+    this.name = name || `${FAMILY_NAMES_SINGULAR[familyId]} #${toonId}`
     this.image = image
     this.toonId = toonId
     this.familyId = familyId
