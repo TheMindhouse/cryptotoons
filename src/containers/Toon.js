@@ -6,6 +6,10 @@ import { setDocumentTitle } from "../helpers/utils"
 import { ToonDetailsCore } from "../hoc/renderProps/ToonDetailsCore"
 import { ToonPageHeader } from "../components/ToonPageHeader/ToonPageHeader"
 import { ToonDetails } from "../models/ToonDetails"
+import { ToonAuctionCore } from "../hoc/renderProps/ToonAuctionCore"
+import { ToonAuction } from "../models/web3/ToonAuction"
+import { ToonPageAuction } from "../components/ToonPageAuction/ToonPageAuction"
+import { ToonPageOwnerActions } from "../components/ToonPageOwnerActions/ToonPageOwnerActions"
 
 type ToonProps = {
   match: {
@@ -72,7 +76,23 @@ class Toon extends React.PureComponent<ToonProps, ToonState> {
           familyId={familyId}
           toonId={toonId}
           render={(toonDetails: ToonDetails) => (
-            <ToonPageHeader toonDetails={toonDetails} />
+            <ToonAuctionCore
+              familyId={familyId}
+              toonId={toonId}
+              render={(toonAuction: ?ToonAuction) => (
+                <div>
+                  <ToonPageHeader
+                    toonDetails={toonDetails}
+                    toonAuction={toonAuction}
+                  />
+                  <ToonPageOwnerActions
+                    toonDetails={toonDetails}
+                    toonAuction={toonAuction}
+                  />
+                  <ToonPageAuction toonAuction={toonAuction} />
+                </div>
+              )}
+            />
           )}
         />
       </div>

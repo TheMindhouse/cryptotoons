@@ -156,6 +156,10 @@
       {
         "name": "startedAt",
         "type": "uint256"
+      },
+      {
+        "name": "currentPrice",
+        "type": "uint256"
       }
     ],
     "payable": false,

@@ -1,14 +1,14 @@
 // @flow
 import * as React from "react"
-import withWeb3 from "../../hoc/withWeb3"
-import { Button, message } from "antd"
-import withModal from "../../hoc/withModal"
-import type { WithModal } from "../../types/WithModal"
 import { CreateAuctionModal } from "../Modals/CreateAuctionModal"
+import { Button, message } from "antd"
 import { TransactionWithToon } from "../../models/TransactionWithToon"
 import { LocalStorageManager } from "../../localStorage"
-import { ToonDetails } from "../../models/ToonDetails"
 import type { Web3StoreType } from "../../types/Web3StoreType"
+import type { WithModal } from "../../types/WithModal"
+import withModal from "../../hoc/withModal"
+import { ToonDetails } from "../../models/ToonDetails"
+import withWeb3 from "../../hoc/withWeb3"
 
 type CreateToonAuctionProps = {
   toonDetails: ToonDetails,
@@ -19,27 +19,21 @@ type CreateToonAuctionProps = {
 class CreateToonAuction extends React.PureComponent<CreateToonAuctionProps> {
   static defaultProps = {}
 
-  isUserToonOwner = () => {
-    const { web3Store, toonDetails } = this.props
-    return web3Store && web3Store.account === toonDetails.owner
-  }
-
   onSubmitAuction = (
     startPrice: number,
     endPrice: number,
     duration: number
   ) => {
     const { toonDetails, web3Store } = this.props
-    if (!web3Store || !web3Store.Contracts) {
-      return
-    }
     const toonContract = web3Store.Contracts[toonDetails.familyId]
-    if (!toonContract) {
-      return
-    }
-    const durationInMs = duration * 60 * 60 * 1000
+    const durationInSeconds = duration * 60 * 60
     toonContract
-      .createAuction(toonDetails.toonId, startPrice, endPrice, durationInMs)
+      .createAuction(
+        toonDetails.toonId,
+        startPrice,
+        endPrice,
+        durationInSeconds
+      )
       .then((tx: TransactionWithToon) => {
         LocalStorageManager.transactions.updateTransactions(tx)
         message.success("Create Toon Auction Transaction sent")
@@ -47,10 +41,6 @@ class CreateToonAuction extends React.PureComponent<CreateToonAuctionProps> {
   }
 
   render() {
-    if (!this.isUserToonOwner()) {
-      return null
-    }
-
     return (
       <div>
         <CreateAuctionModal

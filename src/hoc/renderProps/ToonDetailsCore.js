@@ -37,26 +37,21 @@ class ToonDetailsCore extends React.PureComponent<Props, State> {
   }
 
   getToon = () => {
-    this.getToonInfo()
-      .then((toonInfo: ToonInfo) => {
-        const toonDetails = new ToonDetails({
-          name: `#${this.props.toonId}`,
-          toonId: this.props.toonId,
-          familyId: this.props.familyId,
-          birthTime: toonInfo.birthTime,
-          owner: toonInfo.owner,
-          genes: toonInfo.genes,
-        })
-        this.setState({ toonDetails })
+    this.getToonInfo().then((toonInfo: ToonInfo) => {
+      const toonDetails = new ToonDetails({
+        name: `#${this.props.toonId}`,
+        toonId: this.props.toonId,
+        familyId: this.props.familyId,
+        birthTime: toonInfo.birthTime,
+        owner: toonInfo.owner,
+        genes: toonInfo.genes,
       })
-      .catch(() => null)
+      this.setState({ toonDetails })
+    })
   }
 
   getToonInfo = (): Promise<ToonInfo> => {
     const { familyId, toonId, web3Store } = this.props
-    if (!web3Store || !web3Store.Contracts) {
-      return Promise.reject()
-    }
     const toonContract: ?ToonContractFacade = web3Store.Contracts[familyId]
     if (!toonContract) {
       return Promise.reject()

@@ -1,8 +1,10 @@
 // @flow
+import { BigNumber } from "bignumber.js/bignumber"
 import { ToonInfo } from "../models/web3/ToonInfo"
 import { BaseContract } from "./BaseContract"
 import { TRANSACTION_TYPE } from "../models/Transaction"
 import { TransactionWithToon } from "../models/TransactionWithToon"
+import { ToonInfoResponseObj } from "../types/web3/web3ResponseObjects"
 
 export class ToonContractFacade extends BaseContract {
   familyId: number
@@ -16,14 +18,14 @@ export class ToonContractFacade extends BaseContract {
     toonId: number,
     startPrice: number,
     endPrice: number,
-    duration: number
+    durationInSeconds: number
   ) {
     return new Promise((resolve, reject) => {
       this.Contract.createSaleAuction(
         toonId,
         startPrice,
         endPrice,
-        duration,
+        durationInSeconds,
         this.config,
         (error, txHash) => {
           if (error) {
@@ -47,18 +49,18 @@ export class ToonContractFacade extends BaseContract {
     })
   }
 
-  /**
+  /* ###########################################################################
    * VIEW FUNCTIONS (free)
-   */
+   ########################################################################## */
 
   getTotalToonsCount(): Promise<number> {
     return new Promise((resolve, reject) => {
-      this.Contract.totalSupply({}, (error, result) => {
+      this.Contract.totalSupply({}, (error, result: BigNumber) => {
         if (error) {
           console.log(error)
           reject(error)
         } else {
-          resolve(parseInt(result, 10))
+          resolve(result.toNumber())
         }
       })
     })
@@ -66,14 +68,17 @@ export class ToonContractFacade extends BaseContract {
 
   getToonInfo(toonId: number): Promise<ToonInfo> {
     return new Promise((resolve, reject) => {
-      this.Contract.getToonInfo(toonId, (error, result) => {
-        if (error) {
-          console.log(error)
-          reject(error)
-        } else {
-          resolve(new ToonInfo(result))
+      this.Contract.getToonInfo(
+        toonId,
+        (error, result: ToonInfoResponseObj) => {
+          if (error) {
+            console.log(error)
+            reject(error)
+          } else {
+            resolve(new ToonInfo(result))
+          }
         }
-      })
+      )
     })
   }
 }

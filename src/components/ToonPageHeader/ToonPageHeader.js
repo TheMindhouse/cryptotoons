@@ -2,21 +2,18 @@
 import * as React from "react"
 import { ToonImageCore } from "../../hoc/renderProps/ToonImageCore"
 import "./styles/ToonPageHeader.css"
-import { CreateToonAuction } from "../ToonActions/CreateToonAuction"
 import { Col, Row } from "antd"
-import { CurrentToonPrice } from "../ToonActions/CurrentToonPrice"
 import { ToonDetails } from "../../models/ToonDetails"
 import { URLHelper } from "../../helpers/URLhelper"
 import { Link } from "react-router-dom"
 import Moment from "react-moment"
-import {
-  getFamilyName,
-  getFamilyNameSingular,
-} from "../../helpers/familyNamesHelper"
+import { getFamilyName, getFamilyNameSingular } from "../../helpers/familyNamesHelper"
 import { AUCTION_CONTRACT_ADDRESS } from "../../constants/contracts"
+import { ToonAuction } from "../../models/web3/ToonAuction"
 
 type ToonPageHeaderProps = {
   toonDetails: ToonDetails,
+  toonAuction: ?ToonAuction,
 }
 
 class ToonPageHeader extends React.PureComponent<ToonPageHeaderProps> {
@@ -73,10 +70,6 @@ class ToonPageHeader extends React.PureComponent<ToonPageHeaderProps> {
                 </p>
               </Col>
             </Row>
-            <div>
-              <CreateToonAuction toonDetails={toonDetails} />
-              <CurrentToonPrice familyId={familyId} toonId={toonId} />
-            </div>
           </div>
         </div>
       </div>

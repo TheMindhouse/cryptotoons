@@ -11,6 +11,7 @@ export const TRANSACTION_RECEIPT_STATUS = {
 
 export const TRANSACTION_TYPE = {
   createAuction: "createAuction",
+  cancelAuction: "cancelAuction",
 }
 
 export class Transaction {

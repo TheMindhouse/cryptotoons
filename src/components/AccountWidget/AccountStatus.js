@@ -28,11 +28,6 @@ class AccountStatus extends React.PureComponent<AccountStatusProps> {
 
   render() {
     const { modal, txStore, web3Store } = this.props
-
-    if (!web3Store) {
-      return null
-    }
-
     return (
       <div className="AccountStatus">
         {!web3Store.account &&
