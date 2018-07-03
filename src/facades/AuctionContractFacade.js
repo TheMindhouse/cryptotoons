@@ -95,6 +95,7 @@ export class AuctionContractFacade extends BaseContract {
       this.Contract.getAuction(
         toonContractAddress,
         toonId,
+        this.config,
         (error, result: ToonAuctionResponseObj) => {
           if (error) {
             // Rejected transaction means there is no auction for the toon

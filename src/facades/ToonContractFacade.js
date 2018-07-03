@@ -16,7 +16,7 @@ export class ToonContractFacade extends BaseContract {
 
   createAuction(
     toonId: number,
-    startPrice: number,
+    startPrice: number, // All prices in Wei
     endPrice: number,
     durationInSeconds: number
   ) {

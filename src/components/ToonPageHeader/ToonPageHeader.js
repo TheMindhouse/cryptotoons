@@ -8,7 +8,6 @@ import { URLHelper } from "../../helpers/URLhelper"
 import { Link } from "react-router-dom"
 import Moment from "react-moment"
 import { getFamilyName } from "../../helpers/familyNamesHelper"
-import { AUCTION_CONTRACT_ADDRESS } from "../../constants/contracts"
 import { ToonAuction } from "../../models/web3/ToonAuction"
 
 type ToonPageHeaderProps = {
@@ -20,7 +19,7 @@ class ToonPageHeader extends React.PureComponent<ToonPageHeaderProps> {
   static defaultProps = {}
 
   render() {
-    const { toonDetails } = this.props
+    const { toonDetails, toonAuction } = this.props
     const { name, familyId, toonId, genes, owner, birthTime } = toonDetails
     return (
       <div>
@@ -64,7 +63,7 @@ class ToonPageHeader extends React.PureComponent<ToonPageHeaderProps> {
                 <p>
                   <b>Owner:</b>
                   <br />
-                  {owner === AUCTION_CONTRACT_ADDRESS ? "On Auction" : owner}
+                  {toonAuction ? toonAuction.seller : toonDetails.owner}
                 </p>
               </Col>
             </Row>

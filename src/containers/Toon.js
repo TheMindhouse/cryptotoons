@@ -89,7 +89,10 @@ class Toon extends React.PureComponent<ToonProps, ToonState> {
                     toonDetails={toonDetails}
                     toonAuction={toonAuction}
                   />
-                  <ToonPageAuction toonAuction={toonAuction} />
+                  <ToonPageAuction
+                    toonDetails={toonDetails}
+                    toonAuction={toonAuction}
+                  />
                 </div>
               )}
             />
