@@ -12,6 +12,7 @@ export const TRANSACTION_RECEIPT_STATUS = {
 export const TRANSACTION_TYPE = {
   createAuction: "createAuction",
   cancelAuction: "cancelAuction",
+  buyToon: "buyToon",
 }
 
 export class Transaction {

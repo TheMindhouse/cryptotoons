@@ -4,8 +4,8 @@ import withWeb3 from "../../hoc/withWeb3"
 import type { Web3StoreType } from "../../types/Web3StoreType"
 import { ToonDetails } from "../../models/ToonDetails"
 import { ToonAuction } from "../../models/web3/ToonAuction"
-import { CreateToonAuction } from "../ToonPageAuction/CreateToonAuction"
-import { EndToonAuction } from "../ToonPageAuction/EndToonAuction"
+import { CreateToonAuction } from "./CreateToonAuction"
+import { EndToonAuction } from "./EndToonAuction"
 
 type ToonPageOwnerActionsProps = {
   toonDetails: ToonDetails,

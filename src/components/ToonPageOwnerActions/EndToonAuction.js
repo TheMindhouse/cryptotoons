@@ -2,7 +2,7 @@
 import * as React from "react"
 import { Button, message, Modal } from "antd"
 import { TransactionWithToon } from "../../models/TransactionWithToon"
-import { LocalStorageManager } from "../../localStorage"
+import { LocalStorageManager } from "../../localStorage/index"
 import type { Web3StoreType } from "../../types/Web3StoreType"
 import type { WithModal } from "../../types/WithModal"
 import { ToonDetails } from "../../models/ToonDetails"
