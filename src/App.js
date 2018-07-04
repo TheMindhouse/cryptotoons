@@ -12,6 +12,7 @@ import { Web3Provider } from "./stores/Web3Provider"
 import { Toon } from "./containers/Toon"
 import AccountStatus from "./components/AccountWidget/AccountStatus"
 import { TransactionsProvider } from "./stores/TransactionsProvider"
+import { Account } from "./containers/Account"
 
 // Initialize Google Analytics
 // ReactGA.initialize('UA-117937544-1')
@@ -43,6 +44,7 @@ class App extends Component<{}> {
                     path="/toons/:familyName/:toonId"
                     component={Toon}
                   />
+                  <Route path="/account/:address" component={Account} />
                   <Route path="/404" component={ErrorPage404} />
                   <Route component={ErrorPage404} />
                 </Switch>

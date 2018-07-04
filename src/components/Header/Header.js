@@ -7,62 +7,68 @@ import "./styles/Header.css"
 import { Link, NavLink } from "react-router-dom"
 import { URLHelper } from "../../helpers/URLhelper"
 import { ToonFamiliesSubmenu } from "./ToonFamiliesSubmenu"
+import withWeb3 from "../../hoc/withWeb3"
+import type { Web3StoreType } from "../../types/Web3StoreType"
 
-type Props = {
-  account?: string,
+type HeaderProps = {
+  web3Store: Web3StoreType,
 }
 
-const Header = (props: Props) => {
-  return (
-    <div className="Header">
-      <div className="container">
-        <Row justify="space-between" type="flex" align="middle">
+class Header extends React.Component<HeaderProps> {
+  render() {
+    const { account } = this.props.web3Store
+    return (
+      <div className="Header">
+        <div className="container">
           <Row justify="space-between" type="flex" align="middle">
-            <div>
-              <Link to={URLHelper.home} className="Header__link">
-                <img src={logo} className="Header__logo" alt="" />
-              </Link>
-            </div>
-          </Row>
-          <ul className="Header__menu">
-            <li>
-              <Dropdown overlay={ToonFamiliesSubmenu}>
-                <NavLink
-                  to={URLHelper.home}
-                  exact
-                  className="Header__menu-link"
-                  activeClassName="Header__menu-link--active"
-                >
-                  Toon Families <Icon type="down" />
-                </NavLink>
-              </Dropdown>
-            </li>
-            <li>
-              <NavLink
-                to="/about"
-                className="Header__menu-link"
-                activeClassName="Header__menu-link--active"
-              >
-                About
-              </NavLink>
-            </li>
-
-            {props.account && (
+            <Row justify="space-between" type="flex" align="middle">
+              <div>
+                <Link to={URLHelper.home} className="Header__link">
+                  <img src={logo} className="Header__logo" alt="" />
+                </Link>
+              </div>
+            </Row>
+            <ul className="Header__menu">
+              <li>
+                <Dropdown overlay={ToonFamiliesSubmenu}>
+                  <NavLink
+                    to={URLHelper.home}
+                    exact
+                    className="Header__menu-link"
+                    activeClassName="Header__menu-link--active"
+                  >
+                    Toon Families <Icon type="down" />
+                  </NavLink>
+                </Dropdown>
+              </li>
               <li>
                 <NavLink
-                  to={`/account/${props.account}`}
+                  to={URLHelper.about}
                   className="Header__menu-link"
                   activeClassName="Header__menu-link--active"
                 >
-                  <span className="hidden-mobile">My</span> Account
+                  About
                 </NavLink>
               </li>
-            )}
-          </ul>
-        </Row>
+
+              {account && (
+                <li>
+                  <NavLink
+                    to={URLHelper.account(account)}
+                    className="Header__menu-link"
+                    activeClassName="Header__menu-link--active"
+                  >
+                    My Account
+                  </NavLink>
+                </li>
+              )}
+            </ul>
+          </Row>
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
+Header = withWeb3(Header)
 export { Header }
