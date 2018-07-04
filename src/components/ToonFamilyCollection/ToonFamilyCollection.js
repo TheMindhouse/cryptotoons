@@ -64,7 +64,14 @@ class ToonFamilyCollection extends React.PureComponent<
     return (
       <Row gutter={30}>
         {Array.from(Array(this.state.toonsCount).keys()).map((toonId) => (
-          <Col span={6} key={toonId} className="ToonFamilyCollection__Toon">
+          <Col
+            xs={{ span: 24 }}
+            sm={{ span: 12 }}
+            md={{ span: 8 }}
+            lg={{ span: 6 }}
+            key={toonId}
+            className="ToonFamilyCollection__Toon"
+          >
             <ToonDetailsCore
               familyId={familyId}
               toonId={toonId}

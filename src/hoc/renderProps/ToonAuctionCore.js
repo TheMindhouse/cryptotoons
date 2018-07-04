@@ -6,18 +6,21 @@ import { ToonAuction } from "../../models/web3/ToonAuction"
 import { AuctionContractFacade } from "../../facades/AuctionContractFacade"
 import { TOON_CONTRACT_ADDRESSES } from "../../constants/contracts"
 
-type Props = {
+type ToonAuctionCoreProps = {
   familyId: number,
   toonId: number,
   render: (?ToonAuction) => ?React.Node,
   web3Store: Web3StoreType,
 }
 
-type State = {
+type ToonAuctionCoreState = {
   toonAuction: ?ToonAuction,
 }
 
-class ToonAuctionCore extends React.PureComponent<Props, State> {
+class ToonAuctionCore extends React.PureComponent<
+  ToonAuctionCoreProps,
+  ToonAuctionCoreState
+> {
   static defaultProps = {}
 
   state = {
@@ -28,7 +31,7 @@ class ToonAuctionCore extends React.PureComponent<Props, State> {
     this.getToonAuction()
   }
 
-  componentDidUpdate(prevProps: Props) {
+  componentDidUpdate(prevProps: ToonAuctionCoreProps) {
     if (
       prevProps.familyId !== this.props.familyId ||
       prevProps.toonId !== this.props.toonId ||

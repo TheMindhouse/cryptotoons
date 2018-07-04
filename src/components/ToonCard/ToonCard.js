@@ -3,6 +3,9 @@ import * as React from "react"
 import "./styles/ToonCard.css"
 import { ToonImageCore } from "../../hoc/renderProps/ToonImageCore"
 import { ToonDetails } from "../../models/ToonDetails"
+import { ToonAuction } from "../../models/web3/ToonAuction"
+import { ToonAuctionCore } from "../../hoc/renderProps/ToonAuctionCore"
+import { ForSaleBadge } from "../Small/ForSaleBadge"
 
 type ToonCardProps = {
   toonDetails: ToonDetails,
@@ -12,13 +15,24 @@ class ToonCard extends React.PureComponent<ToonCardProps> {
   static defaultProps = {}
 
   render() {
-    const { toonDetails } = this.props
+    const { familyId, toonId, genes, name } = this.props.toonDetails
     return (
       <div className="ToonCard">
+        <ToonAuctionCore
+          familyId={familyId}
+          toonId={toonId}
+          render={(toonAuction: ?ToonAuction) =>
+            toonAuction && (
+              <div className="ToonCard__ForSaleBadge">
+                <ForSaleBadge price={toonAuction.currentPrice} />
+              </div>
+            )
+          }
+        />
         <ToonImageCore
-          familyId={toonDetails.familyId}
-          toonId={toonDetails.toonId}
-          genes={toonDetails.genes}
+          familyId={familyId}
+          toonId={toonId}
+          genes={genes}
           render={(imageUrl: ?string) =>
             imageUrl ? (
               <div
@@ -32,7 +46,7 @@ class ToonCard extends React.PureComponent<ToonCardProps> {
             )
           }
         />
-        <p className="ToonCard__name">{toonDetails.name}</p>
+        <p className="ToonCard__name">{name}</p>
       </div>
     )
   }
