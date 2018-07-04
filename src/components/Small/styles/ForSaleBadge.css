@@ -1,0 +1,22 @@
+.ForSaleBadge {
+    background: rgba(251, 205, 21, 0.4);
+    border-radius: 20px;
+    padding: 7px 15px;
+    line-height: 0;
+    display: inline-flex;
+    align-items: center;
+}
+
+.ForSaleBadge__Icon {
+    color: #0b8aa8;
+}
+
+.ForSaleBadge__Caption {
+    font-size: 13px;
+    margin: 0 5px;
+    font-weight: bold;
+}
+
+.ForSaleBadge__Price {
+    color: #000000;
+}

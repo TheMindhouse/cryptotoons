@@ -9,6 +9,7 @@ import { Link } from "react-router-dom"
 import Moment from "react-moment"
 import { getFamilyName } from "../../helpers/familyNamesHelper"
 import { ToonAuction } from "../../models/web3/ToonAuction"
+import { ForSaleBadge } from "../Small/ForSaleBadge"
 
 type ToonPageHeaderProps = {
   toonDetails: ToonDetails,
@@ -20,11 +21,12 @@ class ToonPageHeader extends React.PureComponent<ToonPageHeaderProps> {
 
   render() {
     const { toonDetails, toonAuction } = this.props
-    const { name, familyId, toonId, genes, owner, birthTime } = toonDetails
+    const { name, familyId, toonId, genes, birthTime } = toonDetails
     return (
       <div>
         <div className="ToonPageHeader containerWrapper containerWrapper--gray">
           <div className="container">
+            {toonAuction && <ForSaleBadge price={toonAuction.currentPrice} />}
             <ToonImageCore
               familyId={familyId}
               toonId={toonId}

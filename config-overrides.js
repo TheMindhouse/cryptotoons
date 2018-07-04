@@ -12,7 +12,7 @@ module.exports = function override(config, env) {
       "@font-family": "Catamaran, sans-serif",
       "@font-size-base": "16px",
       "@btn-primary-color": "#333",
-      "@btn-primary-bg": "#fbcd15",
+      "@btn-primary-bg": "#ffcc00",
     },
   })(config, env)
   return config
