@@ -4,6 +4,8 @@ import type { Web3StoreType } from "../../types/Web3StoreType"
 import withWeb3 from "../../hoc/withWeb3"
 import { ToonContractFacade } from "../../facades/ToonContractFacade"
 import * as pluralize from "pluralize"
+import type { ToonWithFamilyIds } from "../../types/ToonTypes"
+import { ToonsGrid } from "../ToonsGrid/ToonsGrid"
 
 type ToonsOwnedProps = {
   accountAddress: string,
@@ -12,6 +14,7 @@ type ToonsOwnedProps = {
 
 type ToonsOwnedState = {
   ownedToonsCount: ?number,
+  ownedToons: Array<ToonWithFamilyIds>,
 }
 
 class ToonsOwned extends React.PureComponent<ToonsOwnedProps, ToonsOwnedState> {
@@ -19,6 +22,7 @@ class ToonsOwned extends React.PureComponent<ToonsOwnedProps, ToonsOwnedState> {
 
   state = {
     ownedToonsCount: null,
+    ownedToons: [],
   }
 
   componentDidMount() {
@@ -32,7 +36,9 @@ class ToonsOwned extends React.PureComponent<ToonsOwnedProps, ToonsOwnedState> {
   }
 
   getToonContracts = (): Array<ToonContractFacade> =>
-    Object.values(this.props.web3Store.Contracts)
+    Object.keys(this.props.web3Store.Contracts).map(
+      (key: number): ToonContractFacade => this.props.web3Store.Contracts[key]
+    )
 
   getOwnedToonsCount = () => {
     const { accountAddress } = this.props
@@ -44,6 +50,7 @@ class ToonsOwned extends React.PureComponent<ToonsOwnedProps, ToonsOwnedState> {
     )
     // Sum all owned toons
     Promise.all(pToonsCount).then((toonCounts: Array<number>) => {
+      this.getOwnedToons(toonCounts)
       const ownedToonsCount = toonCounts.reduce(
         (a: number, b: number) => a + b,
         0
@@ -55,29 +62,38 @@ class ToonsOwned extends React.PureComponent<ToonsOwnedProps, ToonsOwnedState> {
   /**
    * Get detailed info about owned toons.
    *
-   * @param toonCounts - number of owned toons for each family.
-   * These values are sorted the same way as corresponding contracts, eg.
-   * toonCounts[0] is number of toons from family
-   * Object.values(web3Store.Contracts)[0]
+   * @param toonCountsByContract - number of owned toons from each family.
+   * Indexes of these values correspond to the values in web3Store.Contracts, eg.
+   * toonCountsByContract[0] is number of toons from the family in the first contract
    */
-  getOwnedToons = (toonCounts: Array<number>) => {
+  getOwnedToons = (toonCountsByContract: Array<number>) => {
     const { accountAddress } = this.props
     const toonContracts: Array<ToonContractFacade> = this.getToonContracts()
-    const pToonIds = toonCounts.map(
+
+    // This array will hold all promises which resolve to toon id with its family id
+    const pOwnedToons: Array<Promise<ToonWithFamilyIds>> = []
+
+    // For each contract get details for all the toons owned by the user
+    toonCountsByContract.forEach(
       (toonCountsForFamily: number, contractIndex: number) => {
         // For each toon from 0 to toonCountsForFamily we need to get its Toon ID
-        return Array(toonCountsForFamily).map((val: any, toonIndex: number) =>
-          toonContracts[contractIndex].getToonIdByOwnershipIndex(
-            accountAddress,
-            toonIndex
-          )
-        )
+        for (let toonIndex = 0; toonIndex < toonCountsForFamily; toonIndex++) {
+          const pOwnedToon: Promise<ToonWithFamilyIds> = toonContracts[
+            contractIndex
+          ].getToonIdByOwnershipIndex(accountAddress, toonIndex)
+          pOwnedToons.push(pOwnedToon)
+        }
       }
     )
+
+    // Wait until all promises are resolved and then update state
+    Promise.all(pOwnedToons).then((ownedToons: Array<ToonWithFamilyIds>) => {
+      this.setState({ ownedToons })
+    })
   }
 
   render() {
-    const { ownedToonsCount } = this.state
+    const { ownedToonsCount, ownedToons } = this.state
     return (
       <div>
         <h2>
@@ -85,7 +101,7 @@ class ToonsOwned extends React.PureComponent<ToonsOwnedProps, ToonsOwnedState> {
             {ownedToonsCount} {pluralize("Toon", ownedToonsCount)} Owned
           </b>
         </h2>
-        <div className="ct-chart" style={{ height: 500 }} />
+        <ToonsGrid toons={ownedToons} />
       </div>
     )
   }

@@ -5,6 +5,7 @@ import { BaseContract } from "./BaseContract"
 import { TRANSACTION_TYPE } from "../models/Transaction"
 import { TransactionWithToon } from "../models/TransactionWithToon"
 import { ToonInfoResponseObj } from "../types/web3/web3ResponseObjects"
+import { ToonWithFamilyIds } from "../types/ToonTypes"
 
 export class ToonContractFacade extends BaseContract {
   familyId: number
@@ -89,7 +90,10 @@ export class ToonContractFacade extends BaseContract {
    * @param index - index of toon as in ownership array [0..ownedToonsCount]
    * @returns {Promise<number>}
    */
-  getToonIdByOwnershipIndex(owner: string, index: number): Promise<number> {
+  getToonIdByOwnershipIndex(
+    owner: string,
+    index: number
+  ): Promise<ToonWithFamilyIds> {
     return new Promise((resolve, reject) => {
       this.Contract.tokenOfOwnerByIndex(
         owner,
@@ -99,7 +103,10 @@ export class ToonContractFacade extends BaseContract {
             console.log(error)
             reject(error)
           } else {
-            resolve(result.toNumber())
+            resolve({
+              toonId: result.toNumber(),
+              familyId: this.familyId,
+            })
           }
         }
       )

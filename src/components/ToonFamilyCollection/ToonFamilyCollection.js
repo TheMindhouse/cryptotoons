@@ -1,16 +1,12 @@
 // @flow
 import * as React from "react"
 import "./styles/ToonFamilyCollection.css"
-import { Col, Row } from "antd"
 import withWeb3 from "../../hoc/withWeb3"
 import { ToonContractFacade } from "../../facades/ToonContractFacade"
 import { Logger } from "../../helpers/Logger"
-import { ToonCard } from "../ToonCard/ToonCard"
-import { ToonDetailsCore } from "../../hoc/renderProps/ToonDetailsCore"
-import { URLHelper } from "../../helpers/URLhelper"
-import { Link } from "react-router-dom"
-import { ToonDetails } from "../../models/ToonDetails"
 import type { Web3StoreType } from "../../types/Web3StoreType"
+import { ToonsGrid } from "../ToonsGrid/ToonsGrid"
+import type { ToonWithFamilyIds } from "../../types/ToonTypes"
 
 type ToonFamilyCollectionProps = {
   familyId: number,
@@ -59,32 +55,20 @@ class ToonFamilyCollection extends React.PureComponent<
     return toonContract.getTotalToonsCount()
   }
 
-  render() {
+  getToons = (toonsCount: number): Array<ToonWithFamilyIds> => {
     const { familyId } = this.props
-    return (
-      <Row gutter={30}>
-        {Array.from(Array(this.state.toonsCount).keys()).map((toonId) => (
-          <Col
-            xs={{ span: 24 }}
-            sm={{ span: 12 }}
-            md={{ span: 8 }}
-            lg={{ span: 6 }}
-            key={toonId}
-            className="ToonFamilyCollection__Toon"
-          >
-            <ToonDetailsCore
-              familyId={familyId}
-              toonId={toonId}
-              render={(toonDetails: ToonDetails) => (
-                <Link to={URLHelper.toon(familyId, toonId)}>
-                  <ToonCard toonDetails={toonDetails} />
-                </Link>
-              )}
-            />
-          </Col>
-        ))}
-      </Row>
+    return Array.from(Array(toonsCount).keys()).map(
+      (toonId: number): ToonWithFamilyIds => ({
+        toonId,
+        familyId,
+      })
     )
+  }
+
+  render() {
+    const toons = this.getToons(this.state.toonsCount)
+
+    return <ToonsGrid toons={toons} />
   }
 }
 
