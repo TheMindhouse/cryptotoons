@@ -8,6 +8,7 @@ import type { Web3StoreType } from "../../types/Web3StoreType"
 import { TransactionWithToon } from "../../models/TransactionWithToon"
 import { LocalStorageManager } from "../../localStorage"
 import { TOON_CONTRACT_ADDRESSES } from "../../constants/contracts"
+import { wei2eth } from "../../helpers/ethConverter"
 
 type BuyToonProps = {
   toonDetails: ToonDetails,
@@ -24,7 +25,8 @@ class BuyToon extends React.PureComponent<BuyToonProps> {
       content: (
         <div>
           <p>
-            <b>Price: Ξ{this.props.toonAuction.currentPrice}</b>
+            <br />
+            <b>Price: Ξ{wei2eth(this.props.toonAuction.currentPrice)}</b>
           </p>
           <p>
             Toon's ownership will be transferred to your account immediately.
@@ -42,7 +44,8 @@ class BuyToon extends React.PureComponent<BuyToonProps> {
     const { toonId, familyId } = toonDetails
     const toonContractAddress = TOON_CONTRACT_ADDRESSES[toonDetails.familyId]
     const AuctionContract = web3Store.AuctionContract
-    AuctionContract.buyToon(toonContractAddress, toonId, familyId).then(
+    const price = this.props.toonAuction.currentPrice
+    AuctionContract.buyToon(toonContractAddress, toonId, familyId, price).then(
       (tx: TransactionWithToon) => {
         LocalStorageManager.transactions.updateTransactions(tx)
         message.success(`${tx.name} Transaction Sent`)

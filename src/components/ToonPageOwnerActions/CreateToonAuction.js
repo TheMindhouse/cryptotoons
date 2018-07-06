@@ -39,7 +39,7 @@ class CreateToonAuction extends React.PureComponent<CreateToonAuctionProps> {
       )
       .then((tx: TransactionWithToon) => {
         LocalStorageManager.transactions.updateTransactions(tx)
-        message.success("Create Toon Auction Transaction sent")
+        message.success(`${tx.name} Transaction Sent`)
         this.props.modal.close()
       })
   }

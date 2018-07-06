@@ -5,7 +5,7 @@ import { BaseContract } from "./BaseContract"
 import { TRANSACTION_TYPE } from "../models/Transaction"
 import { TransactionWithToon } from "../models/TransactionWithToon"
 import { ToonInfoResponseObj } from "../types/web3/web3ResponseObjects"
-import { ToonWithFamilyIds } from "../types/ToonTypes"
+import type { ToonWithFamilyIds } from "../types/ToonTypes"
 
 export class ToonContractFacade extends BaseContract {
   familyId: number

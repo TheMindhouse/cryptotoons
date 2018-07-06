@@ -5,6 +5,7 @@ import withWeb3 from "../hoc/withWeb3"
 import { setDocumentTitle } from "../helpers/utils"
 import type { Web3StoreType } from "../types/Web3StoreType"
 import { ToonsOwned } from "../components/ToonsOwned/ToonsOwned"
+import { AccountBalance } from "../components/AccountBalance/AccountBalance"
 
 type AccountProps = {
   match: {
@@ -41,6 +42,9 @@ class Account extends React.PureComponent<AccountProps> {
         <div className="containerWrapper">
           <div className="container">
             <ToonsOwned accountAddress={urlAccountAddress} />
+            <br />
+            <br />
+            <AccountBalance accountAddress={urlAccountAddress} />
           </div>
         </div>
       </div>

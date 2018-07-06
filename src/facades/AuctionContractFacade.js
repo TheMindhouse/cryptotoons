@@ -4,7 +4,7 @@ import { BigNumber } from "bignumber.js"
 import { ToonAuction } from "../models/web3/ToonAuction"
 import { ToonAuctionResponseObj } from "../types/web3/web3ResponseObjects"
 import { TransactionWithToon } from "../models/TransactionWithToon"
-import { TRANSACTION_TYPE } from "../models/Transaction"
+import { Transaction, TRANSACTION_TYPE } from "../models/Transaction"
 
 export class AuctionContractFacade extends BaseContract {
   cancelAuction(toonContractAddress: string, toonId: number, familyId: number) {
@@ -35,12 +35,17 @@ export class AuctionContractFacade extends BaseContract {
     })
   }
 
-  buyToon(toonContractAddress: string, toonId: number, familyId: number) {
+  buyToon(
+    toonContractAddress: string,
+    toonId: number,
+    familyId: number,
+    price: number
+  ) {
     return new Promise((resolve, reject) => {
       this.Contract.bid(
         toonContractAddress,
         toonId,
-        this.config,
+        { ...this.config, value: price },
         (error, txHash) => {
           if (error) {
             console.log(error)
@@ -60,6 +65,27 @@ export class AuctionContractFacade extends BaseContract {
           }
         }
       )
+    })
+  }
+
+  withdrawBalance() {
+    return new Promise((resolve, reject) => {
+      this.Contract.withdraw(this.config, (error, txHash) => {
+        if (error) {
+          console.log(error)
+          console.log("[ERROR] Withdraw Account Balance failed")
+          reject(error)
+        } else {
+          const tx: Transaction = {
+            hash: txHash,
+            type: TRANSACTION_TYPE.withdrawBalance,
+            name: `Withdraw Account Balance`,
+            account: this.account,
+            timestamp: new Date(),
+          }
+          resolve(new Transaction(tx))
+        }
+      })
     })
   }
 
@@ -102,6 +128,21 @@ export class AuctionContractFacade extends BaseContract {
             resolve(null)
           } else {
             resolve(new ToonAuction(result))
+          }
+        }
+      )
+    })
+  }
+
+  getAccountBalance(accountAddress: string): Promise<?number> {
+    return new Promise((resolve, reject) => {
+      this.Contract.getPendingWithdrawal(
+        accountAddress,
+        (error, result: BigNumber) => {
+          if (error) {
+            reject(error)
+          } else {
+            resolve(result.toNumber())
           }
         }
       )

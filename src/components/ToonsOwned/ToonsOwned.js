@@ -94,6 +94,10 @@ class ToonsOwned extends React.PureComponent<ToonsOwnedProps, ToonsOwnedState> {
 
   render() {
     const { ownedToonsCount, ownedToons } = this.state
+    const ownedToonsSorted = ownedToons.sort(
+      (a: ToonWithFamilyIds, b: ToonWithFamilyIds) =>
+        a.familyId - b.familyId || a.toonId - b.toonId
+    )
     return (
       <div>
         <h2>
@@ -101,7 +105,7 @@ class ToonsOwned extends React.PureComponent<ToonsOwnedProps, ToonsOwnedState> {
             {ownedToonsCount} {pluralize("Toon", ownedToonsCount)} Owned
           </b>
         </h2>
-        <ToonsGrid toons={ownedToons} />
+        <ToonsGrid toons={ownedToonsSorted} />
       </div>
     )
   }
