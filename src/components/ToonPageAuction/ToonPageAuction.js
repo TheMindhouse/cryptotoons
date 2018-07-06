@@ -6,21 +6,21 @@ import Moment from "react-moment"
 import { BuyToon } from "./BuyToon"
 import { ToonDetails } from "../../models/ToonDetails"
 import { wei2eth } from "../../helpers/ethConverter"
+import { AuctionChart } from "./AuctionChart"
+import { Col, Row } from "antd"
+import { TextWithLabel } from "../Small/TextWithLabel"
 
 type ToonPageAuctionProps = {
   toonDetails: ToonDetails,
-  toonAuction: ?ToonAuction,
+  toonAuction: ToonAuction,
 }
 
 class ToonPageAuction extends React.PureComponent<ToonPageAuctionProps> {
   static defaultProps = {}
 
   render() {
-    const toonAuction: ?ToonAuction = this.props.toonAuction
+    const toonAuction: ToonAuction = this.props.toonAuction
     const toonDetails: ToonDetails = this.props.toonDetails
-    if (!toonAuction) {
-      return null
-    }
 
     const {
       startingPrice,
@@ -30,31 +30,81 @@ class ToonPageAuction extends React.PureComponent<ToonPageAuctionProps> {
       currentPrice,
     } = toonAuction
 
+    // WHen auction reaches end date, endingPrice stays available until
+    // someone buys the toon or the owner cancels the auction.
     const endDate = new Date(startedAt.valueOf() + duration)
     const isAuctionAtEnd = Date.now() > endDate
 
     return (
       <div className="container">
-        {toonAuction && (
-          <BuyToon toonDetails={toonDetails} toonAuction={toonAuction} />
-        )}
-        <p>
-          <b>Started at:</b> Ξ{wei2eth(startingPrice)}
-        </p>
-        <p>
-          <b>Price goes to:</b> Ξ{wei2eth(endingPrice)}
-        </p>
-        <p>
-          <b>Buy now price:</b> Ξ{wei2eth(currentPrice)}
-        </p>
-        {!isAuctionAtEnd && (
-          <p>
-            <b>Time left:</b>{" "}
-            <Moment fromNow ago>
-              {endDate}
-            </Moment>
-          </p>
-        )}
+        <Row className="ToonPageAuction">
+          <Col xs={{ span: 24 }} md={{ span: 20, offset: 2 }}>
+            <Row type="flex" align="middle" justify="space-between">
+              <Col xs={{ span: 24 }} sm={{ span: 12 }} lg={{ span: 8 }}>
+                <Row type="flex" align="middle" justify="space-between">
+                  <TextWithLabel
+                    label="Buy now price"
+                    text={
+                      <h2>
+                        <small className="text-smaller">Ξ</small>{" "}
+                        <b>
+                          {currentPrice > 0 ? wei2eth(currentPrice) : "Free"}
+                        </b>
+                      </h2>
+                    }
+                  />
+                  {!isAuctionAtEnd && (
+                    <TextWithLabel
+                      label="Time left"
+                      text={
+                        <h2 className="color-lgray">
+                          <Moment fromNow ago>
+                            {endDate}
+                          </Moment>
+                        </h2>
+                      }
+                    />
+                  )}
+                </Row>
+              </Col>
+              <Col
+                xs={{ span: 24 }}
+                sm={{ span: 6, offset: 6 }}
+                lg={{ span: 4, offset: 12 }}
+              >
+                <BuyToon toonDetails={toonDetails} toonAuction={toonAuction} />
+              </Col>
+            </Row>
+          </Col>
+
+          <Col xs={{ span: 24 }} md={{ span: 18, offset: 3 }}>
+            <div className="ToonPageAuction__ChartContainer">
+              <AuctionChart toonAuction={toonAuction} />
+            </div>
+          </Col>
+
+          <Col xs={{ span: 24 }} md={{ span: 20, offset: 2 }}>
+            <Row type="flex" align="middle" justify="space-between">
+              <p>
+                <small className="color-lgray">
+                  <b>STARTED AT</b>
+                </small>{" "}
+                <span>
+                  <small>Ξ</small> <b>{wei2eth(startingPrice)}</b>
+                </span>
+              </p>
+
+              <p>
+                <small className="color-lgray">
+                  <b>PRICE GOES TO</b>
+                </small>{" "}
+                <span>
+                  <small>Ξ</small> <b>{wei2eth(endingPrice)}</b>
+                </span>
+              </p>
+            </Row>
+          </Col>
+        </Row>
       </div>
     )
   }

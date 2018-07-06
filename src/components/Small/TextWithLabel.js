@@ -13,7 +13,9 @@ class TextWithLabel extends React.PureComponent<TextWithLabelProps> {
   render() {
     return (
       <div className="TextWithLabel">
-        <span className="TextWithLabel__Label">{this.props.label}</span>
+        <span className="TextWithLabel__Label color-lgray">
+          {this.props.label}
+        </span>
         <span className="TextWithLabel__Text">{this.props.text}</span>
       </div>
     )

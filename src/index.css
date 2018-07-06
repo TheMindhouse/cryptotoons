@@ -37,13 +37,25 @@ body {
     text-align: right;
 }
 
+.color-primary {
+    color: #ffcc00;
+}
+
+.color-secondary {
+    color: #0b8aa8;
+}
+
+.color-lgray {
+    color: #777;
+}
+
 /**
 *** ANT OVERRIDES
  */
 
-.ant-modal .ant-modal-title,
-.ant-confirm-body .ant-confirm-title,
-.ant-notification-notice-message,
-.ant-message {
+body .ant-modal .ant-modal-title,
+body .ant-confirm-body .ant-confirm-title,
+body .ant-notification-notice-message,
+body .ant-message {
     font-weight: bold;
 }

@@ -38,12 +38,14 @@ class ToonPageOwnerActions extends React.PureComponent<
     const { toonDetails, toonAuction } = this.props
 
     return (
-      <div className="container">
-        {toonAuction ? (
-          <EndToonAuction toonDetails={toonDetails} />
-        ) : (
-          <CreateToonAuction toonDetails={toonDetails} />
-        )}
+      <div className="containerWrapper" style={{ paddingTop: 0 }}>
+        <div className="container">
+          {toonAuction ? (
+            <EndToonAuction toonDetails={toonDetails} />
+          ) : (
+            <CreateToonAuction toonDetails={toonDetails} />
+          )}
+        </div>
       </div>
     )
   }

@@ -46,21 +46,19 @@ class CreateToonAuction extends React.PureComponent<CreateToonAuctionProps> {
 
   render() {
     return (
-      <div className="containerWrapper">
-        <div className="container">
-          <CreateAuctionModal
-            modal={this.props.modal}
-            onSubmitAuction={this.onSubmitAuction}
-          />
-          <Button
-            type="primary"
-            size="large"
-            icon="tag-o"
-            onClick={this.props.modal.show}
-          >
-            Create Auction
-          </Button>
-        </div>
+      <div>
+        <CreateAuctionModal
+          modal={this.props.modal}
+          onSubmitAuction={this.onSubmitAuction}
+        />
+        <Button
+          type="primary"
+          size="large"
+          icon="tag-o"
+          onClick={this.props.modal.show}
+        >
+          Create Auction
+        </Button>
       </div>
     )
   }

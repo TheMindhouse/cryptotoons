@@ -68,6 +68,7 @@ class BuyToon extends React.PureComponent<BuyToonProps> {
           size="large"
           icon="shopping-cart"
           onClick={this.confirm}
+          style={{ width: "100%" }}
         >
           Buy now
         </Button>
