@@ -10,6 +10,8 @@ import Moment from "react-moment"
 import { getFamilyName } from "../../helpers/familyNamesHelper"
 import { ToonAuction } from "../../models/web3/ToonAuction"
 import { ForSaleBadge } from "../Small/ForSaleBadge"
+import { TextWithLabel } from "../Small/TextWithLabel"
+import { AccountAddressLink } from "../Small/AccountAddressLink"
 
 type ToonPageHeaderProps = {
   toonDetails: ToonDetails,
@@ -49,24 +51,41 @@ class ToonPageHeader extends React.PureComponent<ToonPageHeaderProps> {
         <div className="containerWrapper">
           <div className="container">
             <Row type="flex" align="middle">
-              <Col span={16}>
-                <h1>
+              <Col xs={{ span: 24 }} md={{ span: 12 }}>
+                <h1 className="ToonPageHeader__Name">
                   <b>{name}</b>
                 </h1>
-                <p>
-                  Born <Moment format="YYYY/MM/DD">{birthTime}</Moment> &bull;{" "}
-                  Family:{" "}
-                  <Link to={URLHelper.toonFamily(familyId)}>
-                    {getFamilyName(familyId)}
-                  </Link>
-                </p>
               </Col>
-              <Col span={8} className="text-right">
-                <p>
-                  <b>Owner:</b>
-                  <br />
-                  {toonAuction ? toonAuction.seller : toonDetails.owner}
-                </p>
+              <Col xs={{ span: 24 }} md={{ span: 12 }}>
+                <Row
+                  type="flex"
+                  align="middle"
+                  justify="space-between"
+                  className="ToonPageHeader__Info"
+                >
+                  <TextWithLabel
+                    label="Born"
+                    text={<Moment format="YYYY/MM/DD">{birthTime}</Moment>}
+                  />
+                  <TextWithLabel
+                    label="Family"
+                    text={
+                      <Link to={URLHelper.toonFamily(familyId)}>
+                        {getFamilyName(familyId)}
+                      </Link>
+                    }
+                  />
+                  <TextWithLabel
+                    label="Owner"
+                    text={
+                      <AccountAddressLink
+                        address={
+                          toonAuction ? toonAuction.seller : toonDetails.owner
+                        }
+                      />
+                    }
+                  />
+                </Row>
               </Col>
             </Row>
           </div>

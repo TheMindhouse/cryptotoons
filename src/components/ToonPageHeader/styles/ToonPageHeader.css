@@ -8,3 +8,19 @@
     background: no-repeat center;
     background-size: contain;
 }
+
+.ToonPageHeader__Name {
+    margin: 0;
+}
+
+
+@media all and (max-width: 768px) {
+    .ToonPageHeader__Name {
+        margin-bottom: 20px;
+    }
+
+    .ToonPageHeader__Info > * {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
