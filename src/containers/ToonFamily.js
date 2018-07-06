@@ -66,16 +66,7 @@ class ToonFamily extends React.PureComponent<Props, State> {
       return null
     }
 
-    return (
-      <div className="containerWrapper containerWrapper--gray">
-        <div className="container">
-          <h1>
-            <b>{this.getFamilyName()}</b>
-          </h1>
-          <ToonFamilyCollection familyId={familyId} />
-        </div>
-      </div>
-    )
+    return <ToonFamilyCollection familyId={familyId} />
   }
 }
 

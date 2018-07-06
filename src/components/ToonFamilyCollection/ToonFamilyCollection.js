@@ -7,6 +7,8 @@ import { Logger } from "../../helpers/Logger"
 import type { Web3StoreType } from "../../types/Web3StoreType"
 import { ToonsGrid } from "../ToonsGrid/ToonsGrid"
 import type { ToonWithFamilyIds } from "../../types/ToonTypes"
+import { getFamilyName } from "../../helpers/familyNamesHelper"
+import { Row, Spin } from "antd"
 
 type ToonFamilyCollectionProps = {
   familyId: number,
@@ -15,6 +17,7 @@ type ToonFamilyCollectionProps = {
 
 type ToonFamilyCollectionState = {
   toonsCount: number,
+  isLoading: boolean,
 }
 
 class ToonFamilyCollection extends React.PureComponent<
@@ -25,18 +28,22 @@ class ToonFamilyCollection extends React.PureComponent<
 
   state = {
     toonsCount: 0,
+    isLoading: true,
   }
 
   componentDidMount() {
-    this.getToonsCount()
-      .then((toonsCount: number) => this.setState({ toonsCount }))
-      .then()
+    this.getToonsCount().then((toonsCount: number) =>
+      this.setState({ toonsCount, isLoading: false })
+    )
   }
 
-  componentDidUpdate() {
-    this.getToonsCount().then((toonsCount: number) =>
-      this.setState({ toonsCount })
-    )
+  componentDidUpdate(prevProps: ToonFamilyCollectionProps) {
+    if (prevProps.familyId !== this.props.familyId) {
+      this.setState({ isLoading: true })
+      this.getToonsCount().then((toonsCount: number) =>
+        this.setState({ toonsCount, isLoading: false })
+      )
+    }
   }
 
   /**
@@ -68,7 +75,38 @@ class ToonFamilyCollection extends React.PureComponent<
   render() {
     const toons = this.getToons(this.state.toonsCount)
 
-    return <ToonsGrid toons={toons} />
+    if (this.state.isLoading) {
+      return (
+        <div className="containerWrapper containerWrapper--gray">
+          <div className="container">
+            <h1>
+              <b>{getFamilyName(this.props.familyId)}</b>
+            </h1>
+            <Row
+              type="flex"
+              align="middle"
+              justify="center"
+              style={{ minHeight: "50vh" }}
+            >
+              <Spin />
+            </Row>
+          </div>
+        </div>
+      )
+    }
+
+    return (
+      <div className="containerWrapper containerWrapper--gray">
+        <div className="container">
+          <h1>
+            <b>
+              {toons.length} {getFamilyName(this.props.familyId)}
+            </b>
+          </h1>
+          <ToonsGrid toons={toons} />
+        </div>
+      </div>
+    )
   }
 }
 
