@@ -23,7 +23,7 @@ const HEIGHT = FULL_HEIGHT - 2 * PADDING
 
 const COLOR_BACKGROUND = "#ddd"
 const COLOR_MAIN = "#0b8aa8"
-const COLOR_GRADIENT_START = "#ddd"
+const COLOR_GRADIENT_START = "#e1e1e1"
 const COLOR_GRADIENT_END = "#fff"
 
 class AuctionChart extends React.PureComponent<AuctionChartProps> {
@@ -69,17 +69,19 @@ class AuctionChart extends React.PureComponent<AuctionChartProps> {
       : [0, 0]
 
   getAuctionEndCoords = (): [number, number] =>
-    this.getAuctionDirection() === AUCTION_DIRECTIONS.INCREASING
-      ? [WIDTH, 0]
-      : [WIDTH, HEIGHT]
+    this.getAuctionDirection() === AUCTION_DIRECTIONS.DECREASING
+      ? [WIDTH, HEIGHT]
+      : [WIDTH, 0]
 
   getCurrentPriceCoords = (): [number, number] => {
     const percentCompleted = this.calculatePercentCompleted()
     const posX = WIDTH * percentCompleted
     const posY =
-      this.getAuctionDirection() === AUCTION_DIRECTIONS.INCREASING
-        ? HEIGHT - HEIGHT * percentCompleted
-        : HEIGHT * percentCompleted
+      this.getAuctionDirection() === AUCTION_DIRECTIONS.STABLE
+        ? 0
+        : this.getAuctionDirection() === AUCTION_DIRECTIONS.INCREASING
+          ? HEIGHT - HEIGHT * percentCompleted
+          : HEIGHT * percentCompleted
     return [posX, posY]
   }
 
