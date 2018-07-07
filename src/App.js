@@ -13,6 +13,7 @@ import { Toon } from "./containers/Toon"
 import AccountStatus from "./components/AccountWidget/AccountStatus"
 import { TransactionsProvider } from "./stores/TransactionsProvider"
 import { Account } from "./containers/Account"
+import { About } from "./containers/About"
 
 // Initialize Google Analytics
 // ReactGA.initialize('UA-117937544-1')
@@ -45,6 +46,7 @@ class App extends Component<{}> {
                     component={Toon}
                   />
                   <Route path="/account/:address" component={Account} />
+                  <Route path="/about" component={About} />
                   <Route path="/404" component={ErrorPage404} />
                   <Route component={ErrorPage404} />
                 </Switch>

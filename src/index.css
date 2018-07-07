@@ -29,8 +29,17 @@ body {
     padding: 0 20px;
 }
 
+.container--large-text {
+    font-size: 18px;
+    line-height: 1.6em;
+}
+
 .text-center {
     text-align: center;
+}
+
+.text-justify {
+    text-align: justify;
 }
 
 .text-right {
