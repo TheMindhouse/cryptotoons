@@ -6,7 +6,7 @@ import { LocalStorageManager } from "../../localStorage"
 import { AccountBalanceWithdraw } from "./AccountBalanceWithdraw"
 import type { Web3StoreType } from "../../types/Web3StoreType"
 import { Transaction } from "../../models/Transaction"
-import { wei2eth } from "../../helpers/ethConverter"
+import { wei2eth } from "../../helpers/unitsConverter"
 
 type Props = {
   accountAddress: string, // NOT user address, but from the page params!

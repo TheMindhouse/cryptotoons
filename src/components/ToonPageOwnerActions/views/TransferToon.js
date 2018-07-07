@@ -1,23 +1,23 @@
 // @flow
 import * as React from "react"
-import { CreateAuctionModal } from "../Modals/CreateAuctionModal"
+import { CreateAuctionModal } from "../../Modals/CreateAuctionModal"
 import { Button, message } from "antd"
-import { TransactionWithToon } from "../../models/TransactionWithToon"
-import { LocalStorageManager } from "../../localStorage/index"
-import type { Web3StoreType } from "../../types/Web3StoreType"
-import type { WithModal } from "../../types/WithModal"
-import withModal from "../../hoc/withModal"
-import { ToonDetails } from "../../models/ToonDetails"
-import withWeb3 from "../../hoc/withWeb3"
-import { eth2wei, ethConverter } from "../../helpers/ethConverter"
+import { TransactionWithToon } from "../../../models/TransactionWithToon"
+import { LocalStorageManager } from "../../../localStorage/index"
+import type { Web3StoreType } from "../../../types/Web3StoreType"
+import type { WithModal } from "../../../types/WithModal"
+import withModal from "../../../hoc/withModal"
+import { ToonDetails } from "../../../models/ToonDetails"
+import withWeb3 from "../../../hoc/withWeb3"
+import { eth2wei, ethConverter } from "../../../helpers/unitsConverter"
 
-type CreateToonAuctionProps = {
+type TransferToonProps = {
   toonDetails: ToonDetails,
   web3Store: Web3StoreType,
   modal: WithModal,
 }
 
-class CreateToonAuction extends React.PureComponent<CreateToonAuctionProps> {
+class TransferToon extends React.PureComponent<TransferToonProps> {
   static defaultProps = {}
 
   onSubmitAuction = (
@@ -52,17 +52,17 @@ class CreateToonAuction extends React.PureComponent<CreateToonAuctionProps> {
           onSubmitAuction={this.onSubmitAuction}
         />
         <Button
-          type="primary"
+          type="default"
           size="large"
-          icon="tag-o"
+          icon="gift"
           onClick={this.props.modal.show}
         >
-          Create Auction
+          Gift Toon
         </Button>
       </div>
     )
   }
 }
 
-CreateToonAuction = withModal(withWeb3(CreateToonAuction))
-export { CreateToonAuction }
+TransferToon = withModal(withWeb3(TransferToon))
+export { TransferToon }

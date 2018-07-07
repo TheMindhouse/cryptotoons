@@ -2,7 +2,7 @@
 import * as React from "react"
 import "./styles/ForSaleBadge.css"
 import { Icon } from "antd"
-import { wei2eth } from "../../helpers/ethConverter"
+import { wei2eth } from "../../helpers/unitsConverter"
 
 type ForSaleBadgeProps = {
   price: number, // price in Wei

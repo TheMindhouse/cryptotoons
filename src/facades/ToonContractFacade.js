@@ -31,8 +31,7 @@ export class ToonContractFacade extends BaseContract {
         (error, txHash) => {
           if (error) {
             console.log(error)
-            console.log("[ERROR] Create Auction failed")
-            reject(error)
+            reject("Create Auction Transaction has failed to send")
           } else {
             const tx = {
               hash: txHash,

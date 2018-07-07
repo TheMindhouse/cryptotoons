@@ -7,3 +7,5 @@ export const wei2eth = (wei: number, decimals?: number = 3): number => {
   }
   return eth
 }
+
+export const days2seconds = (days: number): number => days * 24 * 60 * 60

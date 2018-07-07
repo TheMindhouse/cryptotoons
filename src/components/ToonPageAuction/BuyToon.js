@@ -8,7 +8,7 @@ import type { Web3StoreType } from "../../types/Web3StoreType"
 import { TransactionWithToon } from "../../models/TransactionWithToon"
 import { LocalStorageManager } from "../../localStorage"
 import { TOON_CONTRACT_ADDRESSES } from "../../constants/contracts"
-import { wei2eth } from "../../helpers/ethConverter"
+import { wei2eth } from "../../helpers/unitsConverter"
 
 type BuyToonProps = {
   toonDetails: ToonDetails,
