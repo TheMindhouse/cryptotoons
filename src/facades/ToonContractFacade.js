@@ -54,7 +54,7 @@ export class ToonContractFacade extends BaseContract {
     const fromAccount = this.account
     return new Promise((resolve, reject) => {
       if (!fromAccount || !toAccount || !toonId) {
-        throw "Incorrect arguments"
+        throw new Error("Incorrect arguments")
       }
       this.Contract.transferFrom(
         fromAccount,

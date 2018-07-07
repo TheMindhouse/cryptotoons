@@ -66,8 +66,8 @@ class TransferToon extends React.PureComponent<
 
           <div>
             <p>
-              Toon's ownership will be transfer to the new owner. You will lose
-              ownership of this toon.
+              Toon's ownership will be transferred to the new owner. You will
+              lose ownership of this toon.
             </p>
             <Tooltip
               trigger={["focus"]}

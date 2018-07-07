@@ -17,4 +17,10 @@ export class ToonAuction {
     this.startedAt = new Date(props[4].toNumber() * 1000)
     this.currentPrice = props[5].toNumber()
   }
+
+  // Contract will return an auction object with default values (zeros) even if such auction doesn't exist.
+  // Auction is active when startedAt value is higher than 0.
+  isActive() {
+    return this.startedAt > 0
+  }
 }

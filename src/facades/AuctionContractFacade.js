@@ -93,31 +93,11 @@ export class AuctionContractFacade extends BaseContract {
    * VIEW FUNCTIONS (free)
    ########################################################################## */
 
-  getCurrentPrice(
-    toonContractAddress: string,
-    toonId: number
-  ): Promise<?number> {
-    return new Promise((resolve, reject) => {
-      this.Contract.getCurrentPrice(
-        toonContractAddress,
-        toonId,
-        (error, result: BigNumber) => {
-          if (error) {
-            // Rejected transaction means there is no auction for the toon
-            resolve(null)
-          } else {
-            resolve(result.toNumber())
-          }
-        }
-      )
-    })
-  }
-
   getAuction(
     toonContractAddress: string,
     toonId: number
   ): Promise<?ToonAuction> {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       this.Contract.getAuction(
         toonContractAddress,
         toonId,
@@ -127,10 +107,10 @@ export class AuctionContractFacade extends BaseContract {
         },
         (error, result: ToonAuctionResponseObj) => {
           if (error) {
-            // Rejected transaction means there is no auction for the toon
-            resolve(null)
+            reject(error)
           } else {
-            resolve(new ToonAuction(result))
+            const toonAuction = new ToonAuction(result)
+            toonAuction.isActive() ? resolve(toonAuction) : resolve(null)
           }
         }
       )
