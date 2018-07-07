@@ -6,7 +6,7 @@ type ToonDetailsProps = {
   image?: string,
   toonId: number,
   familyId: number,
-  birthTime: Date,
+  birthTime: string,
   owner: string,
   genes: string,
 }

@@ -29,6 +29,10 @@ body {
     padding: 0 20px;
 }
 
+.container--small {
+    max-width: 600px;
+}
+
 .container--large-text {
     font-size: 18px;
     line-height: 1.6em;

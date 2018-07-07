@@ -7,6 +7,8 @@ import { ToonAuction } from "../../models/web3/ToonAuction"
 import { CreateToonAuction } from "./views/CreateToonAuction"
 import { ToonOwnerActionButtons } from "./views/ToonOwnerActionButtons"
 import { TransferToon } from "./views/TransferToon"
+import { PendingTransactionInfo } from "../Small/PendingTransactionInfo"
+import { TRANSACTION_TYPE } from "../../models/Transaction"
 
 const OWNER_ACTION_VIEWS = {
   BUTTONS: 0,
@@ -59,11 +61,25 @@ class ToonPageOwnerActions extends React.PureComponent<
       return null
     }
 
+    const transactionTypes = [
+      TRANSACTION_TYPE.buyToon,
+      TRANSACTION_TYPE.transferToon,
+      TRANSACTION_TYPE.cancelAuction,
+      TRANSACTION_TYPE.createAuction,
+    ]
+
     const { toonDetails, toonAuction } = this.props
     const { currentView } = this.state
 
     return (
       <div className="containerWrapper" style={{ paddingTop: 0 }}>
+        <div className="container container--small">
+          <PendingTransactionInfo
+            type={transactionTypes}
+            toon={toonDetails}
+            style={{ marginBottom: 10 }}
+          />
+        </div>
         <div className="container">
           {currentView === OWNER_ACTION_VIEWS.BUTTONS && (
             <ToonOwnerActionButtons
