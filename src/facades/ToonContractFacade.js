@@ -6,6 +6,7 @@ import { TRANSACTION_TYPE } from "../models/Transaction"
 import { TransactionWithToon } from "../models/TransactionWithToon"
 import { ToonInfoResponseObj } from "../types/web3/web3ResponseObjects"
 import type { ToonWithFamilyIds } from "../types/ToonTypes"
+import { cutAddress } from "../helpers/strings"
 
 export class ToonContractFacade extends BaseContract {
   familyId: number
@@ -37,6 +38,40 @@ export class ToonContractFacade extends BaseContract {
               hash: txHash,
               type: TRANSACTION_TYPE.createAuction,
               name: `Create Auction for Toon #${toonId}`,
+              account: this.account,
+              timestamp: new Date(),
+              familyId: this.familyId,
+              toonId,
+            }
+            resolve(new TransactionWithToon(tx))
+          }
+        }
+      )
+    })
+  }
+
+  transferToon(toonId: number, toAccount: string) {
+    const fromAccount = this.account
+    return new Promise((resolve, reject) => {
+      if (!fromAccount || !toAccount || !toonId) {
+        throw "Incorrect arguments"
+      }
+      this.Contract.transferFrom(
+        fromAccount,
+        toAccount,
+        toonId,
+        this.config,
+        (error, txHash) => {
+          if (error) {
+            console.log(error)
+            reject("Transfer Toon Transaction has failed to send")
+          } else {
+            const tx = {
+              hash: txHash,
+              type: TRANSACTION_TYPE.transferToon,
+              name: `Transfer Toon #${toonId} to address ${cutAddress(
+                toAccount
+              )}...`,
               account: this.account,
               timestamp: new Date(),
               familyId: this.familyId,

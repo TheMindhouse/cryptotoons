@@ -5,7 +5,6 @@ import { TransactionWithToon } from "../../../models/TransactionWithToon"
 import { LocalStorageManager } from "../../../localStorage/index"
 import type { Web3StoreType } from "../../../types/Web3StoreType"
 import type { WithModal } from "../../../types/WithModal"
-import withModal from "../../../hoc/withModal"
 import { ToonDetails } from "../../../models/ToonDetails"
 import withWeb3 from "../../../hoc/withWeb3"
 import { days2seconds, eth2wei } from "../../../helpers/unitsConverter"
@@ -56,10 +55,12 @@ class CreateToonAuction extends React.PureComponent<
       .then((tx: TransactionWithToon) => {
         LocalStorageManager.transactions.updateTransactions(tx)
         message.success(`${tx.name} Transaction Sent`)
-        this.props.switchToDefaultView()
+        this.setState({ isSubmitting: false }, this.props.switchToDefaultView)
       })
-      .catch((error) => message.error(error))
-      .finally(() => this.setState({ isSubmitting: false }))
+      .catch((error: string) => {
+        this.setState({ isSubmitting: false })
+        message.error(error)
+      })
   }
 
   render() {
@@ -165,5 +166,5 @@ class CreateToonAuction extends React.PureComponent<
   }
 }
 
-CreateToonAuction = withModal(withWeb3(CreateToonAuction))
+CreateToonAuction = withWeb3(CreateToonAuction)
 export { CreateToonAuction }

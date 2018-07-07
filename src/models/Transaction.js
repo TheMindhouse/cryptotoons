@@ -13,6 +13,7 @@ export const TRANSACTION_TYPE = {
   createAuction: "createAuction",
   cancelAuction: "cancelAuction",
   buyToon: "buyToon",
+  transferToon: "transferToon",
 }
 
 export class Transaction {
