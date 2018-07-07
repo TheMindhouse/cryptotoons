@@ -1,11 +1,12 @@
 // @flow
 import * as React from "react"
-import { Col, Icon, Row } from "antd"
+import { Col, Row } from "antd"
 import { URLHelper } from "../../helpers/URLhelper"
 import { Link } from "react-router-dom"
 import "./styles/Footer.css"
 import logoMindhouse from "../../assets/images/logo-mindhouse.png"
 import logoWebcartoons from "../../assets/images/logo-webcartoons.png"
+import { SocialLinks } from "../SocialLinks/SocialLinks"
 
 type Props = {}
 
@@ -19,13 +20,13 @@ class Footer extends React.PureComponent<Props> {
           <Row>
             <Col xs={24} sm={24} md={4}>
               <nav className="Footer__nav">
-                <Link to={URLHelper.home}>About</Link>
+                <Link to={URLHelper.about}>About</Link>
                 <br />
-                <Link to={URLHelper.home}>Help</Link>
+                <Link to={URLHelper.help}>Help</Link>
                 <br />
-                <Link to={URLHelper.home}>Terms of Use</Link>
+                <Link to={URLHelper.terms}>Terms of Use</Link>
                 <br />
-                <Link to={URLHelper.home}>Contact</Link>
+                <Link to={URLHelper.contact}>Contact</Link>
               </nav>
             </Col>
             <Col xs={24} sm={24} md={16} style={{ textAlign: "center" }}>
@@ -56,30 +57,7 @@ class Footer extends React.PureComponent<Props> {
               </Row>
             </Col>
             <Col xs={24} sm={24} md={4} className="Footer-Social">
-              <a
-                href="https://www.facebook.com/cryptotoons/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="Footer-Social__Icon"
-              >
-                <Icon type="facebook" />
-              </a>
-              <a
-                href="https://www.instagram.com/cryptotoons/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="Footer-Social__Icon"
-              >
-                <Icon type="instagram" />
-              </a>
-              <a
-                href="https://twitter.com/toontoken"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="Footer-Social__Icon"
-              >
-                <Icon type="twitter" />
-              </a>
+              <SocialLinks />
             </Col>
           </Row>
         </div>

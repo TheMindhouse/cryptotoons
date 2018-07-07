@@ -1,36 +1,26 @@
 // @flow
 import * as React from "react"
-import backgroundBlue from "../assets/images/background-blue.jpg"
-import toonsGang from "../assets/images/toons.png"
 import { Col, Row } from "antd"
 import { setDocumentTitle } from "../helpers/utils"
 
-type AboutProps = {}
+type TermsOfUseProps = {}
 
-class About extends React.PureComponent<AboutProps> {
+class TermsOfUse extends React.PureComponent<TermsOfUseProps> {
   static defaultProps = {}
 
   componentDidMount() {
-    setDocumentTitle("About")
+    setDocumentTitle("Terms Of Use")
   }
 
   render() {
     return (
       <div>
-        <div
-          className="containerWrapper About__Header"
-          style={{
-            backgroundImage: `url(${backgroundBlue})`,
-            backgroundSize: "cover",
-            padding: "100px 0",
-          }}
-        >
-          <div className="container">
-            <img
-              src={toonsGang}
-              alt="CryptoToons"
-              style={{ maxWidth: "90%" }}
-            />
+        <div className="containerWrapper containerWrapper--gray">
+          <div className="container text-center">
+            <h1>
+              <b>Terms of Use</b>
+            </h1>
+            <h3 className="color-lgray">Last Updated: July 7th, 2018</h3>
           </div>
         </div>
 
@@ -43,9 +33,6 @@ class About extends React.PureComponent<AboutProps> {
                 md={{ span: 16 }}
                 lg={{ span: 14 }}
               >
-                <h1 className="text-center">
-                  <b>About CryptoToons</b>
-                </h1>
                 <p>
                   Lorem Ipsum is slechts een proeftekst uit het drukkerij- en
                   zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze
@@ -84,4 +71,4 @@ class About extends React.PureComponent<AboutProps> {
   }
 }
 
-export { About }
+export { TermsOfUse }
