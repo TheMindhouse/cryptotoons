@@ -4,10 +4,7 @@ import ToonContractABI from "../assets/abi/ToonABI.json"
 import AuctionContractABI from "../assets/abi/AuctionABI.json"
 import { ToonContractFacade } from "../facades/ToonContractFacade"
 import { FAMILY_IDS } from "../constants/toonFamilies"
-import {
-  AUCTION_CONTRACT_ADDRESS,
-  TOON_CONTRACT_ADDRESSES,
-} from "../constants/contracts"
+import { AUCTION_CONTRACT_ADDRESS, TOON_CONTRACT_ADDRESSES, } from "../constants/contracts"
 import { CONFIG } from "../config"
 import { Logger } from "../helpers/Logger"
 import { AuctionContractFacade } from "../facades/AuctionContractFacade"
@@ -55,10 +52,17 @@ class Web3Provider extends React.Component<Props, State> {
       window.web3 = new Web3(window.web3.currentProvider)
       eventsSupported = true
       metamaskAvailable = true
-    } else {
+    } else if (window.location.hostname === "localhost") {
       Logger.log("Metamask not found - using localhost!")
       window.web3 = new Web3(
         new Web3.providers.HttpProvider("http://localhost:8545")
+      )
+    } else {
+      Logger.log("Metamask not found - using infura!")
+      window.web3 = new Web3(
+        new Web3.providers.HttpProvider(
+          "https://rinkeby.infura.io/ML50g9METlqvSTgwiJTm"
+        )
       )
     }
 
