@@ -32,7 +32,6 @@ class ToonPageHeader extends React.PureComponent<ToonPageHeaderProps> {
             <ToonImageCore
               familyId={familyId}
               toonId={toonId}
-              genes={genes}
               render={(imageUrl: ?string) =>
                 imageUrl ? (
                   <div

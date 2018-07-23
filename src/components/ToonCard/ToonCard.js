@@ -32,7 +32,6 @@ class ToonCard extends React.PureComponent<ToonCardProps> {
         <ToonImageCore
           familyId={familyId}
           toonId={toonId}
-          genes={genes}
           render={(imageUrl: ?string) =>
             imageUrl ? (
               <div
