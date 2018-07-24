@@ -1,6 +1,6 @@
 // @flow
 import * as React from "react"
-import { Button, message, Modal } from "antd"
+import { Button, message, Modal, Tooltip } from "antd"
 import { ToonDetails } from "../../models/ToonDetails"
 import { ToonAuction } from "../../models/web3/ToonAuction"
 import withWeb3 from "../../hoc/withWeb3"
@@ -59,6 +59,24 @@ class BuyToon extends React.PureComponent<BuyToonProps> {
     // Do not show Buy button for Toon owner
     if (web3Store.account === toonAuction.seller) {
       return null
+    }
+
+    if (!web3Store.account) {
+      return (
+        <Tooltip title="Log in to MetaMask to buy Toons">
+          <Button
+            type="primary"
+            size="large"
+            icon="shopping-cart"
+            onClick={this.confirm}
+            style={{ width: "100%" }}
+            title="Log in"
+            disabled
+          >
+            Buy now
+          </Button>
+        </Tooltip>
+      )
     }
 
     return (
