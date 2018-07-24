@@ -20,6 +20,18 @@
     margin-bottom: 20px;
 }
 
+.ToonCard__image--placeholder {
+    display: flex;
+    justify-content: center;
+}
+
+.ToonCard__image--placeholder .anticon {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: calc(50% - 20px);
+}
+
 .ToonCard__name {
     text-align: center;
     font-weight: bold;

@@ -36,7 +36,14 @@ class ToonImageCore extends React.PureComponent<Props, State> {
     const imageUrl = `${CONFIG.TOON_IMAGE_BASE_URL}/${this.props.familyId}/${
       this.props.toonId
     }`
-    this.setState({ imageUrl })
+
+    // Pre-download images before showing it on the page
+    let imageToDownload = new Image()
+    imageToDownload.onload = () => {
+      this.setState({ imageUrl }) // pass down the URL to the downloaded image
+      imageToDownload = null
+    }
+    imageToDownload.src = imageUrl
   }
 
   render() {

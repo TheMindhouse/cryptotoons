@@ -6,6 +6,7 @@ import { ToonDetails } from "../../models/ToonDetails"
 import { ToonAuction } from "../../models/web3/ToonAuction"
 import { ToonAuctionCore } from "../../hoc/renderProps/ToonAuctionCore"
 import { ForSaleBadge } from "../Small/ForSaleBadge"
+import { Icon, Spin } from "antd"
 
 type ToonCardProps = {
   toonDetails: ToonDetails,
@@ -41,7 +42,9 @@ class ToonCard extends React.PureComponent<ToonCardProps> {
                 }}
               />
             ) : (
-              <div className="ToonCard__image ToonCard__image--placeholder" />
+              <div className="ToonCard__image ToonCard__image--placeholder">
+                <Icon type="loading" />
+              </div>
             )
           }
         />

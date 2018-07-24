@@ -2,7 +2,7 @@
 import * as React from "react"
 import { ToonImageCore } from "../../hoc/renderProps/ToonImageCore"
 import "./styles/ToonPageHeader.css"
-import { Col, Row } from "antd"
+import { Col, Icon, Row } from "antd"
 import { ToonDetails } from "../../models/ToonDetails"
 import { URLHelper } from "../../helpers/URLhelper"
 import { Link } from "react-router-dom"
@@ -41,7 +41,9 @@ class ToonPageHeader extends React.PureComponent<ToonPageHeaderProps> {
                     }}
                   />
                 ) : (
-                  <div className="ToonPageHeader__Image ToonPageHeader__Image--placeholder" />
+                  <div className="ToonPageHeader__Image ToonPageHeader__Image--placeholder">
+                    <Icon type="loading" style={{ fontSize: 24 }} />
+                  </div>
                 )
               }
             />

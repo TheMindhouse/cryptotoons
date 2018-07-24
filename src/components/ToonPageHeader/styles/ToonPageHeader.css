@@ -9,6 +9,12 @@
     background-size: contain;
 }
 
+.ToonPageHeader__Image--placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .ToonPageHeader__Name {
     margin: 0;
 }
