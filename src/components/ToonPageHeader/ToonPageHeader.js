@@ -12,6 +12,8 @@ import { ToonAuction } from "../../models/web3/ToonAuction"
 import { ForSaleBadge } from "../Small/ForSaleBadge"
 import { TextWithLabel } from "../Small/TextWithLabel"
 import { AccountAddressLink } from "../Small/AccountAddressLink"
+import { PendingTransactionInfo } from "../Small/PendingTransactionInfo"
+import { TRANSACTION_TYPE } from "../../models/Transaction"
 
 type ToonPageHeaderProps = {
   toonDetails: ToonDetails,
@@ -23,7 +25,15 @@ class ToonPageHeader extends React.PureComponent<ToonPageHeaderProps> {
 
   render() {
     const { toonDetails, toonAuction } = this.props
-    const { name, familyId, toonId, genes, birthTime } = toonDetails
+    const { name, familyId, toonId, birthTime } = toonDetails
+
+    const transactionTypes = [
+      TRANSACTION_TYPE.buyToon,
+      TRANSACTION_TYPE.transferToon,
+      TRANSACTION_TYPE.cancelAuction,
+      TRANSACTION_TYPE.createAuction,
+    ]
+
     return (
       <div>
         <div className="ToonPageHeader containerWrapper containerWrapper--gray">
@@ -90,6 +100,13 @@ class ToonPageHeader extends React.PureComponent<ToonPageHeaderProps> {
               </Col>
             </Row>
           </div>
+        </div>
+        <div className="container container--small">
+          <PendingTransactionInfo
+            type={transactionTypes}
+            toon={toonDetails}
+            style={{ marginBottom: 10 }}
+          />
         </div>
       </div>
     )

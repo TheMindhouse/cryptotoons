@@ -9,10 +9,10 @@ const getTransactions = (): Array<Transaction> => {
   if (transactions) {
     return JSON.parse(transactions).map((tx) => {
       switch (tx.type) {
-        case TRANSACTION_TYPE.createAuction:
-          return new TransactionWithToon(tx)
-        default:
+        case TRANSACTION_TYPE.withdrawBalance:
           return new Transaction(tx)
+        default:
+          return new TransactionWithToon(tx)
       }
     })
   }

@@ -61,25 +61,11 @@ class ToonPageOwnerActions extends React.PureComponent<
       return null
     }
 
-    const transactionTypes = [
-      TRANSACTION_TYPE.buyToon,
-      TRANSACTION_TYPE.transferToon,
-      TRANSACTION_TYPE.cancelAuction,
-      TRANSACTION_TYPE.createAuction,
-    ]
-
     const { toonDetails, toonAuction } = this.props
     const { currentView } = this.state
 
     return (
       <div className="containerWrapper" style={{ paddingTop: 0 }}>
-        <div className="container container--small">
-          <PendingTransactionInfo
-            type={transactionTypes}
-            toon={toonDetails}
-            style={{ marginBottom: 10 }}
-          />
-        </div>
         <div className="container">
           {currentView === OWNER_ACTION_VIEWS.BUTTONS && (
             <ToonOwnerActionButtons
