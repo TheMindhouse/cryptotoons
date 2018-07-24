@@ -19,18 +19,38 @@ type BuyToonProps = {
 class BuyToon extends React.PureComponent<BuyToonProps> {
   static defaultProps = {}
 
+  isPriceIncreasing = () =>
+    this.props.toonAuction.endingPrice > this.props.toonAuction.startingPrice
+
+  getMaxPrice = () =>
+    this.isPriceIncreasing()
+      ? 1.1 * this.props.toonAuction.currentPrice
+      : this.props.toonAuction.currentPrice
+
   confirm = () => {
     Modal.confirm({
       title: `Buy ${this.props.toonDetails.name} now?`,
       content: (
         <div>
+          <br />
           <p>
-            <br />
-            <b>Price: Ξ{wei2eth(this.props.toonAuction.currentPrice)}</b>
+            <b>Max price: Ξ{wei2eth(this.getMaxPrice())}</b>
           </p>
-          <p>
-            Toon's ownership will be transferred to your account immediately.
-          </p>
+          {this.isPriceIncreasing() && (
+            <div>
+              <p style={{ lineHeight: "1.2em" }}>
+                <small>
+                  <b>Important notice</b>
+                  <br />
+                  Price of the Toon is increasing with time, which means that
+                  when the transaction is processed, the price will be a bit
+                  higher. We've added 10% to the current price so your
+                  transaction can still go through after some time.
+                </small>
+              </p>
+            </div>
+          )}
+          <p>Toon's ownership will be transferred to your account.</p>
         </div>
       ),
       okText: "Ok, buy this Toon",
@@ -44,7 +64,7 @@ class BuyToon extends React.PureComponent<BuyToonProps> {
     const { toonId, familyId } = toonDetails
     const toonContractAddress = TOON_CONTRACT_ADDRESSES[toonDetails.familyId]
     const AuctionContract = web3Store.AuctionContract
-    const price = this.props.toonAuction.currentPrice
+    const price = this.getMaxPrice()
     AuctionContract.buyToon(toonContractAddress, toonId, familyId, price).then(
       (tx: TransactionWithToon) => {
         LocalStorageManager.transactions.updateTransactions(tx)
