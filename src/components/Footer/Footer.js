@@ -44,7 +44,7 @@ class Footer extends React.PureComponent<Props> {
                   />
                 </a>
                 <a
-                  href="http://www.webcartoons.nl/"
+                  href="https://webcartoonsstudio.com/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
