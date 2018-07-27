@@ -2,7 +2,8 @@
 import React, { Component } from "react"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import ScrollToTop from "react-router-scroll-top"
-//import ReactGA from "react-ga"
+import ReactGA from "react-ga"
+import { hotjar } from "react-hotjar"
 import { ToonFamilies } from "./containers/ToonFamilies"
 import { Header } from "./components/Header/Header"
 import { ErrorPage404 } from "./containers/ErrorPage404"
@@ -17,13 +18,18 @@ import { About } from "./containers/About"
 import { URLHelper } from "./helpers/URLhelper"
 import { TermsOfUse } from "./containers/TermsOfUse"
 import { Contact } from "./containers/Contact"
+import { CONFIG } from "./config"
 
 // Initialize Google Analytics
-// ReactGA.initialize('UA-117937544-1')
+const hostname = window && window.location && window.location.hostname
+if (hostname === CONFIG.PAGE_URL) {
+  ReactGA.initialize(CONFIG.ANALYTICS_ID)
+  hotjar.initialize(CONFIG.HOTJAR_ID, CONFIG.HOTJAR_VERSION)
+}
 
 const logPageView = () => {
-  // ReactGA.set({ page: window.location.pathname });
-  // ReactGA.pageview(window.location.pathname);
+  ReactGA.set({ page: window.location.pathname })
+  ReactGA.pageview(window.location.pathname)
   return null
 }
 
