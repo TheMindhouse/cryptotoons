@@ -3,10 +3,7 @@ import * as React from "react"
 import "./styles/NetworkCheck.css"
 import withWeb3 from "../../hoc/withWeb3"
 import { CONFIG } from "../../config"
-import {
-  METAMASK_NETWORK_NAMES,
-  METAMASK_NETWORKS,
-} from "../../constants/metamask"
+import { METAMASK_NETWORK_NAMES } from "../../constants/metamask"
 import type { Web3StoreType } from "../../types/Web3StoreType"
 
 type Props = {
