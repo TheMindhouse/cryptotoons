@@ -13,6 +13,8 @@ module.exports = function override(config, env) {
       "@font-size-base": "16px",
       "@btn-primary-color": "#333",
       "@btn-primary-bg": "#ffcc00",
+      "@border-radius-base": "20px",
+      "@border-radius-sm": "10px",
     },
   })(config, env)
   return config
