@@ -6,7 +6,7 @@ type ToonDetailsProps = {
   image?: string,
   toonId: number,
   familyId: number,
-  birthTime: string,
+  birthTime: Date,
   owner: string,
   genes: string,
 }
@@ -16,7 +16,7 @@ export class ToonDetails {
   image: ?string
   toonId: number
   familyId: number
-  birthTime: string
+  birthTime: Date
   owner: string
   genes: string
 

@@ -7,8 +7,6 @@ import { ToonAuction } from "../../models/web3/ToonAuction"
 import { CreateToonAuction } from "./views/CreateToonAuction"
 import { ToonOwnerActionButtons } from "./views/ToonOwnerActionButtons"
 import { TransferToon } from "./views/TransferToon"
-import { PendingTransactionInfo } from "../Small/PendingTransactionInfo"
-import { TRANSACTION_TYPE } from "../../models/Transaction"
 
 const OWNER_ACTION_VIEWS = {
   BUTTONS: 0,

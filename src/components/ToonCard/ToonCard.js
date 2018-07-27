@@ -6,7 +6,7 @@ import { ToonDetails } from "../../models/ToonDetails"
 import { ToonAuction } from "../../models/web3/ToonAuction"
 import { ToonAuctionCore } from "../../hoc/renderProps/ToonAuctionCore"
 import { ForSaleBadge } from "../Small/ForSaleBadge"
-import { Icon, Spin } from "antd"
+import { Icon } from "antd"
 
 type ToonCardProps = {
   toonDetails: ToonDetails,
@@ -16,7 +16,7 @@ class ToonCard extends React.PureComponent<ToonCardProps> {
   static defaultProps = {}
 
   render() {
-    const { familyId, toonId, genes, name } = this.props.toonDetails
+    const { familyId, toonId, name } = this.props.toonDetails
     return (
       <div className="ToonCard">
         <ToonAuctionCore
