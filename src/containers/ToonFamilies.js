@@ -23,37 +23,24 @@ class ToonFamilies extends React.PureComponent<Props> {
   }
 
   render() {
+    const families: Array<[number, string]> = [
+      [FAMILY_IDS.Cows, familyCows],
+      [FAMILY_IDS.Bulls, familyBulls],
+      [FAMILY_IDS.Donkeys, familyDonkeys],
+      [FAMILY_IDS.Elephants, familyElephants],
+      [FAMILY_IDS.Gorillas, familyGorillas],
+      [FAMILY_IDS.Hippos, familyHippos],
+      [FAMILY_IDS.Llamas, familyLlamas],
+    ]
     return (
       <div className="containerWrapper containerWrapper--gray">
         <div className="container">
           <Row gutter={20}>
-            <Col span={12}>
-              <FamilyCard image={familyCows} familyId={FAMILY_IDS.Cows} />
-            </Col>
-            <Col span={12}>
-              <FamilyCard image={familyBulls} familyId={FAMILY_IDS.Bulls} />
-            </Col>
-            <Col span={12}>
-              <FamilyCard image={familyDonkeys} familyId={FAMILY_IDS.Donkeys} />
-            </Col>
-            <Col span={12}>
-              <FamilyCard
-                image={familyElephants}
-                familyId={FAMILY_IDS.Elephants}
-              />
-            </Col>
-            <Col span={12}>
-              <FamilyCard
-                image={familyGorillas}
-                familyId={FAMILY_IDS.Gorillas}
-              />
-            </Col>
-            <Col span={12}>
-              <FamilyCard image={familyHippos} familyId={FAMILY_IDS.Hippos} />
-            </Col>
-            <Col span={12}>
-              <FamilyCard image={familyLlamas} familyId={FAMILY_IDS.Llamas} />
-            </Col>
+            {families.map((family: [number, string]) => (
+              <Col xs={{ span: 24 }} sm={{ span: 12 }} key={family[0]}>
+                <FamilyCard familyId={family[0]} image={family[1]} />
+              </Col>
+            ))}
           </Row>
         </div>
       </div>
