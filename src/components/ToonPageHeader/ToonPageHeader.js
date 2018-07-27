@@ -14,6 +14,7 @@ import { TextWithLabel } from "../Small/TextWithLabel"
 import { AccountAddressLink } from "../Small/AccountAddressLink"
 import { PendingTransactionInfo } from "../Small/PendingTransactionInfo"
 import { TRANSACTION_TYPE } from "../../models/Transaction"
+import { MyToonBadge } from "../Small/MyToonBadge"
 
 type ToonPageHeaderProps = {
   toonDetails: ToonDetails,
@@ -37,8 +38,20 @@ class ToonPageHeader extends React.PureComponent<ToonPageHeaderProps> {
     return (
       <div>
         <div className="ToonPageHeader containerWrapper containerWrapper--gray">
-          <div className="container">
-            {toonAuction && <ForSaleBadge price={toonAuction.currentPrice} />}
+          <div className="container relative">
+            {toonAuction && (
+              <div className="ToonPageHeader__ForSaleBadge">
+                <ForSaleBadge price={toonAuction.currentPrice} />
+              </div>
+            )}
+
+            <div className="ToonPageHeader__MyToonBadge">
+              <MyToonBadge
+                toonDetails={toonDetails}
+                toonAuction={toonAuction}
+              />
+            </div>
+
             <ToonImageCore
               familyId={familyId}
               toonId={toonId}

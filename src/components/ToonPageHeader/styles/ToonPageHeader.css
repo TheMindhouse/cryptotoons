@@ -15,6 +15,19 @@
     align-items: center;
 }
 
+.ToonPageHeader__ForSaleBadge {
+    position: absolute;
+    top: 0;
+    left: 20px;
+}
+
+.ToonPageHeader__MyToonBadge {
+    position: absolute;
+    width: 120px;
+    top: 0;
+    right: 20px;
+}
+
 .ToonPageHeader__Name {
     margin: 0;
 }
@@ -28,5 +41,10 @@
     .ToonPageHeader__Info > * {
         width: 100%;
         margin-bottom: 10px;
+    }
+
+    .ToonPageHeader__MyToonBadge {
+        width: 100px;
+        right: 20px;
     }
 }

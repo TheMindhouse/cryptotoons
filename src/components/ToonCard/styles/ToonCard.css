@@ -47,3 +47,20 @@
     left: 0;
     right: 0;
 }
+
+.ToonCard__MyToonBadge {
+    position: absolute;
+    width: 80px;
+    top: -20px;
+    right: -10px;
+}
+
+
+@media all and (max-width: 768px) {
+    .ToonCard__MyToonBadge {
+        position: absolute;
+        width: 80px;
+        top: -10px;
+        right: 0;
+    }
+}

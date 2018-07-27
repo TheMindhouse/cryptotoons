@@ -38,6 +38,10 @@ body {
     line-height: 1.6em;
 }
 
+.relative {
+    position: relative;
+}
+
 .text-center {
     text-align: center;
 }

@@ -7,6 +7,7 @@ import { ToonAuction } from "../../models/web3/ToonAuction"
 import { ToonAuctionCore } from "../../hoc/renderProps/ToonAuctionCore"
 import { ForSaleBadge } from "../Small/ForSaleBadge"
 import { Icon } from "antd"
+import { MyToonBadge } from "../Small/MyToonBadge"
 
 type ToonCardProps = {
   toonDetails: ToonDetails,
@@ -16,7 +17,8 @@ class ToonCard extends React.PureComponent<ToonCardProps> {
   static defaultProps = {}
 
   render() {
-    const { familyId, toonId, name } = this.props.toonDetails
+    const { toonDetails } = this.props
+    const { familyId, toonId, name } = toonDetails
     return (
       <div className="ToonCard">
         <ToonAuctionCore
@@ -24,8 +26,16 @@ class ToonCard extends React.PureComponent<ToonCardProps> {
           toonId={toonId}
           render={(toonAuction: ?ToonAuction) =>
             toonAuction && (
-              <div className="ToonCard__ForSaleBadge">
-                <ForSaleBadge price={toonAuction.currentPrice} />
+              <div>
+                <div className="ToonCard__ForSaleBadge">
+                  <ForSaleBadge price={toonAuction.currentPrice} />
+                </div>
+                <div className="ToonCard__MyToonBadge">
+                  <MyToonBadge
+                    toonDetails={toonDetails}
+                    toonAuction={toonAuction}
+                  />
+                </div>
               </div>
             )
           }
