@@ -1,4 +1,7 @@
+import { METAMASK_NETWORKS } from "./constants/metamask"
+
 export const CONFIG = {
+  ETHEREUM_NETWORK: METAMASK_NETWORKS.rinkeby,
   // Browser page title
   PAGE_TITLE: "CryptoToons - Entertoonment on the blockchain",
   TOON_IMAGE_BASE_URL: "https://mindhouse.io:3100/toon",

@@ -1,0 +1,18 @@
+.NetworkCheck {
+    position: fixed;
+    z-index: 99;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    font-weight: 400;
+    color: #fafafa;
+    background: #f39c12;
+    font-size: 13px;
+    padding: 20px 30px;
+    text-align: center;
+}
+
+.NetworkCheck a {
+    color: inherit;
+    text-decoration: underline;
+}

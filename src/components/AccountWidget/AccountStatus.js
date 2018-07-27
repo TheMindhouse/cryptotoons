@@ -13,6 +13,7 @@ import { StatusConnected } from "./Status/StatusConnected"
 import type { WithModal } from "../../types/WithModal"
 import type { TransactionsStore } from "../../stores/TransactionsProvider"
 import type { Web3StoreType } from "../../types/Web3StoreType"
+import { NetworkCheck } from "./NetworkCheck"
 
 type AccountStatusProps = {
   modal: WithModal,
@@ -30,6 +31,8 @@ class AccountStatus extends React.PureComponent<AccountStatusProps> {
     const { modal, txStore, web3Store } = this.props
     return (
       <div className="AccountStatus">
+        <NetworkCheck />
+
         {!web3Store.account &&
           web3Store.metamaskAvailable && <StatusDisconnected />}
 
