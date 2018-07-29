@@ -4,12 +4,24 @@
     top: 0;
     left: 0;
     width: 100vw;
+    bottom: 0;
     font-weight: 400;
     color: #fafafa;
-    background: #f39c12;
-    font-size: 13px;
+    background: #11a7d8;
+    background-size: cover;
+    font-size: 25px;
     padding: 20px 30px;
     text-align: center;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.NetworkCheck__logo {
+    width: 200px;
+    margin-top: -20vh;
 }
 
 .NetworkCheck a {
