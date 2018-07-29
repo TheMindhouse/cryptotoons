@@ -19,11 +19,8 @@ type BuyToonProps = {
 class BuyToon extends React.PureComponent<BuyToonProps> {
   static defaultProps = {}
 
-  isPriceIncreasing = () =>
-    this.props.toonAuction.endingPrice > this.props.toonAuction.startingPrice
-
   getMaxPrice = () =>
-    this.isPriceIncreasing()
+    this.props.toonAuction.isPriceIncreasing()
       ? 1.1 * this.props.toonAuction.currentPrice
       : this.props.toonAuction.currentPrice
 
@@ -36,7 +33,7 @@ class BuyToon extends React.PureComponent<BuyToonProps> {
           <p>
             <b>Max price: Ξ{wei2eth(this.getMaxPrice())}</b>
           </p>
-          {this.isPriceIncreasing() && (
+          {this.props.toonAuction.isPriceIncreasing() && (
             <div>
               <p style={{ lineHeight: "1.2em" }}>
                 <small>

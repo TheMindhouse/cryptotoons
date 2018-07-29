@@ -3,15 +3,10 @@ import * as React from "react"
 import * as SVG from "svg.js"
 import { ToonAuction } from "../../models/web3/ToonAuction"
 import "./styles/AuctionChart.css"
+import { AUCTION_DIRECTIONS } from "../../constants/auction"
 
 type AuctionChartProps = {
   toonAuction: ToonAuction,
-}
-
-const AUCTION_DIRECTIONS = {
-  DECREASING: 0,
-  INCREASING: 1,
-  STABLE: 2,
 }
 
 const FULL_WIDTH = 1080
@@ -35,58 +30,33 @@ class AuctionChart extends React.PureComponent<AuctionChartProps> {
     this.drawSVG()
   }
 
-  /**
-   * Returns how much of auction time has elapsed
-   *
-   * @return {number} - percent scaled from 0 to 1
-   */
-  calculatePercentCompleted = (): number => {
-    const { duration, startedAt } = this.props.toonAuction
-    const timeElapsed = Date.now() - startedAt
-    if (timeElapsed >= duration) {
-      return 1
-    }
-    return timeElapsed / duration
-  }
-
-  getAuctionDirection = (): number => {
-    const { startingPrice, endingPrice } = this.props.toonAuction
-    // Price decreasing
-    if (startingPrice > endingPrice) {
-      return AUCTION_DIRECTIONS.DECREASING
-    }
-    // Price increasing
-    if (startingPrice < endingPrice) {
-      return AUCTION_DIRECTIONS.INCREASING
-    }
-    // Price not changing
-    return AUCTION_DIRECTIONS.STABLE
-  }
-
   getAuctionStartCoords = (): [number, number] =>
-    this.getAuctionDirection() === AUCTION_DIRECTIONS.INCREASING
+    this.props.toonAuction.getAuctionDirection() ===
+    AUCTION_DIRECTIONS.INCREASING
       ? [0, HEIGHT]
       : [0, 0]
 
   getAuctionEndCoords = (): [number, number] =>
-    this.getAuctionDirection() === AUCTION_DIRECTIONS.DECREASING
+    this.props.toonAuction.getAuctionDirection() ===
+    AUCTION_DIRECTIONS.DECREASING
       ? [WIDTH, HEIGHT]
       : [WIDTH, 0]
 
   getCurrentPriceCoords = (): [number, number] => {
-    const percentCompleted = this.calculatePercentCompleted()
+    const { toonAuction } = this.props
+    const percentCompleted = toonAuction.getPercentCompleted()
     const posX = WIDTH * percentCompleted
     const posY =
-      this.getAuctionDirection() === AUCTION_DIRECTIONS.STABLE
+      toonAuction.getAuctionDirection() === AUCTION_DIRECTIONS.STABLE
         ? 0
-        : this.getAuctionDirection() === AUCTION_DIRECTIONS.INCREASING
+        : toonAuction.getAuctionDirection() === AUCTION_DIRECTIONS.INCREASING
           ? HEIGHT - HEIGHT * percentCompleted
           : HEIGHT * percentCompleted
     return [posX, posY]
   }
 
   getPriceBackgroundCoords = (): Array<Array<number>> => {
-    switch (this.getAuctionDirection()) {
+    switch (this.props.toonAuction.getAuctionDirection()) {
       case AUCTION_DIRECTIONS.INCREASING:
         return [[0, HEIGHT], [WIDTH, 0], [WIDTH, HEIGHT]]
       case AUCTION_DIRECTIONS.DECREASING:

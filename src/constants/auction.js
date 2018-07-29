@@ -1,0 +1,5 @@
+export const AUCTION_DIRECTIONS = {
+  DECREASING: 0,
+  INCREASING: 1,
+  STABLE: 2,
+}
