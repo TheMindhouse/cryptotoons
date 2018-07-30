@@ -11,7 +11,7 @@ export class BaseContract {
     this.Contract = Contract
     this.account = account
     this.config = {
-      gas: 6000000,
+      gas: 300000,
       from: account,
     }
   }
