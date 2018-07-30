@@ -24,6 +24,8 @@ class Footer extends React.PureComponent<Props> {
                 <br />
                 <Link to={URLHelper.help}>Help</Link>
                 <br />
+                <Link to={URLHelper.faq}>FAQ</Link>
+                <br />
                 <Link to={URLHelper.terms}>Terms of Use</Link>
                 <br />
                 <Link to={URLHelper.contact}>Contact</Link>

@@ -21,9 +21,6 @@ export const URLHelper = {
   contact: "/contact",
   terms: "/terms-of-use",
   pageNotFound: "/404",
-  help: {
-    page: "/help",
-    installingMetamask: "/help#installing-metamask",
-    gettingEther: "/help#getting-ether",
-  },
+  help: "/help",
+  faq: "/faq",
 }

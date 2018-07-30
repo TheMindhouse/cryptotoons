@@ -19,6 +19,8 @@ import { URLHelper } from "./helpers/URLhelper"
 import { TermsOfUse } from "./containers/TermsOfUse"
 import { Contact } from "./containers/Contact"
 import { CONFIG } from "./config"
+import { Help } from "./containers/Help"
+import { FAQ } from "./containers/FAQ"
 
 // Initialize Google Analytics
 const hostname = window && window.location && window.location.hostname
@@ -56,6 +58,8 @@ class App extends Component<{}> {
                   />
                   <Route path="/account/:address" component={Account} />
                   <Route path={URLHelper.about} component={About} />
+                  <Route path={URLHelper.help} component={Help} />
+                  <Route path={URLHelper.faq} component={FAQ} />
                   <Route path={URLHelper.terms} component={TermsOfUse} />
                   <Route path={URLHelper.contact} component={Contact} />
                   <Route path="/404" component={ErrorPage404} />

@@ -6,6 +6,6 @@ import { Link } from "react-router-dom"
 export const StatusMetaMaskNotAvailable = () => (
   <span className="AccountStatus__InstallMetaMaskInfo">
     To participate in painting and trading CryptoCanvas on this site,{" "}
-    <Link to={URLHelper.help.page}>install the MetaMask Chrome plugin</Link>.
+    <Link to={URLHelper.help}>install the MetaMask Chrome plugin</Link>.
   </span>
 )
