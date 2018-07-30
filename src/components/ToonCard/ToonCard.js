@@ -24,21 +24,23 @@ class ToonCard extends React.PureComponent<ToonCardProps> {
         <ToonAuctionCore
           familyId={familyId}
           toonId={toonId}
-          render={(toonAuction: ?ToonAuction) =>
-            toonAuction && (
-              <div>
-                <div className="ToonCard__ForSaleBadge">
-                  <ForSaleBadge price={toonAuction.currentPrice} />
+          render={(toonAuction: ?ToonAuction) => (
+            <div>
+              {toonAuction && (
+                <div>
+                  <div className="ToonCard__ForSaleBadge">
+                    <ForSaleBadge price={toonAuction.currentPrice} />
+                  </div>
                 </div>
-                <div className="ToonCard__MyToonBadge">
-                  <MyToonBadge
-                    toonDetails={toonDetails}
-                    toonAuction={toonAuction}
-                  />
-                </div>
+              )}
+              <div className="ToonCard__MyToonBadge">
+                <MyToonBadge
+                  toonDetails={toonDetails}
+                  toonAuction={toonAuction}
+                />
               </div>
-            )
-          }
+            </div>
+          )}
         />
         <ToonImageCore
           familyId={familyId}
