@@ -2,6 +2,11 @@
 import * as React from "react"
 import { Col, Row } from "antd"
 import { setDocumentTitle } from "../helpers/utils"
+import {
+  AUCTION_CONTRACT_ADDRESS,
+  TOON_CONTRACT_ADDRESSES,
+} from "../constants/contracts"
+import { EtherscanContractLink } from "../components/Small/EtherscanContractLink"
 
 type TermsOfUseProps = {}
 
@@ -20,7 +25,7 @@ class TermsOfUse extends React.PureComponent<TermsOfUseProps> {
             <h1>
               <b>Terms of Use</b>
             </h1>
-            <h3 className="color-lgray">Last Updated: July 30th, 2018</h3>
+            <h3 className="color-lgray">Last Updated: July 31th, 2018</h3>
           </div>
         </div>
 
@@ -74,10 +79,26 @@ class TermsOfUse extends React.PureComponent<TermsOfUseProps> {
                 </h2>
 
                 <p>
-                  <b>"Smart Contract"</b> means the smart contract on the
-                  Ethereum blockchain at address ENTER_ADDRESS_HERE. Smart
-                  Contract information can be accessed here.
+                  <b>"Smart Contract"</b> means a set of smart contracts on the
+                  Ethereum blockchain at the following addresses:
                 </p>
+                <ul>
+                  <li>
+                    {
+                      <EtherscanContractLink
+                        address={AUCTION_CONTRACT_ADDRESS}
+                      />
+                    }
+                  </li>
+                  {Object.keys(TOON_CONTRACT_ADDRESSES)
+                    .map((key: string): string => TOON_CONTRACT_ADDRESSES[key])
+                    .filter((address: string) => address)
+                    .map((address: string) => (
+                      <li>
+                        <EtherscanContractLink address={address} />
+                      </li>
+                    ))}
+                </ul>
                 <p>
                   <b>"Toon"</b> means a collectible cartoon created by the
                   CryptoToons with a proof of ownership stored in the Smart
