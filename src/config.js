@@ -1,7 +1,7 @@
 import { METAMASK_NETWORKS } from "./constants/metamask"
 
 export const CONFIG = {
-  ETHEREUM_NETWORK: METAMASK_NETWORKS.rinkeby,
+  ETHEREUM_NETWORK: METAMASK_NETWORKS.main,
   // Page base URL
   PAGE_URL: "cryptotoons.io",
   // Google Analytics code
