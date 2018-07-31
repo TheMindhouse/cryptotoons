@@ -69,12 +69,12 @@ class About extends React.PureComponent<AboutProps> {
                 rel="noopener noreferrer"
               >
                 The Mindhouse
-              </a>) united together to bring you this unique entertoonment on
-              the blockchain, which combines the blockchain with cartoon fun.
+              </a>) united together to bring you this unique project, which
+              combines the blockchain with cartoon fun.
             </p>
             <p>
               <b>
-                Our toons are entertainment and how we call it enterTOONment!
+                Our toons are entertainment and we call it the enterTOONment!
               </b>{" "}
               When we look at nature, animals and daily human life we can’t stop
               laughing and creating. So much entertoonment around us! We started
