@@ -37,6 +37,6 @@
 
 @media all and (max-width: 768px) {
     .AccountStatus__InstallMetaMaskInfo {
-        font-size: 12px;
+        display: none;
     }
 }
