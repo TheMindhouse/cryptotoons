@@ -15,4 +15,4 @@ const FbMessenger = () => {
   )
 }
 
-export { FbMessenger }
+export default FbMessenger

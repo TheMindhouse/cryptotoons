@@ -21,7 +21,7 @@ import { Contact } from "./containers/Contact"
 import { CONFIG } from "./config"
 import { Help } from "./containers/Help"
 import { FAQ } from "./containers/FAQ"
-import { FbMessenger } from "./components/Small/FbMessenger"
+import FbMessenger from "./components/Small/FbMessenger"
 
 // Initialize Google Analytics
 const hostname = window && window.location && window.location.hostname
