@@ -21,7 +21,7 @@ class ToonFamilies extends React.PureComponent<Props> {
 
   componentDidMount() {
     setDocumentTitle("Toon Families")
-    FbMessengerHelper.showHomepageDialog()
+    // FbMessengerHelper.showHomepageDialog()
   }
 
   render() {

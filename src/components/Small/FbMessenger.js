@@ -1,16 +1,13 @@
 // @flow
 import * as React from "react"
+import MessengerCustomerChat from "react-messenger-customer-chat"
 
 const FbMessenger = () => {
   return (
-    <div
-      className="fb-customerchat"
-      attribution="setup_tool"
-      page_id="1390818041157242"
-      theme_color="#0084ff"
-      greeting_dialog_display="hide"
-      logged_in_greeting="Hi, How can we entertoon you?"
-      logged_out_greeting="Hi, How can we entertoon you?"
+    <MessengerCustomerChat
+      pageId="1390818041157242"
+      loggedInGreeting="Hi, How can we entertoon you?"
+      loggedOutGreeting="Hi, How can we entertoon you?"
     />
   )
 }
