@@ -25,7 +25,7 @@ class TermsOfUse extends React.PureComponent<TermsOfUseProps> {
             <h1>
               <b>Terms of Use</b>
             </h1>
-            <h3 className="color-lgray">Last Updated: July 31th, 2018</h3>
+            <h3 className="color-lgray">Last Updated: August 1st, 2018</h3>
           </div>
         </div>
 
@@ -136,8 +136,8 @@ class TermsOfUse extends React.PureComponent<TermsOfUseProps> {
                   CryptoToons, digital collectibles and related matters. "Use"
                   means to reproduce, display, transmit, and distribute images
                   of the Toons. This permission excludes the right to print the
-                  Canvas onto physical copies (including, for example, shirts
-                  and posters).
+                  Toons onto physical copies (including, for example, shirts and
+                  posters).
                 </p>
 
                 {/* ################################################################################################ */}
