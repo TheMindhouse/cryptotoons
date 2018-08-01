@@ -12,7 +12,6 @@ import familyHippos from "../assets/images/toon-families/hippos.png"
 import familyLlamas from "../assets/images/toon-families/llamas.png"
 import { FAMILY_IDS } from "../constants/toonFamilies"
 import { setDocumentTitle } from "../helpers/utils"
-import { FbMessengerHelper } from "../helpers/FbMessengerHelper"
 
 type Props = {}
 
@@ -21,7 +20,6 @@ class ToonFamilies extends React.PureComponent<Props> {
 
   componentDidMount() {
     setDocumentTitle("Toon Families")
-    // FbMessengerHelper.showHomepageDialog()
   }
 
   render() {
