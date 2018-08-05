@@ -19,7 +19,7 @@ class ToonFamilies extends React.PureComponent<Props> {
   static defaultProps = {}
 
   componentDidMount() {
-    setDocumentTitle("Toon Families")
+    setDocumentTitle()
   }
 
   render() {
