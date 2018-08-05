@@ -7,7 +7,7 @@ export const CONFIG = {
   // Google Analytics code
   ANALYTICS_ID: "UA-117937544-5",
   // Hotjar settings
-  HOTJAR_ID: 855484,
+  HOTJAR_ID: 961408,
   HOTJAR_VERSION: 6,
   // Browser page title
   PAGE_TITLE: "CryptoToons - Entertoonment on the blockchain",
