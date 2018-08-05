@@ -64,12 +64,14 @@ class ToonFamilyCollection extends React.PureComponent<
 
   getToons = (toonsCount: number): Array<ToonWithFamilyIds> => {
     const { familyId } = this.props
-    return Array.from(Array(toonsCount).keys()).map(
-      (toonId: number): ToonWithFamilyIds => ({
-        toonId,
-        familyId,
-      })
-    )
+    return Array.from(Array(toonsCount).keys())
+      .reverse()
+      .map(
+        (toonId: number): ToonWithFamilyIds => ({
+          toonId,
+          familyId,
+        })
+      )
   }
 
   render() {
