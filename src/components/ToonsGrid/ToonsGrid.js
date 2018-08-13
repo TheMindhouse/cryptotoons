@@ -21,28 +21,26 @@ class ToonsGrid extends React.PureComponent<ToonsGridProps> {
   render() {
     return (
       <Row gutter={30}>
-        {this.props.toons.map(
-          ({ toonId, familyId }: ToonWithFamilyIds, index: number) => (
-            <Col
-              xs={{ span: 24 }}
-              sm={{ span: 12 }}
-              md={{ span: 8 }}
-              lg={{ span: 6 }}
-              key={index}
-              className="ToonsGrid__Toon"
-            >
-              <ToonDetailsCore
-                familyId={familyId}
-                toonId={toonId}
-                render={(toonDetails: ToonDetails) => (
-                  <Link to={URLHelper.toon(familyId, toonId)}>
-                    <ToonCard toonDetails={toonDetails} />
-                  </Link>
-                )}
-              />
-            </Col>
-          )
-        )}
+        {this.props.toons.map(({ toonId, familyId }: ToonWithFamilyIds) => (
+          <Col
+            xs={{ span: 24 }}
+            sm={{ span: 12 }}
+            md={{ span: 8 }}
+            lg={{ span: 6 }}
+            key={toonId}
+            className="ToonsGrid__Toon"
+          >
+            <ToonDetailsCore
+              familyId={familyId}
+              toonId={toonId}
+              render={(toonDetails: ToonDetails) => (
+                <Link to={URLHelper.toon(familyId, toonId)}>
+                  <ToonCard toonDetails={toonDetails} />
+                </Link>
+              )}
+            />
+          </Col>
+        ))}
       </Row>
     )
   }

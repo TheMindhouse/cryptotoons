@@ -54,6 +54,11 @@ class App extends Component<{}> {
                   <Route exact path="/toons/:name" component={ToonFamily} />
                   <Route
                     exact
+                    path="/toons/:name/page/:pageId"
+                    component={ToonFamily}
+                  />
+                  <Route
+                    exact
                     path="/toons/:familyName/:toonId"
                     component={Toon}
                   />

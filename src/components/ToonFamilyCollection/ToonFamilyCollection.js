@@ -8,10 +8,13 @@ import type { Web3StoreType } from "../../types/Web3StoreType"
 import { ToonsGrid } from "../ToonsGrid/ToonsGrid"
 import type { ToonWithFamilyIds } from "../../types/ToonTypes"
 import { getFamilyName } from "../../helpers/familyNamesHelper"
-import { Row, Spin } from "antd"
+import { Pagination, Row, Spin } from "antd"
+import { CONFIG } from "../../config"
 
 type ToonFamilyCollectionProps = {
   familyId: number,
+  pageId: number,
+  onChangePage: (number) => void,
   web3Store: Web3StoreType,
 }
 
@@ -62,10 +65,14 @@ class ToonFamilyCollection extends React.PureComponent<
     return toonContract.getTotalToonsCount()
   }
 
-  getToons = (toonsCount: number): Array<ToonWithFamilyIds> => {
-    const { familyId } = this.props
+  getToons = (): Array<ToonWithFamilyIds> => {
+    const { toonsCount } = this.state
+    const { familyId, pageId } = this.props
+    const startId = (pageId - 1) * CONFIG.TOONS_PER_PAGE
+    const endId = startId + CONFIG.TOONS_PER_PAGE
     return Array.from(Array(toonsCount).keys())
-      .reverse()
+      .reverse() // Show toons with the highest id (newest) first
+      .slice(startId, endId)
       .map(
         (toonId: number): ToonWithFamilyIds => ({
           toonId,
@@ -75,7 +82,8 @@ class ToonFamilyCollection extends React.PureComponent<
   }
 
   render() {
-    const toons = this.getToons(this.state.toonsCount)
+    const totalToonsCount = this.state.toonsCount
+    const toons = this.getToons()
 
     if (this.state.isLoading) {
       return (
@@ -102,10 +110,18 @@ class ToonFamilyCollection extends React.PureComponent<
         <div className="container">
           <h1>
             <b>
-              {toons.length} {getFamilyName(this.props.familyId)}
+              {totalToonsCount} {getFamilyName(this.props.familyId)}
             </b>
           </h1>
           <ToonsGrid toons={toons} />
+          <Row type="flex" justify="center" style={{ marginTop: 20 }}>
+            <Pagination
+              current={this.props.pageId}
+              pageSize={CONFIG.TOONS_PER_PAGE}
+              total={totalToonsCount}
+              onChange={this.props.onChangePage}
+            />
+          </Row>
         </div>
       </div>
     )

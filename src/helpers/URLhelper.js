@@ -7,6 +7,14 @@ const getToonFamilyUrl = (familyId: number): string => {
   return `/toons/${familyName.toLowerCase()}`
 }
 
+const getToonFamilyUrlWithPage = (familyId: number, pageId: number): string => {
+  if (pageId === 1) {
+    return getToonFamilyUrl(familyId)
+  }
+  const familyName = FAMILY_NAMES[familyId]
+  return `/toons/${familyName.toLowerCase()}/page/${pageId}`
+}
+
 const getToonUrl = (familyId: number, toonId: number): string => {
   const familyUrl = getToonFamilyUrl(familyId)
   return `${familyUrl}/${toonId}`
@@ -15,6 +23,7 @@ const getToonUrl = (familyId: number, toonId: number): string => {
 export const URLHelper = {
   account: (address: string): string => `/account/${address}`,
   toonFamily: getToonFamilyUrl,
+  toonFamilyWithPage: getToonFamilyUrlWithPage,
   toon: getToonUrl,
   home: "/",
   about: "/about",

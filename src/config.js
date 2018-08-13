@@ -17,4 +17,6 @@ export const CONFIG = {
   CHECK_TX_DELAY: 3000,
   // Delay to check account address in ms
   CHECK_ACCOUNT_DELAY: 2000,
+  // Number of toons per page
+  TOONS_PER_PAGE: 48,
 }
