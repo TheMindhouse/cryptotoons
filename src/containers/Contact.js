@@ -4,6 +4,7 @@ import { Col, Divider, Row } from "antd"
 import { SocialLinks } from "../components/SocialLinks/SocialLinks"
 import { setDocumentTitle } from "../helpers/utils"
 import Obfuscate from "react-obfuscate"
+import discordLogo from "../assets/images/discord.svg"
 
 type ContactProps = {}
 
@@ -41,6 +42,19 @@ class Contact extends React.PureComponent<ContactProps> {
                     <Obfuscate email="team@mindhouse.io" />
                   </b>
                 </p>
+                <Divider dashed />
+                <p>Chat with us on:</p>
+                <a
+                  href="https://discord.gg/3VgNJW"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src={discordLogo}
+                    alt="Discord"
+                    style={{ width: 300, maxWidth: "80%" }}
+                  />
+                </a>
                 <Divider dashed />
                 <p>Find us on social media!</p>
                 <SocialLinks fontSize={60} />

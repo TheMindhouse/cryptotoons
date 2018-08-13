@@ -6,6 +6,7 @@ import { Link } from "react-router-dom"
 import "./styles/Footer.css"
 import logoMindhouse from "../../assets/images/logo-mindhouse.png"
 import logoWebcartoons from "../../assets/images/logo-webcartoons.png"
+import discordLogo from "../../assets/images/discord.svg"
 import { SocialLinks } from "../SocialLinks/SocialLinks"
 
 type Props = {}
@@ -60,6 +61,18 @@ class Footer extends React.PureComponent<Props> {
             </Col>
             <Col xs={24} sm={24} md={4} className="Footer-Social">
               <SocialLinks />
+              <a
+                href="https://discord.gg/3VgNJW"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src={discordLogo}
+                  alt="Discord"
+                  className="Footer__logo"
+                  style={{ width: 150, maxWidth: "80%", margin: -5 }}
+                />
+              </a>
             </Col>
           </Row>
         </div>

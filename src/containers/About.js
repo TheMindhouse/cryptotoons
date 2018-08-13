@@ -5,6 +5,7 @@ import toonsGang from "../assets/images/toons.png"
 import { setDocumentTitle } from "../helpers/utils"
 import howItsMadeImage from "../assets/images/how-its-made.svg"
 import poweredByEthereum from "../assets/images/powered-by-ethereum.png"
+import dappStoreLogo from "../assets/images/dappstore.svg"
 
 type AboutProps = {}
 
@@ -115,7 +116,22 @@ class About extends React.PureComponent<AboutProps> {
               <img
                 src={poweredByEthereum}
                 alt="Powered by Ethereum"
-                style={{ width: 400, maxWidth: "80%", marginBottom: 100 }}
+                style={{ width: 400, maxWidth: "80%" }}
+              />
+            </a>
+          </div>
+        </div>
+        <div className="containerWrapper">
+          <div className="container text-center">
+            <a
+              href="https://dappstore.link/dapp/crypto-toons"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src={dappStoreLogo}
+                alt="DAppStore"
+                style={{ width: 300, maxWidth: "80%", marginBottom: 100 }}
               />
             </a>
           </div>
