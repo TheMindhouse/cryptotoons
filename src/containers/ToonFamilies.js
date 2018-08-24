@@ -28,8 +28,8 @@ class ToonFamilies extends React.PureComponent<Props> {
       [FAMILY_IDS.Bulls, familyBulls],
       [FAMILY_IDS.Hippos, familyHippos],
       [FAMILY_IDS.Llamas, familyLlamas],
-      [FAMILY_IDS.Donkeys, familyDonkeys],
       [FAMILY_IDS.Elephants, familyElephants],
+      [FAMILY_IDS.Donkeys, familyDonkeys],
       [FAMILY_IDS.Gorillas, familyGorillas],
     ]
     return (
