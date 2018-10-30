@@ -6,6 +6,7 @@ export const FAMILY_IDS = {
   Gorillas: 4,
   Hippos: 5,
   Llamas: 6,
+  Pandas: 7,
 }
 
 export const FAMILY_NAMES = {
@@ -16,6 +17,7 @@ export const FAMILY_NAMES = {
   [FAMILY_IDS.Gorillas]: "GuldenGorillas",
   [FAMILY_IDS.Hippos]: "HodlHippos",
   [FAMILY_IDS.Llamas]: "LiteLlamas",
+  [FAMILY_IDS.Pandas]: "PowPandas",
 }
 
 export const FAMILY_NAMES_SINGULAR = {
@@ -26,4 +28,5 @@ export const FAMILY_NAMES_SINGULAR = {
   [FAMILY_IDS.Gorillas]: "GuldenGorilla",
   [FAMILY_IDS.Hippos]: "HodlHippo",
   [FAMILY_IDS.Llamas]: "LiteLlama",
+  [FAMILY_IDS.Pandas]: "PowPanda",
 }

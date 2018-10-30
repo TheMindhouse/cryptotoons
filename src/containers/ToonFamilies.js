@@ -10,6 +10,7 @@ import familyElephants from "../assets/images/toon-families/elephants.png"
 import familyGorillas from "../assets/images/toon-families/gorillas.png"
 import familyHippos from "../assets/images/toon-families/hippos.png"
 import familyLlamas from "../assets/images/toon-families/llamas.png"
+import familyPandas from "../assets/images/toon-families/pandas.png"
 import { FAMILY_IDS } from "../constants/toonFamilies"
 import { setDocumentTitle } from "../helpers/utils"
 
@@ -31,6 +32,7 @@ class ToonFamilies extends React.PureComponent<Props> {
       [FAMILY_IDS.Elephants, familyElephants],
       [FAMILY_IDS.Donkeys, familyDonkeys],
       [FAMILY_IDS.Gorillas, familyGorillas],
+      [FAMILY_IDS.Pandas, familyPandas],
     ]
     return (
       <div className="containerWrapper containerWrapper--gray">
