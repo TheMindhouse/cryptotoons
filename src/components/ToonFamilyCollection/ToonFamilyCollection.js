@@ -64,7 +64,7 @@ class ToonFamilyCollection extends React.PureComponent<
   getToonsCount = (): Promise<number> => {
     const { familyId, web3Store } = this.props
     const toonContract: ?ToonContractFacade = web3Store.Contracts[familyId]
-    if (!toonContract || !web3Store.account) {
+    if (!toonContract) {
       return Promise.resolve(0)
     }
 
