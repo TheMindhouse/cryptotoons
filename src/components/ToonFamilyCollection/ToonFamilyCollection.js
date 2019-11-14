@@ -41,7 +41,15 @@ class ToonFamilyCollection extends React.PureComponent<
   }
 
   componentDidUpdate(prevProps: ToonFamilyCollectionProps) {
-    if (prevProps.familyId !== this.props.familyId) {
+    const {
+      familyId: oldFamilyId,
+      web3Store: { account: oldAccount },
+    } = prevProps
+    const {
+      familyId,
+      web3Store: { account },
+    } = this.props
+    if (oldFamilyId !== familyId || oldAccount !== account) {
       this.setState({ isLoading: true })
       this.getToonsCount().then((toonsCount: number) =>
         this.setState({ toonsCount, isLoading: false })
@@ -56,7 +64,7 @@ class ToonFamilyCollection extends React.PureComponent<
   getToonsCount = (): Promise<number> => {
     const { familyId, web3Store } = this.props
     const toonContract: ?ToonContractFacade = web3Store.Contracts[familyId]
-    if (!toonContract) {
+    if (!toonContract || !web3Store.account) {
       return Promise.resolve(0)
     }
 
