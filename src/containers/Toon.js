@@ -10,6 +10,7 @@ import { ToonAuctionCore } from "../hoc/renderProps/ToonAuctionCore"
 import { ToonAuction } from "../models/web3/ToonAuction"
 import { ToonPageAuction } from "../components/ToonPageAuction/ToonPageAuction"
 import { ToonPageOwnerActions } from "../components/ToonPageOwnerActions/ToonPageOwnerActions"
+import { ToonPageFooter } from "../components/ToonPageFooter/ToonPageFooter"
 
 type ToonProps = {
   match: {
@@ -95,6 +96,7 @@ class Toon extends React.PureComponent<ToonProps, ToonState> {
                       toonAuction={toonAuction}
                     />
                   )}
+                  <ToonPageFooter toonDetails={toonDetails} />
                 </div>
               )}
             />

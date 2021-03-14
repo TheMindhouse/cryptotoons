@@ -1,0 +1,13 @@
+.ToonPageFooter {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.ToonPageFooter__Header {
+    margin-bottom: 24px;
+}
+
+.ToonPageFooter__OpenSeaLogo {
+    width: 200px;
+}
