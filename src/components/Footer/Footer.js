@@ -62,7 +62,7 @@ class Footer extends React.PureComponent<Props> {
             <Col xs={24} sm={24} md={4} className="Footer-Social">
               <SocialLinks />
               <a
-                href="https://discord.gg/3VgNJW"
+                href="https://discord.gg/E54DpQ9R"
                 target="_blank"
                 rel="noopener noreferrer"
               >

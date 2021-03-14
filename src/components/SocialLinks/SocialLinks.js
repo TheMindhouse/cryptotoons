@@ -24,14 +24,6 @@ class SocialLinks extends React.PureComponent<SocialLinksProps> {
     return (
       <div>
         <a
-          href="https://www.facebook.com/cryptotoons/"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{ ...style, marginLeft: 0 }}
-        >
-          <Icon type="facebook" />
-        </a>
-        <a
           href="https://www.instagram.com/cryptotoons/"
           target="_blank"
           rel="noopener noreferrer"
