@@ -3,7 +3,6 @@ import * as React from "react"
 import { Col, Divider, Row } from "antd"
 import { SocialLinks } from "../components/SocialLinks/SocialLinks"
 import { setDocumentTitle } from "../helpers/utils"
-import Obfuscate from "react-obfuscate"
 import discordLogo from "../assets/images/discord.svg"
 
 type ContactProps = {}
@@ -35,17 +34,9 @@ class Contact extends React.PureComponent<ContactProps> {
                 md={{ span: 16 }}
                 lg={{ span: 14 }}
               >
-                <p>
-                  If you have any thoughts, questions or suggestions,<br />
-                  you are welcome to contact us at{" "}
-                  <b>
-                    <Obfuscate email="team@mindhouse.io" />
-                  </b>
-                </p>
-                <Divider dashed />
                 <p>Chat with us on:</p>
                 <a
-                  href="https://discord.gg/3VgNJW"
+                  href="https://discord.gg/E54DpQ9R"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
