@@ -18,8 +18,12 @@ class ToonPageFooter extends React.PureComponent<ToonPageFooterProps> {
 
     return (
       <div>
-        <div className="ToonPageFooter containerWrapper">
+        <div className="ToonPageFooter">
           <div className="container relative">
+            <nft-card
+              tokenAddress={TOON_CONTRACT_ADDRESSES[familyId]}
+              tokenId={toonId}
+            />
             <h3 className="ToonPageFooter__Header">Find this Toon also at:</h3>
             <a
               href={`https://opensea.io/assets/${

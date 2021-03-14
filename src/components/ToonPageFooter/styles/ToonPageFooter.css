@@ -2,9 +2,11 @@
     display: flex;
     align-items: center;
     text-align: center;
+    margin-bottom: 50px;
 }
 
 .ToonPageFooter__Header {
+    margin-top: 40px;
     margin-bottom: 24px;
 }
 
