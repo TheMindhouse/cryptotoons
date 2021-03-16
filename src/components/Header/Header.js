@@ -2,7 +2,7 @@
 import React from "react"
 import { Dropdown, Icon, Row } from "antd"
 
-import logo from "../../assets/images/logo-simple.png"
+import logo from "../../assets/images/logo.png"
 import "./styles/Header.css"
 import { Link, NavLink } from "react-router-dom"
 import { URLHelper } from "../../helpers/URLhelper"
@@ -26,9 +26,6 @@ class Header extends React.Component<HeaderProps> {
                 <Link to={URLHelper.home} className="Header__link">
                   <img src={logo} className="Header__logo" alt="" />
                 </Link>
-              </div>
-              <div className="Header__subtext">
-                ~ Original NFTs since 2018 ~
               </div>
             </Row>
             <ul className="Header__menu">
