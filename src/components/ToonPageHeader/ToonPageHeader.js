@@ -102,11 +102,13 @@ class ToonPageHeader extends React.PureComponent<ToonPageHeaderProps> {
                   <TextWithLabel
                     label="Owner"
                     text={
-                      <AccountAddressLink
-                        address={
-                          toonAuction ? toonAuction.seller : toonDetails.owner
-                        }
-                      />
+                      toonAuction !== undefined && (
+                        <AccountAddressLink
+                          address={
+                            toonAuction ? toonAuction.seller : toonDetails.owner
+                          }
+                        />
+                      )
                     }
                   />
                 </Row>

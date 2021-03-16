@@ -32,6 +32,7 @@ class ToonPageAuction extends React.PureComponent<ToonPageAuctionProps> {
 
     // WHen auction reaches end date, endingPrice stays available until
     // someone buys the toon or the owner cancels the auction.
+    const isForever = duration >= 8640000000000000
     const endDate = new Date(startedAt.valueOf() + duration)
     const isAuctionAtEnd = Date.now() > endDate
 
@@ -53,18 +54,19 @@ class ToonPageAuction extends React.PureComponent<ToonPageAuctionProps> {
                       </h2>
                     }
                   />
-                  {!isAuctionAtEnd && (
-                    <TextWithLabel
-                      label="Time left"
-                      text={
-                        <h2 className="color-lgray">
-                          <Moment fromNow ago>
-                            {endDate}
-                          </Moment>
-                        </h2>
-                      }
-                    />
-                  )}
+                  {!isAuctionAtEnd &&
+                    !isForever && (
+                      <TextWithLabel
+                        label="Time left"
+                        text={
+                          <h2 className="color-lgray">
+                            <Moment fromNow ago>
+                              {endDate}
+                            </Moment>
+                          </h2>
+                        }
+                      />
+                    )}
                 </Row>
               </Col>
               <Col
