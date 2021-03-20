@@ -11,6 +11,7 @@ import { ToonAuction } from "../models/web3/ToonAuction"
 import { ToonPageAuction } from "../components/ToonPageAuction/ToonPageAuction"
 import { ToonPageFooter } from "../components/ToonPageFooter/ToonPageFooter"
 import { ToonPageOwnerActions } from "../components/ToonPageOwnerActions/ToonPageOwnerActions"
+import { ToonPagePlaceholder } from "../components/ToonPagePlaceholder/ToonPagePlaceholder"
 
 type ToonProps = {
   match: {
@@ -76,34 +77,38 @@ class Toon extends React.PureComponent<ToonProps, ToonState> {
         <ToonDetailsCore
           familyId={familyId}
           toonId={toonId}
-          render={(toonDetails: ToonDetails) => (
-            <ToonAuctionCore
-              familyId={familyId}
-              toonId={toonId}
-              render={(toonAuction: ?ToonAuction) => (
-                <div>
-                  <ToonPageHeader
-                    toonDetails={toonDetails}
-                    toonAuction={toonAuction}
-                  />
-                  <ToonPageOwnerActions
-                    toonDetails={toonDetails}
-                    toonAuction={toonAuction}
-                  />
-                  {toonAuction && (
-                    <ToonPageAuction
+          render={(toonDetails: ?ToonDetails) =>
+            !toonDetails ? (
+              <ToonPagePlaceholder />
+            ) : (
+              <ToonAuctionCore
+                familyId={familyId}
+                toonId={toonId}
+                render={(toonAuction: ?ToonAuction) => (
+                  <div>
+                    <ToonPageHeader
                       toonDetails={toonDetails}
                       toonAuction={toonAuction}
                     />
-                  )}
-                  <ToonPageFooter
-                    toonDetails={toonDetails}
-                    toonAuction={toonAuction}
-                  />
-                </div>
-              )}
-            />
-          )}
+                    <ToonPageOwnerActions
+                      toonDetails={toonDetails}
+                      toonAuction={toonAuction}
+                    />
+                    {toonAuction && (
+                      <ToonPageAuction
+                        toonDetails={toonDetails}
+                        toonAuction={toonAuction}
+                      />
+                    )}
+                    <ToonPageFooter
+                      toonDetails={toonDetails}
+                      toonAuction={toonAuction}
+                    />
+                  </div>
+                )}
+              />
+            )
+          }
         />
       </div>
     )

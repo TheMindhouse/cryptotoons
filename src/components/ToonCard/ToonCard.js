@@ -8,9 +8,10 @@ import { ToonAuctionCore } from "../../hoc/renderProps/ToonAuctionCore"
 import { ForSaleBadge } from "../Small/ForSaleBadge"
 import { Icon } from "antd"
 import { MyToonBadge } from "../Small/MyToonBadge"
+import { ToonCardPlaceholder } from "./ToonCardPlaceholder"
 
 type ToonCardProps = {
-  toonDetails: ToonDetails,
+  toonDetails: ?ToonDetails,
 }
 
 class ToonCard extends React.PureComponent<ToonCardProps> {
@@ -18,7 +19,11 @@ class ToonCard extends React.PureComponent<ToonCardProps> {
 
   render() {
     const { toonDetails } = this.props
-    const { familyId, toonId, name } = toonDetails
+
+    if (!toonDetails) return <ToonCardPlaceholder />
+
+    const { familyId, toonId, name } = toonDetails;
+
     return (
       <div className="ToonCard">
         <ToonAuctionCore

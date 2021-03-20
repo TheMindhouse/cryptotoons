@@ -40,6 +40,10 @@
     color: #333;
 }
 
+.ToonCard__name--Placeholder {
+    height: 27px;
+}
+
 .ToonCard__ForSaleBadge {
     position: absolute;
     display: flex;

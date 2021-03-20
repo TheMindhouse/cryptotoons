@@ -9,7 +9,7 @@ import type { Web3StoreType } from "../../types/Web3StoreType"
 type Props = {
   familyId: number,
   toonId: number,
-  render: (ToonDetails) => ?React.Node,
+  render: (?ToonDetails) => ?React.Node,
   web3Store: Web3StoreType,
 }
 
@@ -60,8 +60,7 @@ class ToonDetailsCore extends React.PureComponent<Props, State> {
   }
 
   render() {
-    const { toonDetails } = this.state
-    return toonDetails ? this.props.render(toonDetails) : null
+    return this.props.render(this.state.toonDetails)
   }
 }
 

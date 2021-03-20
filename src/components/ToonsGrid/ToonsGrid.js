@@ -33,7 +33,7 @@ class ToonsGrid extends React.PureComponent<ToonsGridProps> {
             <ToonDetailsCore
               familyId={familyId}
               toonId={toonId}
-              render={(toonDetails: ToonDetails) => (
+              render={(toonDetails: ?ToonDetails) => (
                 <Link to={URLHelper.toon(familyId, toonId)}>
                   <ToonCard toonDetails={toonDetails} />
                 </Link>
