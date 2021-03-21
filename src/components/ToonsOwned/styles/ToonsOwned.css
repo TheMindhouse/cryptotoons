@@ -1,0 +1,13 @@
+.ToonsOwned__FamiliesContainer {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+.ToonsOwned__FamilyItem:not(:last-of-type) {
+    margin-right: 18px;
+}
+
+.ToonsOwned__Pagination {
+    margin-top: 20px;
+}

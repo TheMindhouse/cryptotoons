@@ -8,6 +8,11 @@ import type { ToonWithFamilyIds } from "../../types/ToonTypes"
 import { ToonsGrid } from "../ToonsGrid/ToonsGrid"
 import { Pagination, Row, Spin } from "antd"
 import { CONFIG } from "../../config"
+import {
+  FAMILY_NAMES,
+  FAMILY_NAMES_SINGULAR,
+} from "../../constants/toonFamilies"
+import "./styles/ToonsOwned.css"
 
 type ToonsOwnedProps = {
   accountAddress: string,
@@ -140,25 +145,24 @@ class ToonsOwned extends React.PureComponent<ToonsOwnedProps, ToonsOwnedState> {
             {ownedToonsCount} {pluralize("Toon", ownedToonsCount)}
           </b>
         </h2>
-        {/*<div*/}
-        {/*  style={{ display: "flex", flexWrap: "wrap", marginBottom: "40px" }}*/}
-        {/*>*/}
-        {/*  {toonCountsByContract.map((count, familyId) => (*/}
-        {/*    <React.Fragment>*/}
-        {/*      <h4>*/}
-        {/*        <b>{count}</b>{" "}*/}
-        {/*        {count === 1*/}
-        {/*          ? FAMILY_NAMES_SINGULAR[familyId]*/}
-        {/*          : FAMILY_NAMES[familyId]}*/}
-        {/*      </h4>*/}
-        {/*      {familyId < toonCountsByContract.length - 1 && (*/}
-        {/*        <div style={{ flexShrink: 0, margin: "0 10px" }}>•</div>*/}
-        {/*      )}*/}
-        {/*    </React.Fragment>*/}
-        {/*  ))}*/}
-        {/*</div>*/}
+
+        <div className="ToonsOwned__FamiliesContainer">
+          {toonCountsByContract.map(
+            (count, familyId) =>
+              count === 0 ? null : (
+                <h3 className="ToonsOwned__FamilyItem">
+                  <b>{count}</b>{" "}
+                  {count === 1
+                    ? FAMILY_NAMES_SINGULAR[familyId]
+                    : FAMILY_NAMES[familyId]}
+                </h3>
+              )
+          )}
+        </div>
+
         <ToonsGrid toons={toonsPerPage} />
-        <Row type="flex" justify="center" style={{ marginTop: 20 }}>
+
+        <Row type="flex" justify="center" className="ToonsOwned__Pagination">
           <Pagination
             current={this.props.pageId}
             pageSize={CONFIG.TOONS_PER_PAGE}
