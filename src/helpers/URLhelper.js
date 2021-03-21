@@ -1,6 +1,7 @@
 // @flow
 
 import { FAMILY_NAMES } from "../constants/toonFamilies"
+import { AUCTION_CONTRACT_ADDRESS, CONTRACT_OWNER_ADDRESS } from "../constants/contracts"
 
 const getToonFamilyUrl = (familyId: number): string => {
   const familyName = FAMILY_NAMES[familyId]
@@ -30,6 +31,8 @@ const getAccountUrlWithPage = (address: string, pageId: number): string =>
 export const URLHelper = {
   account: getAccountUrl,
   accountWithPage: getAccountUrlWithPage,
+  creatorsPage: () => getAccountUrl(CONTRACT_OWNER_ADDRESS),
+  auctionsPage: () => getAccountUrl(AUCTION_CONTRACT_ADDRESS),
   toonFamily: getToonFamilyUrl,
   toonFamilyWithPage: getToonFamilyUrlWithPage,
   toon: getToonUrl,

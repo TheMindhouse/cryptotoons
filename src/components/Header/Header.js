@@ -51,6 +51,16 @@ class Header extends React.Component<HeaderProps> {
                 </NavLink>
               </li>
 
+              <li>
+                <NavLink
+                  to={URLHelper.auctionsPage()}
+                  className="Header__menu-link"
+                  activeClassName="Header__menu-link--active"
+                >
+                  Toon Auctions
+                </NavLink>
+              </li>
+
               {account && (
                 <li>
                   <NavLink

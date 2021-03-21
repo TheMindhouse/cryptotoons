@@ -2,16 +2,16 @@
 import * as React from "react"
 import { Alert } from "antd"
 import withWeb3 from "../hoc/withWeb3"
-import { equalStrings, setDocumentTitle } from "../helpers/utils"
+import { setDocumentTitle } from "../helpers/utils"
 import type { Web3StoreType } from "../types/Web3StoreType"
 import { ToonsOwned } from "../components/ToonsOwned/ToonsOwned"
-import { AccountBalance } from "../components/AccountBalance/AccountBalance"
 import { URLHelper } from "../helpers/URLhelper"
 import { type RouterHistory, withRouter } from "react-router-dom"
 import {
   AUCTION_CONTRACT_ADDRESS,
   CONTRACT_OWNER_ADDRESS,
 } from "../constants/contracts"
+import { equalStrings } from "../helpers/strings"
 
 type Props = {
   match: {
@@ -36,8 +36,16 @@ class Account extends React.PureComponent<Props, State> {
   static defaultProps = {}
 
   constructor(props: Props) {
-    super(props)
-    const urlAccountAddress = this.props.match.params.address
+    super(props);
+    this.initializePage(props, true)
+  }
+
+  componentDidUpdate() {
+    this.initializePage(this.props, false)
+  }
+
+  initializePage = (props: Props, fromConstructor: boolean) => {
+    const urlAccountAddress = props.match.params.address
     const pageId: number = this.getPageIdByProps(props)
     const isCreatorsPage = equalStrings(
       urlAccountAddress,
@@ -52,14 +60,21 @@ class Account extends React.PureComponent<Props, State> {
       : isAuctionsPage
         ? "Toon Auctions"
         : "Account Details"
-    this.state = {
+    setDocumentTitle(pageTitle)
+
+    const state ={
       urlAccountAddress,
       pageId,
       pageTitle,
       isCreatorsPage,
       isAuctionsPage,
     }
-    setDocumentTitle(pageTitle)
+
+    if (fromConstructor) {
+      this.state = state;
+    } else {
+      this.setState(state)
+    }
   }
 
   getPageIdByProps = (props: Props): number =>

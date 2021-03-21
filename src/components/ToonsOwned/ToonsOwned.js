@@ -39,6 +39,7 @@ class ToonsOwned extends React.PureComponent<ToonsOwnedProps, ToonsOwnedState> {
 
   componentDidUpdate(prevProps: ToonsOwnedProps) {
     if (prevProps.accountAddress !== this.props.accountAddress) {
+      this.setState({ isLoading: true })
       this.getOwnedToonsCount()
     }
   }

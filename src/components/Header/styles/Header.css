@@ -32,7 +32,7 @@
 
 .Header__menu li {
     display: inline-block;
-    padding: 0 30px;
+    padding: 0 24px;
     font-weight: 600;
     font-size: 20px;
 }
@@ -86,9 +86,10 @@
         flex-direction: row;
         justify-content: center;
         width: 100%;
+        flex-wrap: wrap;
     }
 
     .Header__menu li {
-        padding: 0 15px;
+        padding: 5px 15px;
     }
 }
