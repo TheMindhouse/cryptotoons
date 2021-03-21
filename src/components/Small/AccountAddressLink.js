@@ -4,6 +4,7 @@ import { URLHelper } from "../../helpers/URLhelper"
 import { cutAddress, equalStrings } from "../../helpers/strings"
 import { Link } from "react-router-dom"
 import { CONTRACT_OWNER_ADDRESS } from "../../constants/contracts"
+import { Icon } from "antd"
 
 type Props = {
   address: string,
@@ -17,7 +18,13 @@ class AccountAddressLink extends React.PureComponent<Props> {
     const isFromCreators = equalStrings(address, CONTRACT_OWNER_ADDRESS)
     return (
       <Link to={URLHelper.account(address)}>
-        {isFromCreators ? "CryptoToons Creators" : cutAddress(address)}
+        {isFromCreators ? (
+          <React.Fragment>
+            CryptoToons Creators <Icon type="check-circle" style={{ fontSize: 16 }}/>
+          </React.Fragment>
+        ) : (
+          cutAddress(address)
+        )}
       </Link>
     )
   }
