@@ -4,7 +4,10 @@ import ToonContractABI from "../assets/abi/ToonABI.json"
 import AuctionContractABI from "../assets/abi/AuctionABI.json"
 import { ToonContractFacade } from "../facades/ToonContractFacade"
 import { FAMILY_IDS } from "../constants/toonFamilies"
-import { AUCTION_CONTRACT_ADDRESS, TOON_CONTRACT_ADDRESSES, } from "../constants/contracts"
+import {
+  AUCTION_CONTRACT_ADDRESS,
+  TOON_CONTRACT_ADDRESSES,
+} from "../constants/contracts"
 import { CONFIG } from "../config"
 import { Logger } from "../helpers/Logger"
 import { AuctionContractFacade } from "../facades/AuctionContractFacade"

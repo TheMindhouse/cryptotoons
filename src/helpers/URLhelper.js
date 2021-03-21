@@ -20,8 +20,16 @@ const getToonUrl = (familyId: number, toonId: number): string => {
   return `${familyUrl}/${toonId}`
 }
 
+const getAccountUrl = (address: string): string => `/account/${address}`
+
+const getAccountUrlWithPage = (address: string, pageId: number): string =>
+  pageId === 1
+    ? getAccountUrl(address)
+    : getAccountUrl(address) + `/page/${pageId}`
+
 export const URLHelper = {
-  account: (address: string): string => `/account/${address}`,
+  account: getAccountUrl,
+  accountWithPage: getAccountUrlWithPage,
   toonFamily: getToonFamilyUrl,
   toonFamilyWithPage: getToonFamilyUrlWithPage,
   toon: getToonUrl,

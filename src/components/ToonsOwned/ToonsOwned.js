@@ -6,15 +6,21 @@ import { ToonContractFacade } from "../../facades/ToonContractFacade"
 import * as pluralize from "pluralize"
 import type { ToonWithFamilyIds } from "../../types/ToonTypes"
 import { ToonsGrid } from "../ToonsGrid/ToonsGrid"
+import { Pagination, Row, Spin } from "antd"
+import { CONFIG } from "../../config"
 
 type ToonsOwnedProps = {
   accountAddress: string,
+  pageId: number,
+  onChangePage: (number) => void,
   web3Store: Web3StoreType,
 }
 
 type ToonsOwnedState = {
   ownedToonsCount: ?number,
   ownedToons: Array<ToonWithFamilyIds>,
+  toonCountsByContract: Array<number>,
+  isLoading: boolean,
 }
 
 class ToonsOwned extends React.PureComponent<ToonsOwnedProps, ToonsOwnedState> {
@@ -23,6 +29,8 @@ class ToonsOwned extends React.PureComponent<ToonsOwnedProps, ToonsOwnedState> {
   state = {
     ownedToonsCount: null,
     ownedToons: [],
+    toonCountsByContract: [],
+    isLoading: true,
   }
 
   componentDidMount() {
@@ -49,13 +57,13 @@ class ToonsOwned extends React.PureComponent<ToonsOwnedProps, ToonsOwnedState> {
         toonContract.getOwnedToonsCount(accountAddress)
     )
     // Sum all owned toons
-    Promise.all(pToonsCount).then((toonCounts: Array<number>) => {
-      this.getOwnedToons(toonCounts)
-      const ownedToonsCount = toonCounts.reduce(
+    Promise.all(pToonsCount).then((toonCountsByContract: Array<number>) => {
+      this.getOwnedToons(toonCountsByContract)
+      const ownedToonsCount = toonCountsByContract.reduce(
         (a: number, b: number) => a + b,
         0
       )
-      this.setState({ ownedToonsCount })
+      this.setState({ ownedToonsCount, toonCountsByContract })
     })
   }
 
@@ -87,25 +95,76 @@ class ToonsOwned extends React.PureComponent<ToonsOwnedProps, ToonsOwnedState> {
     )
 
     // Wait until all promises are resolved and then update state
-    Promise.all(pOwnedToons).then((ownedToons: Array<ToonWithFamilyIds>) => {
-      this.setState({ ownedToons })
+    Promise.all(pOwnedToons).then((_ownedToons: Array<ToonWithFamilyIds>) => {
+      // Sort toons by families and ids
+      const ownedToons = _ownedToons.sort(
+        (a: ToonWithFamilyIds, b: ToonWithFamilyIds) =>
+          a.familyId - b.familyId || a.toonId - b.toonId
+      )
+      this.setState({ ownedToons, isLoading: false })
     })
   }
 
+  getToonsPerPage = (): Array<ToonWithFamilyIds> => {
+    const { ownedToons } = this.state
+    const { pageId } = this.props
+    const startId = (pageId - 1) * CONFIG.TOONS_PER_PAGE
+    const endId = startId + CONFIG.TOONS_PER_PAGE
+    return ownedToons.slice(startId, endId)
+  }
+
   render() {
-    const { ownedToonsCount, ownedToons } = this.state
-    const ownedToonsSorted = ownedToons.sort(
-      (a: ToonWithFamilyIds, b: ToonWithFamilyIds) =>
-        a.familyId - b.familyId || a.toonId - b.toonId
-    )
+    const { ownedToonsCount, toonCountsByContract } = this.state
+    const toonsPerPage = this.getToonsPerPage()
+
+    if (this.state.isLoading) {
+      return (
+        <div className="container">
+          <Row
+            type="flex"
+            align="middle"
+            justify="center"
+            style={{ minHeight: "50vh" }}
+          >
+            <Spin />
+          </Row>
+        </div>
+      )
+    }
+
     return (
       <div>
         <h2>
           <b>
-            {ownedToonsCount} {pluralize("Toon", ownedToonsCount)} Owned
+            {ownedToonsCount} {pluralize("Toon", ownedToonsCount)}
           </b>
         </h2>
-        <ToonsGrid toons={ownedToonsSorted} />
+        {/*<div*/}
+        {/*  style={{ display: "flex", flexWrap: "wrap", marginBottom: "40px" }}*/}
+        {/*>*/}
+        {/*  {toonCountsByContract.map((count, familyId) => (*/}
+        {/*    <React.Fragment>*/}
+        {/*      <h4>*/}
+        {/*        <b>{count}</b>{" "}*/}
+        {/*        {count === 1*/}
+        {/*          ? FAMILY_NAMES_SINGULAR[familyId]*/}
+        {/*          : FAMILY_NAMES[familyId]}*/}
+        {/*      </h4>*/}
+        {/*      {familyId < toonCountsByContract.length - 1 && (*/}
+        {/*        <div style={{ flexShrink: 0, margin: "0 10px" }}>•</div>*/}
+        {/*      )}*/}
+        {/*    </React.Fragment>*/}
+        {/*  ))}*/}
+        {/*</div>*/}
+        <ToonsGrid toons={toonsPerPage} />
+        <Row type="flex" justify="center" style={{ marginTop: 20 }}>
+          <Pagination
+            current={this.props.pageId}
+            pageSize={CONFIG.TOONS_PER_PAGE}
+            total={ownedToonsCount}
+            onChange={this.props.onChangePage}
+          />
+        </Row>
       </div>
     )
   }

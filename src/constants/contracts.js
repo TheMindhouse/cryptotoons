@@ -1,5 +1,8 @@
 import { FAMILY_IDS } from "./toonFamilies"
 
+export const CONTRACT_OWNER_ADDRESS =
+  "0xBcd7247756bE53Fe42D8868F92549C54E7e64152"
+
 export const AUCTION_CONTRACT_ADDRESS =
   "0xaaa688ac2755cb6a27d123a0300bcf793c9ed019"
 
