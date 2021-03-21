@@ -40,18 +40,15 @@ class ToonPageAuction extends React.PureComponent<ToonPageAuctionProps> {
       <div className="container">
         <Row className="ToonPageAuction">
           <Col xs={{ span: 24 }} md={{ span: 20, offset: 2 }}>
-            <Row type="flex" align="middle" justify="space-between">
-              <Col xs={{ span: 24 }} sm={{ span: 12 }} lg={{ span: 8 }}>
+            <Row type="flex" align="middle" justify="space-between" gutter={16}>
+              <Col xs={{ span: 24 }} sm={{ span: 12 }} lg={{ span: 8 }} className="ToonPageAuction__Col">
                 <Row type="flex" align="middle" justify="space-between">
                   <TextWithLabel
-                    label="Buy now price"
+                    label="Auction started"
                     text={
-                      <h2>
-                        <small className="text-smaller">Ξ</small>{" "}
-                        <b>
-                          {currentPrice > 0 ? wei2eth(currentPrice) : "Free"}
-                        </b>
-                      </h2>
+                      <h3 className="color-lgray">
+                        <Moment format="YYYY/MM/DD, HH:mm">{startedAt}</Moment>
+                      </h3>
                     }
                   />
                   {!isAuctionAtEnd &&
@@ -69,12 +66,28 @@ class ToonPageAuction extends React.PureComponent<ToonPageAuctionProps> {
                     )}
                 </Row>
               </Col>
-              <Col
-                xs={{ span: 24 }}
-                sm={{ span: 6, offset: 6 }}
-                lg={{ span: 4, offset: 12 }}
-              >
-                <BuyToon toonDetails={toonDetails} toonAuction={toonAuction} />
+              <Col xs={{ span: 24 }} sm={{ span: 9 }} lg={{ span: 8 }} className="ToonPageAuction__Col">
+                <Row type="flex" align="middle" justify="end">
+                  <Col xs={{ span: 12 }}>
+                    <TextWithLabel
+                      label="Buy now price"
+                      text={
+                        <h2>
+                          <small className="text-smaller">Ξ</small>{" "}
+                          <b>
+                            {currentPrice > 0 ? wei2eth(currentPrice) : "Free"}
+                          </b>
+                        </h2>
+                      }
+                    />
+                  </Col>
+                  <Col xs={{ span: 12 }}>
+                    <BuyToon
+                      toonDetails={toonDetails}
+                      toonAuction={toonAuction}
+                    />
+                  </Col>
+                </Row>
               </Col>
             </Row>
           </Col>

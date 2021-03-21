@@ -3,6 +3,9 @@
 }
 
 .ToonPageAuction__ChartContainer {
-    margin-top: 20px;
     margin-bottom: 10px;
+}
+
+.ToonPageAuction__Col {
+    margin-bottom: 20px;
 }
