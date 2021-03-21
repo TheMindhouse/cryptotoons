@@ -89,7 +89,7 @@ class ToonPageHeader extends React.PureComponent<ToonPageHeaderProps> {
                 >
                   <TextWithLabel
                     label="Born"
-                    text={<Moment format="YYYY/MM/DD">{birthTime}</Moment>}
+                    text={<Moment format="MMMM Do, YYYY">{birthTime}</Moment>}
                   />
                   <TextWithLabel
                     label="Family"
