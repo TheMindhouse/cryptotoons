@@ -5,7 +5,8 @@ import { CONFIG } from "../../config"
 type Props = {
   familyId: number,
   toonId: number,
-  render: (?string) => React.Node,
+  placeholder: React.Node,
+  render: (string) => React.Node,
 }
 
 type State = {
@@ -33,6 +34,7 @@ class ToonImageCore extends React.PureComponent<Props, State> {
   }
 
   getImageUrl = () => {
+    this.setState({ imageUrl: null })
     const { familyId, toonId } = this.props
     const imageUrl = `${CONFIG.TOON_IMAGE_BASE_URL}/${familyId}/${toonId}`
 
@@ -46,7 +48,10 @@ class ToonImageCore extends React.PureComponent<Props, State> {
   }
 
   render() {
-    return this.props.render(this.state.imageUrl)
+    const { imageUrl } = this.state
+    const { render, placeholder } = this.props
+
+    return imageUrl ? render(imageUrl) : placeholder
   }
 }
 

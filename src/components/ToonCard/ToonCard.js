@@ -50,20 +50,19 @@ class ToonCard extends React.PureComponent<ToonCardProps> {
         <ToonImageCore
           familyId={familyId}
           toonId={toonId}
-          render={(imageUrl: ?string) =>
-            imageUrl ? (
-              <div
-                className="ToonCard__image"
-                style={{
-                  backgroundImage: `url(${imageUrl})`,
-                }}
-              />
-            ) : (
-              <div className="ToonCard__image ToonCard__image--placeholder">
-                <Icon type="loading" />
-              </div>
-            )
+          placeholder={
+            <div className="ToonCard__image ToonCard__image--placeholder">
+              <Icon type="loading" />
+            </div>
           }
+          render={(imageUrl: string) => (
+            <div
+              className="ToonCard__image"
+              style={{
+                backgroundImage: `url(${imageUrl})`,
+              }}
+            />
+          )}
         />
         <p className="ToonCard__name">{name}</p>
       </div>

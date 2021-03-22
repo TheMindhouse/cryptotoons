@@ -55,20 +55,19 @@ class ToonPageHeader extends React.PureComponent<ToonPageHeaderProps> {
             <ToonImageCore
               familyId={familyId}
               toonId={toonId}
-              render={(imageUrl: ?string) =>
-                imageUrl ? (
-                  <div
-                    className="ToonPageHeader__Image"
-                    style={{
-                      backgroundImage: `url(${imageUrl})`,
-                    }}
-                  />
-                ) : (
-                  <div className="ToonPageHeader__Image ToonPageHeader__Image--placeholder">
-                    <Icon type="loading" style={{ fontSize: 24 }} />
-                  </div>
-                )
+              placeholder={
+                <div className="ToonPageHeader__Image ToonPageHeader__Image--placeholder">
+                  <Icon type="loading" style={{ fontSize: 24 }} />
+                </div>
               }
+              render={(imageUrl: string) => (
+                <div
+                  className="ToonPageHeader__Image"
+                  style={{
+                    backgroundImage: `url(${imageUrl})`,
+                  }}
+                />
+              )}
             />
           </div>
         </div>
