@@ -22,7 +22,7 @@ class ToonCard extends React.PureComponent<ToonCardProps> {
 
     if (!toonDetails) return <ToonCardPlaceholder />
 
-    const { familyId, toonId, name } = toonDetails;
+    const { familyId, toonId, name } = toonDetails
 
     return (
       <div className="ToonCard">
