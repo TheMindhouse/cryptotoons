@@ -36,15 +36,22 @@ class Account extends React.PureComponent<Props, State> {
   static defaultProps = {}
 
   constructor(props: Props) {
-    super(props);
-    this.initializePage(props, true)
+    super(props)
+    this.state = this.getInitialState(props)
   }
 
-  componentDidUpdate() {
-    this.initializePage(this.props, false)
+  componentDidUpdate(prevProps: Props) {
+    if (
+      !equalStrings(
+        prevProps.match.params.address,
+        this.props.match.params.address
+      )
+    ) {
+      this.setState(this.getInitialState(this.props))
+    }
   }
 
-  initializePage = (props: Props, fromConstructor: boolean) => {
+  getInitialState = (props: Props) => {
     const urlAccountAddress = props.match.params.address
     const pageId: number = this.getPageIdByProps(props)
     const isCreatorsPage = equalStrings(
@@ -62,18 +69,12 @@ class Account extends React.PureComponent<Props, State> {
         : "Account Details"
     setDocumentTitle(pageTitle)
 
-    const state ={
+    return {
       urlAccountAddress,
       pageId,
       pageTitle,
       isCreatorsPage,
       isAuctionsPage,
-    }
-
-    if (fromConstructor) {
-      this.state = state;
-    } else {
-      this.setState(state)
     }
   }
 

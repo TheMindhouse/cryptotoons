@@ -4,8 +4,30 @@
     margin-bottom: 40px;
 }
 
-.ToonsOwned__FamilyItem:not(:last-of-type) {
+.FamilyFilterItem {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.FamilyFilterItem:hover {
+    text-decoration: underline;
+}
+
+.FamilyFilterItem--inactive {
+    color: #ccc;
+}
+
+.FamilyFilterItem:not(:last-of-type) {
     margin-right: 18px;
+}
+
+.FamilyFilterItem__Name {
+    margin-left: 4px;
+}
+
+.FamilyFilterItem__Cross {
+    margin-left: 8px;
 }
 
 .ToonsOwned__Pagination {

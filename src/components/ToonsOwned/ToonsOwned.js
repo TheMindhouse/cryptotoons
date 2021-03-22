@@ -6,7 +6,7 @@ import { ToonContractFacade } from "../../facades/ToonContractFacade"
 import * as pluralize from "pluralize"
 import type { ToonWithFamilyIds } from "../../types/ToonTypes"
 import { ToonsGrid } from "../ToonsGrid/ToonsGrid"
-import { Pagination, Row, Spin } from "antd"
+import { Icon, Pagination, Row, Spin } from "antd"
 import { CONFIG } from "../../config"
 import {
   FAMILY_NAMES,
@@ -22,21 +22,23 @@ type ToonsOwnedProps = {
 }
 
 type ToonsOwnedState = {
-  ownedToonsCount: ?number,
   ownedToons: Array<ToonWithFamilyIds>,
   toonCountsByContract: Array<number>,
   isLoading: boolean,
+  familyIdFilter: ?number,
+}
+
+const initialState: ToonsOwnedState = {
+  ownedToons: [],
+  toonCountsByContract: [],
+  isLoading: true,
+  familyIdFilter: null,
 }
 
 class ToonsOwned extends React.PureComponent<ToonsOwnedProps, ToonsOwnedState> {
   static defaultProps = {}
 
-  state = {
-    ownedToonsCount: null,
-    ownedToons: [],
-    toonCountsByContract: [],
-    isLoading: true,
-  }
+  state = initialState
 
   componentDidMount() {
     this.getOwnedToonsCount()
@@ -44,7 +46,7 @@ class ToonsOwned extends React.PureComponent<ToonsOwnedProps, ToonsOwnedState> {
 
   componentDidUpdate(prevProps: ToonsOwnedProps) {
     if (prevProps.accountAddress !== this.props.accountAddress) {
-      this.setState({ isLoading: true })
+      this.setState(initialState)
       this.getOwnedToonsCount()
     }
   }
@@ -65,11 +67,7 @@ class ToonsOwned extends React.PureComponent<ToonsOwnedProps, ToonsOwnedState> {
     // Sum all owned toons
     Promise.all(pToonsCount).then((toonCountsByContract: Array<number>) => {
       this.getOwnedToons(toonCountsByContract)
-      const ownedToonsCount = toonCountsByContract.reduce(
-        (a: number, b: number) => a + b,
-        0
-      )
-      this.setState({ ownedToonsCount, toonCountsByContract })
+      this.setState({ toonCountsByContract })
     })
   }
 
@@ -111,17 +109,33 @@ class ToonsOwned extends React.PureComponent<ToonsOwnedProps, ToonsOwnedState> {
     })
   }
 
-  getToonsPerPage = (): Array<ToonWithFamilyIds> => {
-    const { ownedToons } = this.state
+  filterToons = (_familyId: ?number) => {
+    const { familyIdFilter } = this.state
+    const familyId = _familyId === familyIdFilter ? null : _familyId
+    this.setState({ familyIdFilter: familyId })
+    this.props.onChangePage(1)
+  }
+
+  getFilteredToons = () => {
+    const { ownedToons, familyIdFilter } = this.state
+    return familyIdFilter !== null
+      ? ownedToons.filter((toon) => toon.familyId === familyIdFilter)
+      : ownedToons
+  }
+
+  getToonsPerPage = (
+    toons: Array<ToonWithFamilyIds>
+  ): Array<ToonWithFamilyIds> => {
     const { pageId } = this.props
     const startId = (pageId - 1) * CONFIG.TOONS_PER_PAGE
     const endId = startId + CONFIG.TOONS_PER_PAGE
-    return ownedToons.slice(startId, endId)
+    return toons.slice(startId, endId)
   }
 
   render() {
-    const { ownedToonsCount, toonCountsByContract } = this.state
-    const toonsPerPage = this.getToonsPerPage()
+    const { ownedToons, toonCountsByContract, familyIdFilter } = this.state
+    const ownedToonsFiltered = this.getFilteredToons()
+    const toonsPerPage = this.getToonsPerPage(ownedToonsFiltered)
 
     if (this.state.isLoading) {
       return (
@@ -142,7 +156,7 @@ class ToonsOwned extends React.PureComponent<ToonsOwnedProps, ToonsOwnedState> {
       <div>
         <h2>
           <b>
-            {ownedToonsCount} {pluralize("Toon", ownedToonsCount)}
+            {ownedToons.length} {pluralize("Toon", ownedToons.length)}
           </b>
         </h2>
 
@@ -150,11 +164,27 @@ class ToonsOwned extends React.PureComponent<ToonsOwnedProps, ToonsOwnedState> {
           {toonCountsByContract.map(
             (count, familyId) =>
               count === 0 ? null : (
-                <h3 className="ToonsOwned__FamilyItem">
-                  <b>{count}</b>{" "}
-                  {count === 1
-                    ? FAMILY_NAMES_SINGULAR[familyId]
-                    : FAMILY_NAMES[familyId]}
+                <h3
+                  className={`FamilyFilterItem ${
+                    familyIdFilter !== null && familyIdFilter !== familyId
+                      ? "FamilyFilterItem--inactive"
+                      : ""
+                  }`}
+                  onClick={() => this.filterToons(familyId)}
+                  key={familyId}
+                >
+                  <b>{count}</b>
+                  <div className="FamilyFilterItem__Name">
+                    {count === 1
+                      ? FAMILY_NAMES_SINGULAR[familyId]
+                      : FAMILY_NAMES[familyId]}
+                  </div>
+                  {familyIdFilter === familyId && (
+                    <Icon
+                      type="close-circle"
+                      className="FamilyFilterItem__Cross"
+                    />
+                  )}
                 </h3>
               )
           )}
@@ -166,7 +196,7 @@ class ToonsOwned extends React.PureComponent<ToonsOwnedProps, ToonsOwnedState> {
           <Pagination
             current={this.props.pageId}
             pageSize={CONFIG.TOONS_PER_PAGE}
-            total={ownedToonsCount}
+            total={ownedToonsFiltered.length}
             onChange={this.props.onChangePage}
           />
         </Row>
