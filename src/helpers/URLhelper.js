@@ -1,19 +1,9 @@
 // @flow
-
 import { FAMILY_NAMES } from "../constants/toonFamilies"
-import { AUCTION_CONTRACT_ADDRESS, CONTRACT_OWNER_ADDRESS } from "../constants/contracts"
 
 const getToonFamilyUrl = (familyId: number): string => {
   const familyName = FAMILY_NAMES[familyId]
   return `/toons/${familyName.toLowerCase()}`
-}
-
-const getToonFamilyUrlWithPage = (familyId: number, pageId: number): string => {
-  if (pageId === 1) {
-    return getToonFamilyUrl(familyId)
-  }
-  const familyName = FAMILY_NAMES[familyId]
-  return `/toons/${familyName.toLowerCase()}/page/${pageId}`
 }
 
 const getToonUrl = (familyId: number, toonId: number): string => {
@@ -23,18 +13,17 @@ const getToonUrl = (familyId: number, toonId: number): string => {
 
 const getAccountUrl = (address: string): string => `/account/${address}`
 
-const getAccountUrlWithPage = (address: string, pageId: number): string =>
-  pageId === 1
-    ? getAccountUrl(address)
-    : getAccountUrl(address) + `/page/${pageId}`
+export const getUrlWithPage = (
+  url: string,
+  pageId: ?(number | string)
+): string =>
+  pageId === undefined || pageId === null || pageId === 1
+    ? url
+    : `${url}/page/${pageId}`
 
 export const URLHelper = {
   account: getAccountUrl,
-  accountWithPage: getAccountUrlWithPage,
-  creatorsPage: () => getAccountUrl(CONTRACT_OWNER_ADDRESS),
-  auctionsPage: () => getAccountUrl(AUCTION_CONTRACT_ADDRESS),
   toonFamily: getToonFamilyUrl,
-  toonFamilyWithPage: getToonFamilyUrlWithPage,
   toon: getToonUrl,
   home: "/",
   about: "/about",
@@ -43,4 +32,6 @@ export const URLHelper = {
   pageNotFound: "/404",
   help: "/help",
   faq: "/faq",
+  auctions: "/auctions",
+  creators: "/creators",
 }

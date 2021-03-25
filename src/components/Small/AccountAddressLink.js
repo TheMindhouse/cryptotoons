@@ -16,16 +16,15 @@ class AccountAddressLink extends React.PureComponent<Props> {
   render() {
     const { address } = this.props
     const isFromCreators = equalStrings(address, CONTRACT_OWNER_ADDRESS)
-    return (
-      <Link to={URLHelper.account(address)}>
-        {isFromCreators ? (
-          <React.Fragment>
-            CryptoToons Creators <Icon type="check-circle" style={{ fontSize: 16 }}/>
-          </React.Fragment>
-        ) : (
-          cutAddress(address)
-        )}
+    return isFromCreators ? (
+      <Link to={URLHelper.creators}>
+        <React.Fragment>
+          CryptoToons Creators{" "}
+          <Icon type="check-circle" style={{ fontSize: 16 }} />
+        </React.Fragment>
       </Link>
+    ) : (
+      <Link to={URLHelper.account(address)}>{cutAddress(address)}</Link>
     )
   }
 }

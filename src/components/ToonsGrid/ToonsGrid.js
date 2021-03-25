@@ -27,7 +27,7 @@ class ToonsGrid extends React.PureComponent<ToonsGridProps> {
             sm={{ span: 12 }}
             md={{ span: 8 }}
             lg={{ span: 6 }}
-            key={toonId}
+            key={`${familyId}-${toonId}`}
             className="ToonsGrid__Toon"
           >
             <ToonDetailsCore

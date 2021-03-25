@@ -15,12 +15,13 @@ import AccountStatus from "./components/AccountWidget/AccountStatus"
 import { TransactionsProvider } from "./stores/TransactionsProvider"
 import { Account } from "./containers/Account"
 import { About } from "./containers/About"
-import { URLHelper } from "./helpers/URLhelper"
+import { getUrlWithPage, URLHelper } from "./helpers/URLhelper"
 import { TermsOfUse } from "./containers/TermsOfUse"
 import { Contact } from "./containers/Contact"
 import { CONFIG } from "./config"
 import { Help } from "./containers/Help"
 import { FAQ } from "./containers/FAQ"
+import { AUCTION_CONTRACT_ADDRESS, CONTRACT_OWNER_ADDRESS, } from "./constants/contracts"
 
 // Initialize Google Analytics
 const hostname = window && window.location && window.location.hostname
@@ -62,6 +63,33 @@ class App extends Component<{}> {
                     component={Toon}
                   />
                   <Route path="/account/:address" component={Account} />
+
+                  <Route exact path={getUrlWithPage(URLHelper.auctions, ':pageId')}>
+                    <Account
+                      address={AUCTION_CONTRACT_ADDRESS}
+                      url={URLHelper.auctions}
+                    />
+                  </Route>
+                  <Route exact path={URLHelper.auctions}>
+                    <Account
+                      address={AUCTION_CONTRACT_ADDRESS}
+                      url={URLHelper.auctions}
+                    />
+                  </Route>
+
+                  <Route exact path={getUrlWithPage(URLHelper.creators, ':pageId')}>
+                    <Account
+                      address={CONTRACT_OWNER_ADDRESS}
+                      url={URLHelper.creators}
+                    />
+                  </Route>
+                  <Route exact path={URLHelper.creators}>
+                    <Account
+                      address={CONTRACT_OWNER_ADDRESS}
+                      url={URLHelper.creators}
+                    />
+                  </Route>
+
                   <Route path={URLHelper.about} component={About} />
                   <Route path={URLHelper.help} component={Help} />
                   <Route path={URLHelper.faq} component={FAQ} />

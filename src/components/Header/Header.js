@@ -53,7 +53,7 @@ class Header extends React.Component<HeaderProps> {
 
               <li>
                 <NavLink
-                  to={URLHelper.auctionsPage()}
+                  to={URLHelper.auctions}
                   className="Header__menu-link"
                   activeClassName="Header__menu-link--active"
                 >

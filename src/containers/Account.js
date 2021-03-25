@@ -5,12 +5,9 @@ import withWeb3 from "../hoc/withWeb3"
 import { setDocumentTitle } from "../helpers/utils"
 import type { Web3StoreType } from "../types/Web3StoreType"
 import { ToonsOwned } from "../components/ToonsOwned/ToonsOwned"
-import { URLHelper } from "../helpers/URLhelper"
+import { getUrlWithPage, URLHelper } from "../helpers/URLhelper"
 import { type RouterHistory, withRouter } from "react-router-dom"
-import {
-  AUCTION_CONTRACT_ADDRESS,
-  CONTRACT_OWNER_ADDRESS,
-} from "../constants/contracts"
+import { AUCTION_CONTRACT_ADDRESS, CONTRACT_OWNER_ADDRESS, } from "../constants/contracts"
 import { equalStrings } from "../helpers/strings"
 
 type Props = {
@@ -22,6 +19,8 @@ type Props = {
   },
   history: RouterHistory,
   web3Store: Web3StoreType,
+  address: ?string,
+  url: ?string,
 }
 
 type State = {
@@ -41,18 +40,22 @@ class Account extends React.PureComponent<Props, State> {
   }
 
   componentDidUpdate(prevProps: Props) {
+    const prevParams = prevProps.match.params
+    const currentParams = this.props.match.params
     if (
-      !equalStrings(
-        prevProps.match.params.address,
-        this.props.match.params.address
-      )
+      !equalStrings(prevParams.address, currentParams.address) ||
+      !equalStrings(prevProps.address, this.props.address)
     ) {
       this.setState(this.getInitialState(this.props))
+    }
+
+    if (prevParams.pageId !== currentParams.pageId) {
+      this.setState({ pageId: this.getPageIdByProps(this.props) })
     }
   }
 
   getInitialState = (props: Props) => {
-    const urlAccountAddress = props.match.params.address
+    const urlAccountAddress = props.address || props.match.params.address
     const pageId: number = this.getPageIdByProps(props)
     const isCreatorsPage = equalStrings(
       urlAccountAddress,
@@ -84,7 +87,10 @@ class Account extends React.PureComponent<Props, State> {
   onChangePage = (pageId: number) => {
     this.setState({ pageId })
     this.props.history.push(
-      URLHelper.accountWithPage(this.state.urlAccountAddress, pageId)
+      getUrlWithPage(
+        this.props.url || URLHelper.account(this.state.urlAccountAddress),
+        pageId
+      )
     )
   }
 

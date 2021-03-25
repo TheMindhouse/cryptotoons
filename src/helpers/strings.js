@@ -28,4 +28,4 @@ export const slugify = (text: string): string =>
  * Checks if two strings are the same, case-insensitive.
  * Used to compare addresses.
  */
-export const equalStrings = (a: string, b: string) => (a || '').toLowerCase() === (b || '').toLowerCase()
+export const equalStrings = (a: ?string, b: ?string) => (a || '').toLowerCase() === (b || '').toLowerCase()

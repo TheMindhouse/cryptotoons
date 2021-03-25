@@ -1,7 +1,7 @@
 // @flow
 import * as React from "react"
 import { FAMILY_NAMES } from "../constants/toonFamilies"
-import { URLHelper } from "../helpers/URLhelper"
+import { getUrlWithPage, URLHelper } from "../helpers/URLhelper"
 import { setDocumentTitle } from "../helpers/utils"
 import { ToonFamilyCollection } from "../components/ToonFamilyCollection/ToonFamilyCollection"
 import { type RouterHistory, withRouter } from "react-router-dom"
@@ -72,7 +72,7 @@ class ToonFamily extends React.PureComponent<Props, State> {
   onChangePage = (pageId: number) => {
     this.setState({ pageId })
     this.props.history.push(
-      URLHelper.toonFamilyWithPage(this.state.familyId, pageId)
+      getUrlWithPage(URLHelper.toonFamily(this.state.familyId), pageId)
     )
   }
 
