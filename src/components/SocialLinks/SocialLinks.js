@@ -1,6 +1,7 @@
 // @flow
 import * as React from "react"
 import { Icon } from "antd"
+import { SOCIAL_LINKS } from "../../constants/social"
 
 type SocialLinksProps = {
   fontSize: number,
@@ -24,7 +25,7 @@ class SocialLinks extends React.PureComponent<SocialLinksProps> {
     return (
       <div>
         <a
-          href="https://www.instagram.com/cryptotoons/"
+          href={SOCIAL_LINKS.Instagram}
           target="_blank"
           rel="noopener noreferrer"
           style={style}
@@ -32,7 +33,7 @@ class SocialLinks extends React.PureComponent<SocialLinksProps> {
           <Icon type="instagram" />
         </a>
         <a
-          href="https://twitter.com/toontoken"
+          href={SOCIAL_LINKS.Twitter}
           target="_blank"
           rel="noopener noreferrer"
           style={style}

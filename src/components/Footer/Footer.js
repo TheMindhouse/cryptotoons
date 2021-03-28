@@ -8,6 +8,7 @@ import logoMindhouse from "../../assets/images/logo-mindhouse.png"
 import logoWebcartoons from "../../assets/images/logo-webcartoons.png"
 import discordLogo from "../../assets/images/discord.svg"
 import { SocialLinks } from "../SocialLinks/SocialLinks"
+import { SOCIAL_LINKS } from "../../constants/social"
 
 type Props = {}
 
@@ -62,7 +63,7 @@ class Footer extends React.PureComponent<Props> {
             <Col xs={24} sm={24} md={4} className="Footer-Social">
               <SocialLinks />
               <a
-                href="https://discord.gg/E54DpQ9R"
+                href={SOCIAL_LINKS.Discord}
                 target="_blank"
                 rel="noopener noreferrer"
               >
