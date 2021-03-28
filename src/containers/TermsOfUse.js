@@ -94,7 +94,7 @@ class TermsOfUse extends React.PureComponent<TermsOfUseProps> {
                     .map((key: string): string => TOON_CONTRACT_ADDRESSES[key])
                     .filter((address: string) => address)
                     .map((address: string) => (
-                      <li>
+                      <li key={address}>
                         <EtherscanContractLink address={address} />
                       </li>
                     ))}
