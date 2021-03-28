@@ -77,16 +77,16 @@ class App extends Component<{}> {
                     />
                   </Route>
 
-                  <Route exact path={getUrlWithPage(URLHelper.creators, ':pageId')}>
+                  <Route exact path={getUrlWithPage(URLHelper.genesis, ':pageId')}>
                     <Account
                       address={CONTRACT_OWNER_ADDRESS}
-                      url={URLHelper.creators}
+                      url={URLHelper.genesis}
                     />
                   </Route>
-                  <Route exact path={URLHelper.creators}>
+                  <Route exact path={URLHelper.genesis}>
                     <Account
                       address={CONTRACT_OWNER_ADDRESS}
-                      url={URLHelper.creators}
+                      url={URLHelper.genesis}
                     />
                   </Route>
 

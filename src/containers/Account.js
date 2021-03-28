@@ -66,7 +66,7 @@ class Account extends React.PureComponent<Props, State> {
       AUCTION_CONTRACT_ADDRESS
     )
     const pageTitle = isCreatorsPage
-      ? "Toons From Original Creators"
+      ? "Genesis Toons From Original Creators"
       : isAuctionsPage
         ? "Toon Auctions"
         : "Account Details"

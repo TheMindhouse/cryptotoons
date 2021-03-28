@@ -33,5 +33,5 @@ export const URLHelper = {
   help: "/help",
   faq: "/faq",
   auctions: "/auctions",
-  creators: "/creators",
+  genesis: "/genesis",
 }

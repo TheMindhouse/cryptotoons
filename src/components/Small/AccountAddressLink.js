@@ -17,7 +17,7 @@ class AccountAddressLink extends React.PureComponent<Props> {
     const { address } = this.props
     const isFromCreators = equalStrings(address, CONTRACT_OWNER_ADDRESS)
     return isFromCreators ? (
-      <Link to={URLHelper.creators}>
+      <Link to={URLHelper.genesis}>
         <React.Fragment>
           CryptoToons Creators{" "}
           <Icon type="check-circle" style={{ fontSize: 16 }} />
