@@ -4,6 +4,7 @@ import { Col, Divider, Row } from "antd"
 import { SocialLinks } from "../components/SocialLinks/SocialLinks"
 import { setDocumentTitle } from "../helpers/utils"
 import discordLogo from "../assets/images/discord.svg"
+import { SOCIAL_LINKS } from "../constants/social"
 
 type ContactProps = {}
 
@@ -36,7 +37,7 @@ class Contact extends React.PureComponent<ContactProps> {
               >
                 <p>Chat with us on:</p>
                 <a
-                  href="https://discord.gg/E54DpQ9R"
+                  href={SOCIAL_LINKS.Discord}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
