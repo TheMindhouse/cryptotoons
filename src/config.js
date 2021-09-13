@@ -1,5 +1,8 @@
 import { METAMASK_NETWORKS } from "./constants/metamask"
 
+// const API_URL = 'http://localhost:3100';
+const API_URL = 'https://mindhouse.io:3100';
+
 export const CONFIG = {
   ETHEREUM_NETWORK: METAMASK_NETWORKS.main,
   // Page base URL
@@ -11,8 +14,10 @@ export const CONFIG = {
   HOTJAR_VERSION: 6,
   // Browser page title
   PAGE_TITLE: "CryptoToons - Entertoonment on the blockchain",
-  // Base URL to get toon images
-  TOON_IMAGE_BASE_URL: "https://mindhouse.io:3100/toon",
+  // API to get toon images
+  TOON_IMAGE_BASE_URL: `${API_URL}/toon`,
+  // API for stats
+  STATS_URL: `${API_URL}/stats`,
   // Delay to check transactions in ms
   CHECK_TX_DELAY: 3000,
   // Delay to check account address in ms

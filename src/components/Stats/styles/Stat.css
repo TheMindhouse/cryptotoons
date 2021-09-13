@@ -1,0 +1,32 @@
+.Stat {
+    background: #fff;
+    padding: 16px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 6px 10px 0 rgba(0,0,0,0.05);
+    margin: 10px 0;
+}
+
+.Stat__Title {
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.45);
+}
+
+.Stat__Value {
+    font-size: 35px;
+}
+
+@media all and (max-width: 768px) {
+    .Stat {
+        padding: 10px;
+        margin: 6px 0;
+    }
+
+    .Stat__Title {
+        font-size: 16px;
+    }
+
+    .Stat__Value {
+        font-size: 27px;
+    }
+}

@@ -21,7 +21,11 @@ import { Contact } from "./containers/Contact"
 import { CONFIG } from "./config"
 import { Help } from "./containers/Help"
 import { FAQ } from "./containers/FAQ"
-import { AUCTION_CONTRACT_ADDRESS, CONTRACT_OWNER_ADDRESS, } from "./constants/contracts"
+import {
+  AUCTION_CONTRACT_ADDRESS,
+  CONTRACT_OWNER_ADDRESS,
+} from "./constants/contracts"
+import { StatsProvider } from "./stores/StatsProvider"
 
 // Initialize Google Analytics
 const hostname = window && window.location && window.location.hostname
@@ -41,69 +45,77 @@ class App extends Component<{}> {
     return (
       <Web3Provider>
         <TransactionsProvider>
-          <Router>
-            <ScrollToTop>
-              <div className="AppContent">
-                <Header />
-                <AccountStatus />
+          <StatsProvider>
+            <Router>
+              <ScrollToTop>
+                <div className="AppContent">
+                  <Header />
+                  <AccountStatus />
 
-                <Route path="/" component={logPageView} />
+                  <Route path="/" component={logPageView} />
 
-                <Switch>
-                  <Route exact path="/" component={ToonFamilies} />
-                  <Route exact path="/toons/:name" component={ToonFamily} />
-                  <Route
-                    exact
-                    path="/toons/:name/page/:pageId"
-                    component={ToonFamily}
-                  />
-                  <Route
-                    exact
-                    path="/toons/:familyName/:toonId"
-                    component={Toon}
-                  />
-                  <Route path="/account/:address" component={Account} />
-
-                  <Route exact path={getUrlWithPage(URLHelper.auctions, ':pageId')}>
-                    <Account
-                      address={AUCTION_CONTRACT_ADDRESS}
-                      url={URLHelper.auctions}
+                  <Switch>
+                    <Route exact path="/" component={ToonFamilies} />
+                    <Route exact path="/toons/:name" component={ToonFamily} />
+                    <Route
+                      exact
+                      path="/toons/:name/page/:pageId"
+                      component={ToonFamily}
                     />
-                  </Route>
-                  <Route exact path={URLHelper.auctions}>
-                    <Account
-                      address={AUCTION_CONTRACT_ADDRESS}
-                      url={URLHelper.auctions}
+                    <Route
+                      exact
+                      path="/toons/:familyName/:toonId"
+                      component={Toon}
                     />
-                  </Route>
+                    <Route path="/account/:address" component={Account} />
 
-                  <Route exact path={getUrlWithPage(URLHelper.genesis, ':pageId')}>
-                    <Account
-                      address={CONTRACT_OWNER_ADDRESS}
-                      url={URLHelper.genesis}
-                    />
-                  </Route>
-                  <Route exact path={URLHelper.genesis}>
-                    <Account
-                      address={CONTRACT_OWNER_ADDRESS}
-                      url={URLHelper.genesis}
-                    />
-                  </Route>
+                    <Route
+                      exact
+                      path={getUrlWithPage(URLHelper.auctions, ":pageId")}
+                    >
+                      <Account
+                        address={AUCTION_CONTRACT_ADDRESS}
+                        url={URLHelper.auctions}
+                      />
+                    </Route>
+                    <Route exact path={URLHelper.auctions}>
+                      <Account
+                        address={AUCTION_CONTRACT_ADDRESS}
+                        url={URLHelper.auctions}
+                      />
+                    </Route>
 
-                  <Route path={URLHelper.about} component={About} />
-                  <Route path={URLHelper.help} component={Help} />
-                  <Route path={URLHelper.faq} component={FAQ} />
-                  <Route path={URLHelper.terms} component={TermsOfUse} />
-                  <Route path={URLHelper.contact} component={Contact} />
-                  <Route path="/404" component={ErrorPage404} />
-                  <Route component={ErrorPage404} />
-                </Switch>
+                    <Route
+                      exact
+                      path={getUrlWithPage(URLHelper.genesis, ":pageId")}
+                    >
+                      <Account
+                        address={CONTRACT_OWNER_ADDRESS}
+                        url={URLHelper.genesis}
+                      />
+                    </Route>
+                    <Route exact path={URLHelper.genesis}>
+                      <Account
+                        address={CONTRACT_OWNER_ADDRESS}
+                        url={URLHelper.genesis}
+                      />
+                    </Route>
 
-                {/*<FbMessenger />*/}
-                <Footer />
-              </div>
-            </ScrollToTop>
-          </Router>
+                    <Route path={URLHelper.about} component={About} />
+                    <Route path={URLHelper.help} component={Help} />
+                    <Route path={URLHelper.faq} component={FAQ} />
+                    <Route path={URLHelper.terms} component={TermsOfUse} />
+                    <Route path={URLHelper.contact} component={Contact} />
+                    <Route path="/404" component={ErrorPage404} />
+                    <Route component={ErrorPage404} />
+                  </Switch>
+
+                  {/*<FbMessenger />*/}
+                  <Footer />
+                </div>
+              </ScrollToTop>
+            </Router>
+          </StatsProvider>
         </TransactionsProvider>
       </Web3Provider>
     )

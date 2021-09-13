@@ -10,6 +10,7 @@ import type { ToonWithFamilyIds } from "../../types/ToonTypes"
 import { getFamilyName } from "../../helpers/familyNamesHelper"
 import { Pagination, Row, Spin } from "antd"
 import { CONFIG } from "../../config"
+import FamilyStats from "../Stats/FamilyStats"
 
 type ToonFamilyCollectionProps = {
   familyId: number,
@@ -118,9 +119,10 @@ class ToonFamilyCollection extends React.PureComponent<
         <div className="container">
           <h1>
             <b>
-              {totalToonsCount} {getFamilyName(this.props.familyId)}
+              {getFamilyName(this.props.familyId)}
             </b>
           </h1>
+          <FamilyStats familyId={this.props.familyId}/>
           <ToonsGrid toons={toons} />
           <Row type="flex" justify="center" style={{ marginTop: 20 }}>
             <Pagination
