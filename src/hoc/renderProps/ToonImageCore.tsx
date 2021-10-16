@@ -1,11 +1,12 @@
 import * as React from "react"
 import { CONFIG } from "../../config"
+import {ReactNode} from "react";
 
 type Props = {
   familyId: number,
   toonId: number,
-  placeholder: React.Node,
-  render: (string) => React.Node,
+  placeholder: ReactNode,
+  render: (string) => ReactNode,
 }
 
 type State = {

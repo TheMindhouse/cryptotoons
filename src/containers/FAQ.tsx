@@ -1,4 +1,5 @@
 import * as React from "react"
+import { ReactNode } from "react"
 import { Anchor, Col, Divider, Row } from "antd"
 import { URLHelper } from "../helpers/URLhelper"
 import { Link } from "react-router-dom"
@@ -7,7 +8,7 @@ import { slugify } from "../helpers/strings"
 
 type Props = {}
 
-const FAQ_QUESTIONS = [
+const FAQ_QUESTIONS: [string, ReactNode][] = [
   [
     "What are CryptoToons?",
     <p>
@@ -150,33 +151,29 @@ class FAQ extends React.PureComponent<Props> {
             <Row gutter={30}>
               <Col xs={24} sm={24} md={8}>
                 <Anchor style={{ paddingTop: 20 }}>
-                  {FAQ_QUESTIONS.map(
-                    (question: [string, React.Node], index: number) => (
-                      <Anchor.Link
-                        href={`#${slugify(question[0])}`}
-                        title={question[0]}
-                        key={index}
-                      />
-                    )
-                  )}
+                  {FAQ_QUESTIONS.map((question, index: number) => (
+                    <Anchor.Link
+                      href={`#${slugify(question[0])}`}
+                      title={question[0]}
+                      key={index}
+                    />
+                  ))}
                 </Anchor>
               </Col>
               <Col xs={24} sm={24} md={16}>
-                {FAQ_QUESTIONS.map(
-                  (question: [string, React.Node], index: number) => (
-                    <div
-                      key={index}
-                      id={slugify(question[0])}
-                      style={{ paddingTop: 10, marginBottom: 20 }}
-                    >
-                      <h2>
-                        <b>{question[0]}</b>
-                      </h2>
-                      {question[1]}
-                      <Divider dashed />
-                    </div>
-                  )
-                )}
+                {FAQ_QUESTIONS.map((question, index: number) => (
+                  <div
+                    key={index}
+                    id={slugify(question[0])}
+                    style={{ paddingTop: 10, marginBottom: 20 }}
+                  >
+                    <h2>
+                      <b>{question[0]}</b>
+                    </h2>
+                    {question[1]}
+                    <Divider dashed />
+                  </div>
+                ))}
               </Col>
             </Row>
           </div>

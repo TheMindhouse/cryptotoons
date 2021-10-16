@@ -14,13 +14,14 @@ import { Logger } from "../helpers/Logger"
 import { AuctionContractFacade } from "../facades/AuctionContractFacade"
 import type { Web3StoreType } from "../types/Web3StoreType"
 import { NamingContractFacade } from "../facades/NamingContractFacade"
+import {ReactNode} from "react";
 
 const Web3Context = React.createContext()
 
 const Web3 = window.Web3
 
 type Props = {
-  children?: React.Node,
+  children?: ReactNode,
 }
 
 type State = {

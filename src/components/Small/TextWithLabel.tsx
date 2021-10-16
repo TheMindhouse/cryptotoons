@@ -1,9 +1,10 @@
 import * as React from "react"
 import "./styles/TextWithLabel.css"
+import {ReactNode} from "react";
 
 type TextWithLabelProps = {
   label: string,
-  text: string | React.Node,
+  text: string | ReactNode,
 }
 
 class TextWithLabel extends React.PureComponent<TextWithLabelProps> {
