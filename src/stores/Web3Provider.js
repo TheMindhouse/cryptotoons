@@ -2,16 +2,19 @@
 import * as React from "react"
 import ToonContractABI from "../assets/abi/ToonABI.json"
 import AuctionContractABI from "../assets/abi/AuctionABI.json"
+import NamingContractABI from "../assets/abi/NamingABI.json"
 import { ToonContractFacade } from "../facades/ToonContractFacade"
 import { FAMILY_IDS } from "../constants/toonFamilies"
 import {
   AUCTION_CONTRACT_ADDRESS,
+  NAMING_CONTRACT_ADDRESS,
   TOON_CONTRACT_ADDRESSES,
 } from "../constants/contracts"
 import { CONFIG } from "../config"
 import { Logger } from "../helpers/Logger"
 import { AuctionContractFacade } from "../facades/AuctionContractFacade"
 import type { Web3StoreType } from "../types/Web3StoreType"
+import { NamingContractFacade } from "../facades/NamingContractFacade"
 
 const Web3Context = React.createContext()
 
@@ -71,11 +74,13 @@ class Web3Provider extends React.Component<Props, State> {
 
     const Contracts = this.prepareContractFacades()
     const AuctionContract = this.prepareAuctionContractFacade()
+    const NamingContract = this.prepareNamingContractFacade()
 
     const web3Store: Web3StoreType = {
       web3: window.web3,
       Contracts,
       AuctionContract,
+      NamingContract,
       account: null,
       eventsSupported,
       metamaskAvailable,
@@ -113,6 +118,16 @@ class Web3Provider extends React.Component<Props, State> {
     )
   }
 
+  prepareNamingContractFacade = (
+    account: string = ""
+  ): NamingContractFacade => {
+    const ContractInstance = window.web3.eth.contract(NamingContractABI)
+    return new NamingContractFacade(
+      ContractInstance.at(NAMING_CONTRACT_ADDRESS),
+      account
+    )
+  }
+
   checkAccount = () => {
     window.web3.eth.getAccounts((error, accounts = []) => {
       const account = accounts[0]
@@ -120,10 +135,12 @@ class Web3Provider extends React.Component<Props, State> {
         Logger.log("New account: ", account)
         const Contracts = this.prepareContractFacades(account)
         const AuctionContract = this.prepareAuctionContractFacade(account)
+        const NamingContract = this.prepareNamingContractFacade(account)
         const web3Store: Web3StoreType = {
           ...this.state.web3Store,
           Contracts,
           AuctionContract,
+          NamingContract,
           account,
         }
         this.setState({ web3Store })

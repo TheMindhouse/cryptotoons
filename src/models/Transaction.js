@@ -14,6 +14,7 @@ export const TRANSACTION_TYPE = {
   cancelAuction: "cancelAuction",
   buyToon: "buyToon",
   transferToon: "transferToon",
+  setName: "setName",
 }
 
 export class Transaction {

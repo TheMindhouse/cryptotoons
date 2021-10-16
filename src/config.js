@@ -24,4 +24,8 @@ export const CONFIG = {
   CHECK_ACCOUNT_DELAY: 2000,
   // Number of toons per page
   TOONS_PER_PAGE: 24,
+  // Max length of custom toon name
+  MAX_NAME_LENGTH: 25,
+  // Fee for naming a Toon
+  NAMING_FEE: 0.001,
 }

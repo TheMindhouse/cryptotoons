@@ -7,11 +7,13 @@ import { ToonAuction } from "../../models/web3/ToonAuction"
 import { CreateToonAuction } from "./views/CreateToonAuction"
 import { ToonOwnerActionButtons } from "./views/ToonOwnerActionButtons"
 import { TransferToon } from "./views/TransferToon"
+import { NameYourToon } from "./views/NameYourToon"
 
 const OWNER_ACTION_VIEWS = {
   BUTTONS: 0,
   CREATE_AUCTION: 1,
   TRANSFER: 2,
+  SET_NAME: 3,
 }
 
 type ToonPageOwnerActionsProps = {
@@ -69,6 +71,9 @@ class ToonPageOwnerActions extends React.PureComponent<
             <ToonOwnerActionButtons
               toonDetails={toonDetails}
               toonAuction={toonAuction}
+              switchToNamingView={() =>
+                this.switchView(OWNER_ACTION_VIEWS.SET_NAME)
+              }
               switchToCreateAuctionView={() =>
                 this.switchView(OWNER_ACTION_VIEWS.CREATE_AUCTION)
               }
@@ -89,6 +94,15 @@ class ToonPageOwnerActions extends React.PureComponent<
 
           {currentView === OWNER_ACTION_VIEWS.TRANSFER && (
             <TransferToon
+              toonDetails={toonDetails}
+              switchToDefaultView={() =>
+                this.switchView(OWNER_ACTION_VIEWS.BUTTONS)
+              }
+            />
+          )}
+
+          {currentView === OWNER_ACTION_VIEWS.SET_NAME && (
+            <NameYourToon
               toonDetails={toonDetails}
               switchToDefaultView={() =>
                 this.switchView(OWNER_ACTION_VIEWS.BUTTONS)

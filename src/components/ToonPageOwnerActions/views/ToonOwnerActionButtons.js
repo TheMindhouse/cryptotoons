@@ -8,6 +8,7 @@ import { EndToonAuction } from "../EndToonAuction"
 type ToonOwnerActionButtonsProps = {
   toonAuction: ?ToonAuction,
   toonDetails: ToonDetails,
+  switchToNamingView: () => void,
   switchToCreateAuctionView: () => void,
   switchToTransferView: () => void,
 }
@@ -21,17 +22,23 @@ class ToonOwnerActionButtons extends React.PureComponent<
     const {
       toonDetails,
       toonAuction,
+      switchToNamingView,
       switchToCreateAuctionView,
       switchToTransferView,
     } = this.props
     return (
       <Row type="flex" align="middle" justify="center">
         <div style={{ margin: 10 }}>
+          <Button type="primary" size="large" onClick={switchToNamingView}>
+            Name Your Toon 🎉
+          </Button>
+        </div>
+        <div style={{ margin: 10 }}>
           {toonAuction ? (
             <EndToonAuction toonDetails={toonDetails} />
           ) : (
             <Button
-              type="primary"
+              type="default"
               size="large"
               icon="tag-o"
               onClick={switchToCreateAuctionView}
@@ -54,5 +61,4 @@ class ToonOwnerActionButtons extends React.PureComponent<
     )
   }
 }
-
 export { ToonOwnerActionButtons }

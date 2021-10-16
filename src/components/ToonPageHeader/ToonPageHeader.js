@@ -15,6 +15,7 @@ import { AccountAddressLink } from "../Small/AccountAddressLink"
 import { PendingTransactionInfo } from "../Small/PendingTransactionInfo"
 import { TRANSACTION_TYPE } from "../../models/Transaction"
 import { MyToonBadge } from "../Small/MyToonBadge"
+import { ToonNameCore } from "../../hoc/renderProps/ToonNameCore"
 
 type ToonPageHeaderProps = {
   toonDetails: ToonDetails,
@@ -33,6 +34,7 @@ class ToonPageHeader extends React.PureComponent<ToonPageHeaderProps> {
       TRANSACTION_TYPE.transferToon,
       TRANSACTION_TYPE.cancelAuction,
       TRANSACTION_TYPE.createAuction,
+      TRANSACTION_TYPE.setName,
     ]
 
     return (
@@ -75,9 +77,22 @@ class ToonPageHeader extends React.PureComponent<ToonPageHeaderProps> {
           <div className="container">
             <Row type="flex" align="middle">
               <Col xs={{ span: 24 }} md={{ span: 12 }}>
-                <h1 className="ToonPageHeader__Name">
-                  <b>{name}</b>
-                </h1>
+                <ToonNameCore
+                  familyId={familyId}
+                  toonId={toonId}
+                  render={({ loading, customName }) =>
+                    loading ? (
+                      <b>Loading</b>
+                    ) : (
+                      <div>
+                        <h1 className="ToonPageHeader__Name">
+                          <b>{(customName && `"${customName}"`) || name}</b>
+                        </h1>
+                        {customName && <h3>{name}</h3>}
+                      </div>
+                    )
+                  }
+                />
               </Col>
               <Col xs={{ span: 24 }} md={{ span: 12 }}>
                 <Row
