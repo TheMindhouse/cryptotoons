@@ -49,7 +49,38 @@
     "type": "event"
   },
   {
-    "constant": true,
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_address",
+        "type": "address"
+      }
+    ],
+    "name": "ban",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "bannedAddresses",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "fee",
     "outputs": [
@@ -63,7 +94,6 @@
     "type": "function"
   },
   {
-    "constant": true,
     "inputs": [
       {
         "internalType": "address",
@@ -82,6 +112,25 @@
         "internalType": "string",
         "name": "",
         "type": "string"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_address",
+        "type": "address"
+      }
+    ],
+    "name": "isBanned",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
       }
     ],
     "stateMutability": "view",
@@ -150,7 +199,6 @@
         "type": "string"
       }
     ],
-    "payable": true,
     "name": "setTokenName",
     "outputs": [],
     "stateMutability": "payable",
@@ -165,6 +213,19 @@
       }
     ],
     "name": "transferOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_address",
+        "type": "address"
+      }
+    ],
+    "name": "unban",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
