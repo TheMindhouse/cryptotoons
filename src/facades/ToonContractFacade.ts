@@ -42,33 +42,6 @@ export class ToonContractFacade extends BaseContract {
       toonId,
     }
     return new TransactionWithToon(tx)
-
-    // return new Promise((resolve, reject) => {
-    //   this.Contract.methods.createSaleAuction(
-    //     toonId,
-    //     startPrice,
-    //     endPrice,
-    //     durationInSeconds,
-    //     this.config,
-    //     (error, txHash) => {
-    //       if (error) {
-    //         console.log(error)
-    //         reject("Create Auction Transaction has failed to send")
-    //       } else {
-    //         const tx = {
-    //           hash: txHash,
-    //           type: TRANSACTION_TYPE.createAuction,
-    //           name: `Create Auction for Toon #${toonId}`,
-    //           account: this.account,
-    //           timestamp: new Date(),
-    //           familyId: this.familyId,
-    //           toonId,
-    //         }
-    //         resolve(new TransactionWithToon(tx))
-    //       }
-    //     }
-    //   )
-    // })
   }
 
   async transferToon(toonId: number, toAccount: string) {
@@ -94,36 +67,6 @@ export class ToonContractFacade extends BaseContract {
       toonId,
     }
     return new TransactionWithToon(tx)
-    // return new Promise((resolve, reject) => {
-    //   if (!fromAccount || !toAccount || !toonId) {
-    //     throw new Error("Incorrect arguments")
-    //   }
-    //   this.Contract.methods.transferFrom(
-    //     fromAccount,
-    //     toAccount,
-    //     toonId,
-    //     this.config,
-    //     (error, txHash) => {
-    //       if (error) {
-    //         console.log(error)
-    //         reject("Transfer Toon Transaction has failed to send")
-    //       } else {
-    //         const tx = {
-    //           hash: txHash,
-    //           type: TRANSACTION_TYPE.transferToon,
-    //           name: `Transfer Toon #${toonId} to address ${cutAddress(
-    //             toAccount
-    //           )}...`,
-    //           account: this.account,
-    //           timestamp: new Date(),
-    //           familyId: this.familyId,
-    //           toonId,
-    //         }
-    //         resolve(new TransactionWithToon(tx))
-    //       }
-    //     }
-    //   )
-    // })
   }
 
   /* ###########################################################################
@@ -137,31 +80,11 @@ export class ToonContractFacade extends BaseContract {
     } catch (e) {
       console.error(e)
     }
-    // return new Promise((resolve, reject) => {
-    //   this.Contract.methods.totalSupply({}, (error, result: BigNumber) => {
-    //     if (error) {
-    //       console.log(error)
-    //       reject(error)
-    //     } else {
-    //       resolve(result.toNumber())
-    //     }
-    //   })
-    // })
   }
 
   async getOwnedToonsCount(owner: string): Promise<number> {
     const result = await this.Contract.methods.balanceOf(owner).call()
     return Number(result)
-    // return new Promise((resolve, reject) => {
-    //   this.Contract.methods.balanceOf(owner, (error, result: BigNumber) => {
-    //     if (error) {
-    //       console.log(error)
-    //       reject(error)
-    //     } else {
-    //       resolve(result.toNumber())
-    //     }
-    //   })
-    // })
   }
 
   /**
@@ -185,23 +108,6 @@ export class ToonContractFacade extends BaseContract {
       toonId: Number(result),
       familyId: this.familyId,
     }
-    // return new Promise((resolve, reject) => {
-    //   this.Contract.methods.tokenOfOwnerByIndex(
-    //     owner,
-    //     index,
-    //     (error, result: BigNumber) => {
-    //       if (error) {
-    //         console.log(error)
-    //         reject(error)
-    //       } else {
-    //         resolve({
-    //           toonId: result.toNumber(),
-    //           familyId: this.familyId,
-    //         })
-    //       }
-    //     }
-    //   )
-    // })
   }
 
   async getToonInfo(toonId: number) {

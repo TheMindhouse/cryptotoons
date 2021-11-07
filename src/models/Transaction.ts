@@ -14,7 +14,17 @@ export const TRANSACTION_TYPE = {
   cancelAuction: "cancelAuction",
   buyToon: "buyToon",
   transferToon: "transferToon",
+  withdrawBalance: "withdrawBalance",
   setName: "setName",
+}
+
+export interface TransactionProps {
+  hash: string;
+  status?: string;
+  type: string;
+  name: string;
+  account: string;
+  timestamp: Date;
 }
 
 export class Transaction {
@@ -25,7 +35,7 @@ export class Transaction {
   account: string;
   timestamp: Date;
 
-  constructor({ hash, type, name, status, account, timestamp }) {
+  constructor({ hash, type, name, status, account, timestamp }: TransactionProps) {
     if (TRANSACTION_TYPE[type] === "undefined") {
       throw new Error("Incorrect transaction type")
     }

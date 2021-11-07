@@ -1,6 +1,6 @@
-import { Transaction } from "./Transaction"
+import { Transaction, TransactionProps } from "./Transaction"
 
-interface TransactionWithToonProps extends Transaction {
+interface TransactionWithToonProps extends TransactionProps {
   familyId: number;
   toonId: number;
 }

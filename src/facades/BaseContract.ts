@@ -4,21 +4,13 @@ import { CONFIG } from "../config"
 export class BaseContract {
   Contract: Contract
   account: string
-  config: {
-    gas: number,
-    from: string,
-  }
 
   constructor(Contract: Contract, account: string) {
     this.Contract = Contract
     this.account = account
-    this.config = {
-      gas: 300000,
-      from: account,
-    }
   }
 
-  async sendTransaction(contractMethod: any, value?: number) {
+  async sendTransaction(contractMethod: any, value?: number): Promise<string> {
     const gasEstimate = await contractMethod.estimateGas({
       from: this.account,
       value,
