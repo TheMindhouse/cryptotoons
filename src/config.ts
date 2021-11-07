@@ -1,10 +1,13 @@
 import { METAMASK_NETWORKS } from "./constants/metamask"
 
 // const API_URL = 'http://localhost:3100';
-const API_URL = 'https://mindhouse.io:3100';
+const API_URL = "https://mindhouse.io:3100"
 
 export const CONFIG = {
-  ETHEREUM_NETWORK: METAMASK_NETWORKS.main,
+  ETHEREUM_NETWORK:
+    process.env.REACT_APP_ETHEREUM_NETWORK === "rinkeby"
+      ? METAMASK_NETWORKS.rinkeby
+      : METAMASK_NETWORKS.main,
   // Page base URL
   PAGE_URL: "cryptotoons.io",
   // Google Analytics code
