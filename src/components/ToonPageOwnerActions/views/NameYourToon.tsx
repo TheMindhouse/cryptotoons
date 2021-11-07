@@ -50,7 +50,7 @@ class NameYourToon extends React.PureComponent<
       })
       .catch((error: Error) => {
         this.setState({ isSubmitting: false })
-        message.error(error.message || error)
+        message.error(error?.message || error)
       })
   }
 

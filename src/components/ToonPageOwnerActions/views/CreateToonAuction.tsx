@@ -58,7 +58,7 @@ class CreateToonAuction extends React.PureComponent<
       })
       .catch((error: Error) => {
         this.setState({ isSubmitting: false })
-        message.error(error.message)
+        message.error(error?.message || error)
       })
   }
 
