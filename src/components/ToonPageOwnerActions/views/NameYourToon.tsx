@@ -9,6 +9,7 @@ import withWeb3 from "../../../hoc/withWeb3"
 import { CONFIG } from "../../../config"
 import { isValidName } from "../../../helpers/namingService"
 import { TOON_CONTRACT_ADDRESSES } from "../../../constants/contracts"
+import { URLHelper } from "../../../helpers/URLhelper"
 
 type NameYourToonProps = {
   toonDetails: ToonDetails,
@@ -63,7 +64,12 @@ class NameYourToon extends React.PureComponent<
       <Row type="flex" justify="center">
         <Col xs={{ span: 24 }} md={{ span: 12 }}>
           <h2 className="text-center">
-            <b>Name Your Toon</b>
+            <b>
+              Name Your Toon{" "}
+              <sup>
+                <small>BETA</small>
+              </sup>
+            </b>
           </h2>
 
           <div>
@@ -75,6 +81,7 @@ class NameYourToon extends React.PureComponent<
             </p>
             <p>You can change the name as many times as you wish!</p>
             <p>
+              <b>Rules:</b> Be nice!<br />
               <b>Max length:</b> {CONFIG.MAX_NAME_LENGTH} chars<br />
               <span style={{ color: textColor }}>
                 <b>Chars supported:</b> letters, numbers, spaces, dashes and
@@ -101,7 +108,19 @@ class NameYourToon extends React.PureComponent<
             </div>
           </div>
 
-          <TermsInfo />
+          <p className="TermsInfo">
+            By sending a transaction you accept{" "}
+            <a href={URLHelper.terms} target="_blank">
+              Terms of Use
+            </a>.
+            <br />
+            Name Your Toon feature is in beta and might be reverted in the
+            future.
+            <br />
+            Any offensive, illegal or vulgar names might get your account
+            blacklisted which would make naming service unavailable for all your
+            CryptoToons.
+          </p>
 
           <Row type="flex" justify="space-between" style={{ marginTop: 30 }}>
             <Button
