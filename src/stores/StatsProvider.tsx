@@ -19,7 +19,7 @@ class StatsProvider extends React.Component<Props, State> {
   checkAccountInterval = setInterval(() => {}, CONFIG.CHECK_ACCOUNT_DELAY)
 
   componentDidMount() {
-    this.fetchStats()
+    // this.fetchStats()
   }
 
   fetchStats = async () => {
