@@ -18,6 +18,13 @@ export const TRANSACTION_TYPE = {
 }
 
 export class Transaction {
+  hash: string;
+  status: string;
+  type: string;
+  name: string;
+  account: string;
+  timestamp: Date;
+
   constructor({ hash, type, name, status, account, timestamp }) {
     if (TRANSACTION_TYPE[type] === "undefined") {
       throw new Error("Incorrect transaction type")

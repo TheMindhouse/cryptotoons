@@ -14,11 +14,12 @@ import { Logger } from "../helpers/Logger"
 import { AuctionContractFacade } from "../facades/AuctionContractFacade"
 import type { Web3StoreType } from "../types/Web3StoreType"
 import { NamingContractFacade } from "../facades/NamingContractFacade"
-import {ReactNode} from "react";
+import { ReactNode } from "react"
+import Web3 from "web3"
 
 const Web3Context = React.createContext()
 
-const Web3 = window.Web3
+// const Web3 = window.Web3
 
 type Props = {
   children?: ReactNode,
@@ -26,10 +27,11 @@ type Props = {
 
 type State = {
   web3Store?: Web3StoreType,
+  web3?: Web3,
 }
 
 class Web3Provider extends React.Component<Props, State> {
-  state = {}
+  state: State = {}
 
   checkAccountInterval = setInterval(() => {}, CONFIG.CHECK_ACCOUNT_DELAY)
 
@@ -53,20 +55,23 @@ class Web3Provider extends React.Component<Props, State> {
 
     let eventsSupported = false
     let metamaskAvailable = false
+    let web3
 
     if (window.ethereum) {
       window.ethereum.enable()
-      window.web3 = new Web3(window.web3.currentProvider)
+      web3 = new Web3(Web3.givenProvider)
       eventsSupported = true
       metamaskAvailable = true
     } else {
       Logger.log("Metamask not found - using infura!")
-      window.web3 = new Web3(
+      web3 = new Web3(
         new Web3.providers.HttpProvider(
           "https://mainnet.infura.io/v3/c0fab121189b4fb4909dc475d82bf450"
         )
       )
     }
+
+    this.setState({ web3 })
 
     eventsSupported
       ? Logger.log("Events supported")
@@ -77,7 +82,7 @@ class Web3Provider extends React.Component<Props, State> {
     const NamingContract = this.prepareNamingContractFacade()
 
     const web3Store: Web3StoreType = {
-      web3: window.web3,
+      web3,
       Contracts,
       AuctionContract,
       NamingContract,
@@ -90,16 +95,19 @@ class Web3Provider extends React.Component<Props, State> {
 
   prepareContractFacades = (
     account: string = ""
-  ): { [number]: ToonContractFacade } => {
-    const ContractInstance = window.web3.eth.contract(ToonContractABI)
-    const Contracts: Object = {}
+  ): Record<number, ToonContractFacade> => {
+    const { web3 } = this.state
+    // const ContractInstance = new this.state.web3Store.web3.eth.Contract(
+    //   ToonContractABI
+    // )
+    const Contracts: Record<number, ToonContractFacade> = {}
     Object.keys(FAMILY_IDS)
       .map((key: string): number => FAMILY_IDS[key])
       .forEach((familyId: number) => {
         const address = TOON_CONTRACT_ADDRESSES[familyId]
         if (address) {
           Contracts[familyId] = new ToonContractFacade(
-            ContractInstance.at(address),
+            new web3.eth.Contract(ToonContractABI, address),
             account,
             familyId
           )
@@ -111,9 +119,10 @@ class Web3Provider extends React.Component<Props, State> {
   prepareAuctionContractFacade = (
     account: string = ""
   ): AuctionContractFacade => {
-    const ContractInstance = window.web3.eth.contract(AuctionContractABI)
+    const { web3 } = this.state
+    // const ContractInstance = web3.eth.Contract(AuctionContractABI)
     return new AuctionContractFacade(
-      ContractInstance.at(AUCTION_CONTRACT_ADDRESS),
+      new web3.eth.Contract(AuctionContractABI, AUCTION_CONTRACT_ADDRESS),
       account
     )
   }
@@ -121,15 +130,17 @@ class Web3Provider extends React.Component<Props, State> {
   prepareNamingContractFacade = (
     account: string = ""
   ): NamingContractFacade => {
-    const ContractInstance = window.web3.eth.contract(NamingContractABI)
+    const { web3 } = this.state
+    // const ContractInstance = window.web3.eth.contract(NamingContractABI)
     return new NamingContractFacade(
-      ContractInstance.at(NAMING_CONTRACT_ADDRESS),
+        new web3.eth.Contract(NamingContractABI, NAMING_CONTRACT_ADDRESS),
       account
     )
   }
 
   checkAccount = () => {
-    window.web3.eth.getAccounts((error, accounts = []) => {
+    const { web3 } = this.state
+    web3.eth.getAccounts((error, accounts = []) => {
       const account = accounts[0]
       if (this.state.web3Store && account !== this.state.web3Store.account) {
         Logger.log("New account: ", account)

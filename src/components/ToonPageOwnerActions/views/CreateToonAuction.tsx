@@ -56,9 +56,9 @@ class CreateToonAuction extends React.PureComponent<
         message.success(`${tx.name} Transaction Sent`)
         this.setState({ isSubmitting: false }, this.props.switchToDefaultView)
       })
-      .catch((error: string) => {
+      .catch((error: Error) => {
         this.setState({ isSubmitting: false })
-        message.error(error)
+        message.error(error.message)
       })
   }
 

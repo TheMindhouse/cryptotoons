@@ -23,8 +23,8 @@ class NetworkCheck extends React.PureComponent<Props, State> {
   }
 
   componentDidMount() {
-    this.props.web3Store.web3.version.getNetwork((err, netId: string) => {
-      this.setState({ networkId: parseInt(netId, 10) })
+    this.props.web3Store.web3.eth.net.getId((err, netId: number) => {
+      this.setState({ networkId: netId })
     })
   }
 

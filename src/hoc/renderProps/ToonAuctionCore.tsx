@@ -4,7 +4,7 @@ import type { Web3StoreType } from "../../types/Web3StoreType"
 import { ToonAuction } from "../../models/web3/ToonAuction"
 import { AuctionContractFacade } from "../../facades/AuctionContractFacade"
 import { TOON_CONTRACT_ADDRESSES } from "../../constants/contracts"
-import {ReactNode} from "react";
+import { ReactNode } from "react"
 
 type ToonAuctionCoreProps = {
   familyId: number,
@@ -47,11 +47,13 @@ class ToonAuctionCore extends React.PureComponent<
     const { toonId, familyId, web3Store } = this.props
     const AuctionContract: AuctionContractFacade = web3Store.AuctionContract
     const toonContractAddress = TOON_CONTRACT_ADDRESSES[familyId]
-    return AuctionContract.getAuction(toonContractAddress, toonId).then(
-      (toonAuction?: ToonAuction) => {
+    return AuctionContract.getAuction(toonContractAddress, toonId)
+      .then((toonAuction?: ToonAuction) => {
         this.setState({ toonAuction })
-      }
-    )
+      })
+      .catch((e) => {
+        console.error(e)
+      })
   }
 
   render() {

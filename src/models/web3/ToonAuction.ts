@@ -9,13 +9,20 @@ export class ToonAuction {
   startedAt: Date
   currentPrice: number
 
-  constructor(props: ToonAuctionResponseObj) {
-    this.seller = props[0]
-    this.startingPrice = props[1].toNumber()
-    this.endingPrice = props[2].toNumber()
-    this.duration = props[3].toNumber() * 1000
-    this.startedAt = new Date(props[4].toNumber() * 1000)
-    this.currentPrice = props[5].toNumber()
+  constructor({
+    startingPrice,
+    endingPrice,
+    currentPrice,
+    startedAt,
+    seller,
+    duration,
+  }: ToonAuctionResponseObj) {
+    this.seller = seller
+    this.startingPrice = Number(startingPrice)
+    this.endingPrice = Number(endingPrice)
+    this.duration = Number(duration) * 1000
+    this.startedAt = new Date(Number(startedAt) * 1000)
+    this.currentPrice = Number(currentPrice)
   }
 
   /**

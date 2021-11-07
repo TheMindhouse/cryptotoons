@@ -5,9 +5,9 @@ export class ToonInfo {
   birthTime: Date
   owner: string
 
-  constructor(props: ToonInfoResponseObj) {
-    this.genes = props[0].toString(10)
-    this.birthTime = new Date(props[1].toNumber() * 1000)
-    this.owner = props[2]
+  constructor({ genes, owner, birthTime }: ToonInfoResponseObj) {
+    this.genes = genes
+    this.birthTime = new Date(Number(birthTime) * 1000)
+    this.owner = owner
   }
 }

@@ -1,16 +1,14 @@
-import { BigNumber } from "bignumber.js/bignumber"
+export type ToonAuctionResponseObj = {
+  currentPrice: string,
+  duration: string,
+  endingPrice: string,
+  seller: string,
+  startedAt: string,
+  startingPrice: string,
+}
 
-export type ToonAuctionResponseObj = [
-  string, // seller
-  BigNumber, // startingPrice
-  BigNumber, // endingPrice
-  BigNumber, // duration
-  BigNumber, // startedAt
-  BigNumber, // currentPrice
-]
-
-export type ToonInfoResponseObj = [
-  BigNumber, // genes
-  BigNumber, // birthTime
-  string, // owner
-]
+export type ToonInfoResponseObj = {
+  genes: string,
+  birthTime: string,
+  owner: string,
+}

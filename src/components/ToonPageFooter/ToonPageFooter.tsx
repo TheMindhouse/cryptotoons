@@ -6,6 +6,8 @@ import openseaLogo from "../../assets/images/opensea-logo.png"
 import { ToonAuction } from "../../models/web3/ToonAuction"
 import withWeb3 from "../../hoc/withWeb3"
 import type { Web3StoreType } from "../../types/Web3StoreType"
+import { CONFIG } from "../../config"
+import { METAMASK_NETWORKS } from "../../constants/metamask"
 
 type ToonPageFooterProps = {
   toonDetails: ToonDetails,
@@ -35,7 +37,11 @@ class ToonPageFooter extends React.PureComponent<ToonPageFooterProps> {
     const isOwner = this.isUserToonOwner()
 
     // Not loading and no active auction
-    if (toonAuction !== null) return null
+    if (
+      toonAuction !== null ||
+      CONFIG.ETHEREUM_NETWORK !== METAMASK_NETWORKS.main
+    )
+      return null
 
     return (
       <div>

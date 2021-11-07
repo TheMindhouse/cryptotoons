@@ -6,6 +6,9 @@ interface TransactionWithToonProps extends Transaction {
 }
 
 export class TransactionWithToon extends Transaction {
+  familyId: number
+  toonId: number
+
   constructor(props: TransactionWithToonProps) {
     super(props)
     this.familyId = props.familyId

@@ -52,19 +52,18 @@ class ToonsOwned extends React.PureComponent<ToonsOwnedProps, ToonsOwnedState> {
 
   getToonContracts = (): Array<ToonContractFacade> =>
     Object.keys(this.props.web3Store.Contracts).map(
-      (key: number): ToonContractFacade => this.props.web3Store.Contracts[key]
+      (key) => this.props.web3Store.Contracts[key]
     )
 
   getOwnedToonsCount = () => {
     const { accountAddress } = this.props
-    const toonContracts: Array<ToonContractFacade> = this.getToonContracts()
+    const toonContracts = this.getToonContracts()
     // Count number of owned toons from each family
     const pToonsCount: Array<Promise<number>> = toonContracts.map(
-      (toonContract: ToonContractFacade) =>
-        toonContract.getOwnedToonsCount(accountAddress)
+      (toonContract) => toonContract.getOwnedToonsCount(accountAddress)
     )
     // Sum all owned toons
-    Promise.all(pToonsCount).then((toonCountsByContract: Array<number>) => {
+    Promise.all(pToonsCount).then((toonCountsByContract) => {
       this.getOwnedToons(toonCountsByContract)
       this.setState({ toonCountsByContract })
     })
@@ -79,30 +78,27 @@ class ToonsOwned extends React.PureComponent<ToonsOwnedProps, ToonsOwnedState> {
    */
   getOwnedToons = (toonCountsByContract: Array<number>) => {
     const { accountAddress } = this.props
-    const toonContracts: Array<ToonContractFacade> = this.getToonContracts()
+    const toonContracts = this.getToonContracts()
 
     // This array will hold all promises which resolve to toon id with its family id
     const pOwnedToons: Array<Promise<ToonWithFamilyIds>> = []
 
     // For each contract get details for all the toons owned by the user
-    toonCountsByContract.forEach(
-      (toonCountsForFamily: number, contractIndex: number) => {
-        // For each toon from 0 to toonCountsForFamily we need to get its Toon ID
-        for (let toonIndex = 0; toonIndex < toonCountsForFamily; toonIndex++) {
-          const pOwnedToon: Promise<ToonWithFamilyIds> = toonContracts[
-            contractIndex
-          ].getToonIdByOwnershipIndex(accountAddress, toonIndex)
-          pOwnedToons.push(pOwnedToon)
-        }
+    toonCountsByContract.forEach((toonCountsForFamily, contractIndex) => {
+      // For each toon from 0 to toonCountsForFamily we need to get its Toon ID
+      for (let toonIndex = 0; toonIndex < toonCountsForFamily; toonIndex++) {
+        const pOwnedToon = toonContracts[
+          contractIndex
+        ].getToonIdByOwnershipIndex(accountAddress, toonIndex)
+        pOwnedToons.push(pOwnedToon)
       }
-    )
+    })
 
     // Wait until all promises are resolved and then update state
-    Promise.all(pOwnedToons).then((_ownedToons: Array<ToonWithFamilyIds>) => {
+    Promise.all(pOwnedToons).then((_ownedToons) => {
       // Sort toons by families and ids
       const ownedToons = _ownedToons.sort(
-        (a: ToonWithFamilyIds, b: ToonWithFamilyIds) =>
-          a.familyId - b.familyId || a.toonId - b.toonId
+        (a, b) => a.familyId - b.familyId || a.toonId - b.toonId
       )
       this.setState({ ownedToons, isLoading: false })
     })

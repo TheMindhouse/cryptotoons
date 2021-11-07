@@ -49,7 +49,7 @@ class ToonDetailsCore extends React.PureComponent<Props, State> {
     })
   }
 
-  getToonInfo = (): Promise<ToonInfo> => {
+  getToonInfo = () => {
     const { familyId, toonId, web3Store } = this.props
     const toonContract: ToonContractFacade | undefined = web3Store.Contracts[familyId]
     if (!toonContract) {

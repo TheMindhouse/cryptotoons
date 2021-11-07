@@ -28,4 +28,6 @@ export const CONFIG = {
   MAX_NAME_LENGTH: 25,
   // Fee for naming a Toon
   NAMING_FEE: 0.001,
+  // Multiply estimated gas by this factor for extra safety
+  SAFE_GAS_MULTIPLIER: 1.15,
 }
