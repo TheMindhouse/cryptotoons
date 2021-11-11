@@ -2,7 +2,7 @@ import * as React from "react"
 import withTransactions from "../../hoc/withTransactions"
 import { Transaction, TRANSACTION_STATUS } from "../../models/Transaction"
 import { TransactionWithToon } from "../../models/TransactionWithToon"
-import { Alert } from "antd"
+import { Alert, Icon } from "antd"
 import { EtherscanLink } from "./EtherscanLink"
 import withWeb3 from "../../hoc/withWeb3"
 import type { TransactionsStore } from "../../stores/TransactionsProvider"
@@ -62,7 +62,7 @@ class PendingTransactionInfo extends React.PureComponent<Props> {
           }
           type="info"
           showIcon
-          iconType="loading"
+          icon={<Icon type="loading" />}
           style={this.props.style}
         />
       </div>
