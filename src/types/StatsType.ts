@@ -1,6 +1,4 @@
-import { FAMILY_IDS } from "../constants/toonFamilies"
-
-export type FamilyStats = {
+export type StatsDetails = {
   averagePrice: number,
   floorPrice: number,
   itemsCount: number,
@@ -17,5 +15,12 @@ export type FamilyStats = {
  * JSON with data from the server
  */
 export type StatsData = {
-  [k: FAMILY_IDS]: FamilyStats,
+  summary: Omit<StatsDetails, "ownersCount" | "floorPrice">,
+  collections: Record<
+    number,
+    {
+      name: string,
+      stats: StatsDetails,
+    }
+  >,
 }
