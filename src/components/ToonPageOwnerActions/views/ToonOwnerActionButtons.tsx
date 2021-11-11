@@ -1,7 +1,7 @@
 import * as React from "react"
 import { ToonAuction } from "../../../models/web3/ToonAuction"
 import { ToonDetails } from "../../../models/ToonDetails"
-import { Button, Row } from "antd"
+import { Button, Row, Tooltip } from "antd"
 import { EndToonAuction } from "../EndToonAuction"
 
 type ToonOwnerActionButtonsProps = {
@@ -28,17 +28,20 @@ class ToonOwnerActionButtons extends React.PureComponent<
     return (
       <Row type="flex" align="middle" justify="center">
         <div style={{ margin: 10 }}>
-          <Button
-            type="primary"
-            size="large"
-            onClick={switchToNamingView}
-            disabled={!!toonAuction}
+          <Tooltip
             title={
               toonAuction ? "You need to end the auction first." : undefined
             }
           >
-            Name Your Toon 🎉
-          </Button>
+            <Button
+              type="primary"
+              size="large"
+              onClick={switchToNamingView}
+              disabled={!!toonAuction}
+            >
+              Name Your Toon 🎉
+            </Button>
+          </Tooltip>
         </div>
         <div style={{ margin: 10 }}>
           {toonAuction ? (
@@ -55,18 +58,21 @@ class ToonOwnerActionButtons extends React.PureComponent<
           )}
         </div>
         <div style={{ margin: 10 }}>
-          <Button
-            type="default"
-            size="large"
-            icon="gift"
-            onClick={switchToTransferView}
-            disabled={!!toonAuction}
+          <Tooltip
             title={
               toonAuction ? "You need to end the auction first." : undefined
             }
           >
-            Gift Toon
-          </Button>
+            <Button
+              type="default"
+              size="large"
+              icon="gift"
+              onClick={switchToTransferView}
+              disabled={!!toonAuction}
+            >
+              Gift Toon
+            </Button>
+          </Tooltip>
         </div>
       </Row>
     )
