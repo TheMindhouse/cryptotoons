@@ -122,7 +122,7 @@ class NameYourToon extends React.PureComponent<
             Name Your Toon feature is in beta and might be reverted in the
             future.
             <br />
-            Any offensive, illegal or vulgar names might get your account
+            Any offensive or vulgar names might get your account
             blacklisted which would make naming service unavailable for all your
             CryptoToons.
           </p>
