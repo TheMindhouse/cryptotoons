@@ -28,7 +28,15 @@ class ToonOwnerActionButtons extends React.PureComponent<
     return (
       <Row type="flex" align="middle" justify="center">
         <div style={{ margin: 10 }}>
-          <Button type="primary" size="large" onClick={switchToNamingView}>
+          <Button
+            type="primary"
+            size="large"
+            onClick={switchToNamingView}
+            disabled={!!toonAuction}
+            title={
+              toonAuction ? "You need to end the auction first." : undefined
+            }
+          >
             Name Your Toon 🎉
           </Button>
         </div>
@@ -52,6 +60,10 @@ class ToonOwnerActionButtons extends React.PureComponent<
             size="large"
             icon="gift"
             onClick={switchToTransferView}
+            disabled={!!toonAuction}
+            title={
+              toonAuction ? "You need to end the auction first." : undefined
+            }
           >
             Gift Toon
           </Button>
