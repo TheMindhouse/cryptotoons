@@ -13,7 +13,7 @@ export const AUCTION_CONTRACT_ADDRESS = isRinkeby
 
 export const NAMING_CONTRACT_ADDRESS = isRinkeby
   ? // Rinkeby
-    "0x7cB835bDBa829a2692ADbA757e2018EaA86d775f"
+    "0x119Fd17b0e9b825F24ae62f78a4f9e5637A9FB52"
   : // Live
     "0xa0aface48454a21bce59f580c8bc1e236ea304e7"
 

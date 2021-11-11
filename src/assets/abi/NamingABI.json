@@ -12,6 +12,32 @@
         "internalType": "address",
         "name": "_address",
         "type": "address"
+      }
+    ],
+    "name": "AddressBanned",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "_address",
+        "type": "address"
+      }
+    ],
+    "name": "AddressUnbanned",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "_address",
+        "type": "address"
       },
       {
         "indexed": true,
