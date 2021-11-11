@@ -1,15 +1,16 @@
 import * as React from "react"
-import { Button, Col, Input, message, Row, Tooltip } from "antd"
+import { Button, Col, Input, message, Row } from "antd"
 import { TransactionWithToon } from "../../../models/TransactionWithToon"
 import { LocalStorageManager } from "../../../localStorage/index"
 import type { Web3StoreType } from "../../../types/Web3StoreType"
 import { ToonDetails } from "../../../models/ToonDetails"
-import { TermsInfo } from "../../Small/TermsInfo"
 import withWeb3 from "../../../hoc/withWeb3"
 import { CONFIG } from "../../../config"
 import { isValidName } from "../../../helpers/namingService"
-import { TOON_CONTRACT_ADDRESSES } from "../../../constants/contracts"
 import { URLHelper } from "../../../helpers/URLhelper"
+
+const Filter = require("bad-words")
+const filter = new Filter()
 
 type NameYourToonProps = {
   toonDetails: ToonDetails,
@@ -57,8 +58,10 @@ class NameYourToon extends React.PureComponent<
 
   render() {
     const { name, isSubmitting } = this.state
-    const isValid = isValidName(name)
-    const textColor = isValid ? "inherit" : "#ef3340"
+    const hasValidChars = isValidName(name)
+    const isProfane = filter.isProfane(name)
+    const isValid = hasValidChars && !isProfane;
+    const errorColor = "#ef3340"
 
     return (
       <Row type="flex" justify="center">
@@ -81,9 +84,11 @@ class NameYourToon extends React.PureComponent<
             </p>
             <p>You can change the name as many times as you wish!</p>
             <p>
-              <b>Rules:</b> Be nice!<br />
+              <span style={{ ...(isProfane && { color: errorColor }) }}>
+                <b>Rules:</b> Be nice!<br />
+              </span>
               <b>Max length:</b> {CONFIG.MAX_NAME_LENGTH} chars<br />
-              <span style={{ color: textColor }}>
+              <span style={{ ...(!hasValidChars && { color: errorColor }) }}>
                 <b>Chars supported:</b> letters, numbers, spaces, dashes and
                 underscores
               </span>
@@ -99,7 +104,7 @@ class NameYourToon extends React.PureComponent<
               style={{
                 textAlign: "center",
                 fontWeight: "bold",
-                color: textColor,
+                ...((!isValid) && { color: errorColor }),
               }}
               maxLength={CONFIG.MAX_NAME_LENGTH}
             />

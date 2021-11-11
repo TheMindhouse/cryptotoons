@@ -5,6 +5,7 @@
   "dependencies": {
     "@craco/craco": "^6.3.0",
     "antd": "^3.26.20",
+    "bad-words": "^3.0.4",
     "bignumber.js": "^9.0.1",
     "craco-antd": "^1.19.0",
     "pluralize": "^7.0.0",
