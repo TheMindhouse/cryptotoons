@@ -40,6 +40,31 @@
         "type": "address"
       },
       {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "oldBalance",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "newBalance",
+        "type": "uint256"
+      }
+    ],
+    "name": "BalanceChanged",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "_address",
+        "type": "address"
+      },
+      {
         "indexed": true,
         "internalType": "uint256",
         "name": "_tokenId",
@@ -72,6 +97,25 @@
       }
     ],
     "name": "OwnershipTransferred",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "receiver",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "Withdrawal",
     "type": "event"
   },
   {
@@ -108,7 +152,45 @@
   },
   {
     "inputs": [],
-    "name": "fee",
+    "name": "baseFee",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_address",
+        "type": "address"
+      }
+    ],
+    "name": "getPendingWithdrawal",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_address",
+        "type": "address"
+      }
+    ],
+    "name": "getProjectFeeInWei",
     "outputs": [
       {
         "internalType": "uint256",
@@ -195,6 +277,19 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "ownerServiceAddress",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "uint256",
@@ -202,7 +297,20 @@
         "type": "uint256"
       }
     ],
-    "name": "setFee",
+    "name": "setBaseFee",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_address",
+        "type": "address"
+      }
+    ],
+    "name": "setOwnerService",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -257,14 +365,8 @@
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "address payable",
-        "name": "_to",
-        "type": "address"
-      }
-    ],
-    "name": "withdrawFunds",
+    "inputs": [],
+    "name": "withdraw",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
