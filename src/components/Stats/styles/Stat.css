@@ -4,7 +4,10 @@
     border-radius: 10px;
     text-align: center;
     box-shadow: 0 6px 10px 0 rgba(0,0,0,0.05);
-    margin: 10px 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .Stat__Title {
@@ -14,6 +17,12 @@
 
 .Stat__Value {
     font-size: 35px;
+    font-weight: bold;
+    line-height: 1.1em;
+}
+
+.Stat__Value--Secondary {
+    font-size: 22px;
 }
 
 @media all and (max-width: 768px) {
@@ -28,5 +37,9 @@
 
     .Stat__Value {
         font-size: 27px;
+    }
+
+    .Stat__Value--Secondary {
+        font-size: 19px;
     }
 }

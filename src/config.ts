@@ -25,6 +25,8 @@ export const CONFIG = {
   CHECK_TX_DELAY: 3000,
   // Delay to check account address in ms
   CHECK_ACCOUNT_DELAY: 2000,
+  // Delay to check ethereum price in ms
+  CHECK_ETH_PRICE_DELAY: 60 * 60 * 1000, // 1 hour
   // Number of toons per page
   TOONS_PER_PAGE: 24,
   // Max length of custom toon name

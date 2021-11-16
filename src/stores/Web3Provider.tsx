@@ -16,6 +16,7 @@ import type { Web3StoreType } from "../types/Web3StoreType"
 import { NamingContractFacade } from "../facades/NamingContractFacade"
 import { ReactNode } from "react"
 import Web3 from "web3"
+import { METAMASK_NETWORKS } from "../constants/metamask"
 
 const Web3Context = React.createContext()
 
@@ -34,20 +35,28 @@ class Web3Provider extends React.Component<Props, State> {
   state: State = {}
 
   checkAccountInterval = setInterval(() => {}, CONFIG.CHECK_ACCOUNT_DELAY)
+  checkEthPriceInterval = setInterval(() => {}, CONFIG.CHECK_ETH_PRICE_DELAY)
 
   componentDidMount() {
     window.addEventListener("load", () => {
       this.setupWeb3()
       this.checkAccount()
+      this.checkEthPrice()
+
       this.checkAccountInterval = setInterval(
         this.checkAccount,
         CONFIG.CHECK_ACCOUNT_DELAY
+      )
+      this.checkEthPriceInterval = setInterval(
+        this.checkEthPrice,
+        CONFIG.CHECK_ETH_PRICE_DELAY
       )
     })
   }
 
   componentWillUnmount() {
     window.clearInterval(this.checkAccountInterval)
+    window.clearInterval(this.checkEthPriceInterval)
   }
 
   setupWeb3 = () => {
@@ -89,6 +98,7 @@ class Web3Provider extends React.Component<Props, State> {
       account: null,
       eventsSupported,
       metamaskAvailable,
+      ethPrice: undefined,
     }
     this.setState({ web3Store })
   }
@@ -133,7 +143,7 @@ class Web3Provider extends React.Component<Props, State> {
     const { web3 } = this.state
     // const ContractInstance = window.web3.eth.contract(NamingContractABI)
     return new NamingContractFacade(
-        new web3.eth.Contract(NamingContractABI, NAMING_CONTRACT_ADDRESS),
+      new web3.eth.Contract(NamingContractABI, NAMING_CONTRACT_ADDRESS),
       account
     )
   }
@@ -157,6 +167,28 @@ class Web3Provider extends React.Component<Props, State> {
         this.setState({ web3Store })
       }
     })
+  }
+
+  checkEthPrice = () => {
+    const { web3Store } = this.state
+
+    if (CONFIG.ETHEREUM_NETWORK !== METAMASK_NETWORKS.main) {
+      const ethPrice = 0
+      if (ethPrice !== this.state.web3Store.ethPrice) {
+        this.setState({ web3Store: { ...web3Store, ethPrice } })
+      }
+      return
+    }
+
+    fetch("https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD")
+      .then((response: Response) => response.json())
+      .then((responseJson: { USD: number }) => {
+        const ethPrice = responseJson.USD
+        if (ethPrice !== this.state.web3Store.ethPrice) {
+          console.log("New ETH price: ", ethPrice)
+          this.setState({ web3Store: { ...web3Store, ethPrice } })
+        }
+      })
   }
 
   render() {

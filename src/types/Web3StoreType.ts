@@ -11,4 +11,5 @@ export type Web3StoreType = {
   account?: string,
   eventsSupported: boolean,
   metamaskAvailable: boolean,
+  ethPrice?: number;
 }

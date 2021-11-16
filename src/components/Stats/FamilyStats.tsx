@@ -10,11 +10,12 @@ type Props = {
 }
 
 const FamilyStats = ({ stats, familyId }: Props) => {
-  const totalStats = stats[familyId]
+  const totalStats = stats.collections[familyId].stats
+
   if (!totalStats) return null
 
   return (
-    <div>
+    <div style={{ marginBottom: 20 }}>
       <h2>
         Family Stats{" "}
         <Tooltip
@@ -24,21 +25,21 @@ const FamilyStats = ({ stats, familyId }: Props) => {
           <Icon type="info-circle" style={{ fontSize: 15 }} />
         </Tooltip>
       </h2>
-      <Row gutter={16}>
+      <Row type="flex" gutter={16} align="stretch">
         <Col xs={{ span: 12 }} md={{ span: 6 }}>
           <Stat
             title="Total volume"
-            value={`Ξ ${totalStats.volumeTotal.toFixed(4)}`}
+            value={Number(totalStats.volumeTotal.toFixed(4))}
           />
         </Col>
         <Col xs={{ span: 12 }} md={{ span: 6 }}>
-          <Stat title="Total sales" value={totalStats.salesTotal} />
+          <Stat title="Total sales" text={totalStats.salesTotal} />
         </Col>
         <Col xs={{ span: 12 }} md={{ span: 6 }}>
-          <Stat title="Total supply" value={totalStats.itemsCount} />
+          <Stat title="Total supply" text={totalStats.itemsCount} />
         </Col>
         <Col xs={{ span: 12 }} md={{ span: 6 }}>
-          <Stat title="Owners" value={totalStats.ownersCount} />
+          <Stat title="Owners" text={totalStats.ownersCount} />
         </Col>
       </Row>
     </div>

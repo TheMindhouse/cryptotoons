@@ -1,18 +1,28 @@
-import React from 'react';
-import './styles/Stat.css';
+import React from "react"
+import "./styles/Stat.css"
+import EthToUsd from "../EthToUsd/EthToUsd"
 
 type Props = {
-  title: string;
-  value: string | number;
+  title: string,
+  text?: string | number,
+  value?: number,
 }
 
-const Stat = ({ title, value }: Props) => {
+const Stat = ({ title, value, text }: Props) => {
   return (
     <div className="Stat">
       <div className="Stat__Title">{title}</div>
-      <div className="Stat__Value">{value}</div>
+      {text && <div className="Stat__Value">{text}</div>}
+      {value && (
+        <>
+          <div className="Stat__Value"><EthToUsd eth={value} /></div>
+          <div className="Stat__Value--Secondary">
+            {value} <small>ETH</small>
+          </div>
+        </>
+      )}
     </div>
   )
-};
+}
 
-export default Stat;
+export default Stat
