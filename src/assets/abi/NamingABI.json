@@ -265,6 +265,19 @@
   },
   {
     "inputs": [],
+    "name": "isPaused",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "owner",
     "outputs": [
       {
@@ -298,6 +311,19 @@
       }
     ],
     "name": "setBaseFee",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bool",
+        "name": "_isPaused",
+        "type": "bool"
+      }
+    ],
+    "name": "setIsPaused",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
