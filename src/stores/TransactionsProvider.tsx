@@ -6,11 +6,11 @@ import {
   TRANSACTION_STATUS,
 } from "../models/Transaction"
 import withWeb3 from "../hoc/withWeb3"
-import { notification } from "antd"
+import { Button, notification } from "antd"
 import { EtherscanLink } from "../components/Small/EtherscanLink"
 import { CONFIG } from "../config"
 import type { Web3StoreType } from "../types/Web3StoreType"
-import {ReactNode} from "react";
+import { ReactNode } from "react"
 
 const TransactionsContext = React.createContext()
 
@@ -88,11 +88,21 @@ class TransactionsProvider extends React.Component<
   showNotification = (tx: Transaction) => {
     const notificationConfig = {
       description: (
-        <p>
-          {tx.name} (<EtherscanLink hash={tx.hash} />)
-        </p>
+        <>
+          <p>
+            {tx.name} (<EtherscanLink hash={tx.hash} />)
+          </p>
+          <Button
+            type="primary"
+            ghost
+            size="default"
+            onClick={() => window.location.reload()}
+          >
+            Refresh page
+          </Button>
+        </>
       ),
-      duration: 5,
+      duration: 0,
     }
     switch (tx.status) {
       case TRANSACTION_STATUS.failed:

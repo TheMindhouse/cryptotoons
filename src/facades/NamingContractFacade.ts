@@ -8,11 +8,12 @@ import { eth2wei } from "../helpers/unitsConverter"
 export class NamingContractFacade extends BaseContract {
   async setName(familyId: number, toonId: number, tokenName: string) {
     const contractAddress = TOON_CONTRACT_ADDRESSES[familyId]
-    const fee = await this.getFee()
+    const totalFee = await this.getTotalFee(contractAddress)
+    console.log("totalFee", totalFee)
 
     const txHash = await this.sendTransaction(
       this.Contract.methods.setTokenName(contractAddress, toonId, tokenName),
-      fee
+      totalFee
     ).catch(() => {
       throw Error("Name Your Toon Transaction has failed to send")
     })
@@ -33,7 +34,7 @@ export class NamingContractFacade extends BaseContract {
    * VIEW FUNCTIONS (free)
    ########################################################################## */
 
-  async getName(familyId: number, toonId: number) {
+  async getName(familyId: number, toonId: number): Promise<string> {
     const contractAddress = TOON_CONTRACT_ADDRESSES[familyId]
     const result = await this.Contract.methods
       .getTokenName(contractAddress, toonId)
@@ -41,7 +42,23 @@ export class NamingContractFacade extends BaseContract {
     return result || ""
   }
 
-  async getFee() {
-    return await this.Contract.methods.fee().call()
+  async getBaseFee(): Promise<number> {
+    const baseFee: string = await this.Contract.methods.baseFee().call()
+    return Number(baseFee || 0)
+  }
+
+  async getProjectFee(contractAddress: string): Promise<number> {
+    const projectFee: string = await this.Contract.methods
+      .getProjectFeeInWei(contractAddress)
+      .call()
+    return Number(projectFee || 0)
+  }
+
+  async getTotalFee(contractAddress: string): Promise<number> {
+    const [baseFee, projectFee] = await Promise.all([
+      this.getBaseFee(),
+      this.getProjectFee(contractAddress),
+    ])
+    return baseFee + projectFee
   }
 }
