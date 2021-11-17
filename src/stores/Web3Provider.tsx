@@ -117,6 +117,7 @@ class Web3Provider extends React.Component<Props, State> {
         const address = TOON_CONTRACT_ADDRESSES[familyId]
         if (address) {
           Contracts[familyId] = new ToonContractFacade(
+            web3,
             new web3.eth.Contract(ToonContractABI, address),
             account,
             familyId
@@ -132,6 +133,7 @@ class Web3Provider extends React.Component<Props, State> {
     const { web3 } = this.state
     // const ContractInstance = web3.eth.Contract(AuctionContractABI)
     return new AuctionContractFacade(
+      web3,
       new web3.eth.Contract(AuctionContractABI, AUCTION_CONTRACT_ADDRESS),
       account
     )
@@ -143,6 +145,7 @@ class Web3Provider extends React.Component<Props, State> {
     const { web3 } = this.state
     // const ContractInstance = window.web3.eth.contract(NamingContractABI)
     return new NamingContractFacade(
+      web3,
       new web3.eth.Contract(NamingContractABI, NAMING_CONTRACT_ADDRESS),
       account
     )

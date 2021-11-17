@@ -9,12 +9,13 @@ export class NamingContractFacade extends BaseContract {
   async setName(familyId: number, toonId: number, tokenName: string) {
     const contractAddress = TOON_CONTRACT_ADDRESSES[familyId]
     const totalFee = await this.getTotalFee(contractAddress)
-    console.log("totalFee", totalFee)
+    console.log("totalFee", this.web3.utils.fromWei(String(totalFee), "ether"))
 
     const txHash = await this.sendTransaction(
       this.Contract.methods.setTokenName(contractAddress, toonId, tokenName),
       totalFee
-    ).catch(() => {
+    ).catch((e) => {
+      console.error(e)
       throw Error("Name Your Toon Transaction has failed to send")
     })
 

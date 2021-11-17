@@ -35,4 +35,6 @@ export const CONFIG = {
   NAMING_FEE: 0.001,
   // Multiply estimated gas by this factor for extra safety
   SAFE_GAS_MULTIPLIER: 1.15,
+  // Multiple current gas price by this factor to process transaction faster
+  MAX_GAS_PRICE_MULTIPLIER: 1.2,
 }

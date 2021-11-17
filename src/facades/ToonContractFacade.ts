@@ -5,12 +5,13 @@ import { TransactionWithToon } from "../models/TransactionWithToon"
 import { cutAddress } from "../helpers/strings"
 import { Contract } from "web3-eth-contract"
 import { ToonWithFamilyIds } from "../types/ToonTypes"
+import Web3 from "web3"
 
 export class ToonContractFacade extends BaseContract {
   familyId: number
 
-  constructor(Contract: Contract, account: string, familyId: number) {
-    super(Contract, account)
+  constructor(web3: Web3, Contract: Contract, account: string, familyId: number) {
+    super(web3, Contract, account)
     this.familyId = familyId
   }
 
