@@ -1,4 +1,4 @@
 semi: false
 trailingComma: es5
 arrowParens: always
-parser: flow
+parser: typescript
